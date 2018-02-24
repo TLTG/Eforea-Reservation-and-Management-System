@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="assets/images/icon-main.png">
+
+  <title>EForea - Reserve Now</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="assets/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+      <script src="bootstrap-3.3.6/docs/assets/js/ie8-responsive-file-warning.js"></script>
+    [endif]
+    <script src="bootstrap-3.3.6/docs/assets/js/ie-emulation-modes-warning.js"></script>
+
+    [if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    [endif] -->
+
+  <link href="assets/CSS/reserve.css" rel="stylesheet">
+  <!-- <link href="CSS/navbar.css" rel="stylesheet"> -->
+  <!--  <link href="CSS/navbar-hover.css" rel="stylesheet"> -->
+  <link href="assets/CSS/carousel.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <img src="assets/images/logo-2.png" style="display: block; float: left; margin-left: 10px; margin-right: auto; width: 38%; padding-top: 1px;"
+          alt="Eforea Nail and Body Spa">
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="services.html">Services</a>
+          </li>
+          <li>
+            <a href="spa-party.html">Spa Party</a>
+          </li>
+          <li>
+            <a href="schedule.html">Schedule</a>
+          </li>
+          <li>
+            <a href="about-us.html">About Us</a>
+          </li>
+          <li>
+            <a href="reserve-now2.php" id="active-menu">
+              <b>Reserve Now</b>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <hr>
+  <div aria-hidden="true">
+    <div class="container-fluid" style="padding-top: 40px">
+      <div class="row">
+        <!-- List of Services + Search Bar -->
+        <div class="col-md-2 sidebar" style="padding-top: 30px">
+          <h3 class="h3-categories"> Categories </h3>
+
+          <form class="search-container">
+            <input type="text" id="search-bar" placeholder="Search for a service...">
+            <a href="#">
+              <img class="search-icon" src="assets/images/search-icon.png">
+            </a>
+          </form>
+          <ul class="nav-sidebar">
+            <% categories.forEach(service => { %>
+              <li class="li-navlist">
+                <a href="#">
+                  <span class="badge">
+                    <%= service.count %>
+                  </span>
+                    <%= service.name %>
+                </a>
+              </li>
+            <% }); %>
+            <li class="li-navlist">
+              <a href="#linkserv15">View All </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-7 col-md-offset-2 main">
+          <div class="alert alert-info" id="stickyServ">
+            <h2 class="modal-title" id="linkserv1" style="text-align: center;">SERVICES Offered</h2>
+          </div>
+          <% categories.forEach(element => {
+            %>
+            <form method="post">
+              <h3 class="alert alert-info"><%= element.name %></h3><br/>
+              <% var a=1; services.forEach(elem => {
+                if(elem.category == element.name){
+                  %>
+                    <div style="padding-left: 30px;">
+                      <p class="p-head"><b><%= a %>.</b> <%= elem.name %>
+                        <a title="Information" onclick='viewInfo({"name":"<%= elem.name %>", "desc":"<%= elem.desc %>", "price":"<%= elem.amount %>","time":"<%= elem.time %>"})' name="btnInfo" data-toggle="modal" data-target="#infoServiceModal">
+                          <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                          <span class="sr-only">View Information</span>
+                        </a>
+                      </p>
+                      <hr>
+                      <div class="p-price">
+                        <label> Price: Php <%= elem.amount %> </label>
+                        <button type="button" id="mslink" onclick='addCartModal({"id":"<%= elem.id %>", "name": "<%= elem.name %>","todo": "<%= elem.amount %>" })' class="btn btn-primary btn-addCart btn-<%= elem.id%>" data-toggle="modal" data-target="#addCartModal">
+                          Add to Cart 
+                        </button>
+                      </div>
+                    </div>
+                    <br />
+                    <br />
+                    <hr class="hr-sepserv">
+                  <%
+                  a++;
+                }
+              }); %>
+            </form>
+            <%
+          }); %>
+          <form>
+            <h3 class="alert alert-info">Spa Treatment</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> LEMON
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-3">
+                  <label> Hand Spa </label>
+                  <label> Price: Php 280.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Hand Spa with
+                    <br />Manicure </label>
+                  <label> Price: Php 380.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Foot Spa </label>
+                  <label> Price: Php 280.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label>Foot Spa with
+                    <br />Pedicure </label>
+                  <label> Price: Php 280.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> PEPPERMINT
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-3">
+                  <label> Hand Spa </label>
+                  <label> Price: Php 270.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Hand Spa with
+                    <br />Manicure </label>
+                  <label> Price: Php 380.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Foot Spa </label>
+                  <label> Price: Php 370.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label>Foot Spa with
+                    <br />Pedicure </label>
+                  <label> Price: Php 460.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> LAVENDER
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-3">
+                  <label> Hand Spa </label>
+                  <label> Price: Php 290.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Hand Spa with
+                    <br />Manicure </label>
+                  <label> Price: Php 380.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Foot Spa </label>
+                  <label> Price: Php 340.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label>Foot Spa with
+                    <br />Pedicure </label>
+                  <label> Price: Php 480.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>4.</b> CINNAMON
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-3">
+                  <label> Hand Spa </label>
+                  <label> Price: Php 280.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Hand Spa with
+                    <br />Manicure </label>
+                  <label> Price: Php 380.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Foot Spa </label>
+                  <label> Price: Php 360.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label>Foot Spa with
+                    <br />Pedicure </label>
+                  <label> Price: Php 500.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>5.</b> MANDARIN ORANGE
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-3">
+                  <label> Hand Spa </label>
+                  <label> Price: Php 280.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Hand Spa with
+                    <br />Manicure </label>
+                  <label> Price: Php 380.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Foot Spa </label>
+                  <label> Price: Php 350.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label>Foot Spa with
+                    <br />Pedicure </label>
+                  <label> Price: Php 450.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <!-- End of Service -->
+
+            <br />
+            <br />
+            <h3 class="alert alert-info">Paraffin Treatment</h3>
+            <br />
+            <div class="row" style="padding-left: 50px;">
+              <div class="col-md-3">
+                <label>
+                  <b> 1.</b> Hand Paraffin </label>
+                <label> Price: Php 300.00 </label>
+                <br />
+                <br />
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+              <div class="col-md-3">
+                <label>
+                  <b> 2.</b>Hand Paraffin with Manicure </label>
+                <label> Price: Php 300.00 </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+              <div class="col-md-3">
+                <label>
+                  <b> 3.</b> Foot Paraffin </label>
+                <label> Price: Php 450.00 </label>
+                <br />
+                <br />
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+              <div class="col-md-3">
+                <label>
+                  <b> 4.</b>Foot Paraffin with Pedicure</label>
+                <label> Price: Php 480.00 </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <hr />
+            <!-- End of Service -->
+
+            <br />
+            <h3 class="alert alert-info">Straight</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> BASIC CLEANING
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-4">
+                  <label> Hand Spa </label>
+                  <br />
+                  <label> Price: Php 80.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label> Feet Spa </label>
+                  <br />
+                  <label> Price: Php 90.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label>Hand and Feet Spa </label>
+                  <br />
+                  <label> Price: Php 150.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> BASIC WITH NAIL POLISH
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-4">
+                  <label> Hand Spa </label>
+                  <br />
+                  <label> Price: Php 100.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label> Feet Spa </label>
+                  <br />
+                  <label> Price: Php 110.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label>Hand and Feet Spa </label>
+                  <br />
+                  <label> Price: Php 200.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> POLISH CHANGE
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-4">
+                  <label> Hand Spa </label>
+                  <br />
+                  <label> Price: Php 50.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label> Feet Spa </label>
+                  <br />
+                  <label> Price: Php 50.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label>Hand and Feet Spa </label>
+                  <br />
+                  <label> Price: Php 100.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <!-- End of Service -->
+            <hr>
+
+            <br />
+            <h3 class="alert alert-info">Hair Waxing</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b>UPPER LIP
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 250.00
+                  <input type="radio" name="radiohw1" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 170.00
+                  <input type="radio" name="radiohw1" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <br />
+            <br />
+            <hr>
+
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> LOWER LIP
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 270.00
+                  <input type="radio" name="radiohw2" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 180.00
+                  <input type="radio" name="radiohw2" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> FACE
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 400.00
+                  <input type="radio" name="radiohw3" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 350.00
+                  <input type="radio" name="radiohw3" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>4.</b> TOES
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 150.00
+                  <input type="radio" name="radiohw4" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 150.00
+                  <input type="radio" name="radiohw4" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>5.</b> FINGERS
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 150.00
+                  <input type="radio" name="radiohw5" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 150.00
+                  <input type="radio" name="radiohw5" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>6.</b> UNDERARM
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 450.00
+                  <input type="radio" name="radiohw6" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 400.00
+                  <input type="radio" name="radiohw6" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>7.</b> ARMS
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 450.00
+                  <input type="radio" name="radiohw7" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 400.00
+                  <input type="radio" name="radiohw7" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>8.</b> CHEST
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 800.00
+                  <input type="radio" name="radiohw8" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 450.00
+                  <input type="radio" name="radiohw8" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>9.</b> BACK
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 800.00
+                  <input type="radio" name="radiohw9" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 450.00
+                  <input type="radio" name="radiohw9" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>10.</b> BIKINI
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 650.00
+                  <input type="radio" name="radiohw10" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 550.00
+                  <input type="radio" name="radiohw10" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>11.</b> BRAZILIAN
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 1,050.00
+                  <input type="radio" name="radiohw11" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 850.00
+                  <input type="radio" name="radiohw11" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>12.</b> HALF LEG
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 700.00
+                  <input type="radio" name="radiohw12" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 550.00
+                  <input type="radio" name="radiohw12" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>13.</b> FULL LEG
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 900.00
+                  <input type="radio" name="radiohw13" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 750.00
+                  <input type="radio" name="radiohw13" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>14.</b> FULL BODY
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 4,000.00
+                  <input type="radio" name="radiohw14" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 3,500.00
+                  <input type="radio" name="radiohw14" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <!-- End of Service -->
+            <br />
+            <br />
+            <hr>
+
+            <br />
+            <h3 class="alert alert-info">
+              <strong>Hair Waxing:</strong> Packages</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> Arms, Half leg and Underarm
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 1,200.00
+                  <input type="radio" name="radhwpack1" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 1,400.00
+                  <input type="radio" name="radhwpack1" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> Underarm, Arm and Bikini
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 1,200.00
+                  <input type="radio" name="radhwpack2" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 1,400.00
+                  <input type="radio" name="radhwpack2" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> Half leg, Lower lip and Arm
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 1,000.00
+                  <input type="radio" name="radhwpack3" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 1,200.00
+                  <input type="radio" name="radhwpack3" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>4.</b> Brazilian, Full leg and Underarm
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 1,800.00
+                  <input type="radio" name="radhwpack4" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 2,200.00
+                  <input type="radio" name="radhwpack4" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>5.</b> Full leg, Arms and Underarm
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+
+              <center>
+                <label class="control control--radio radio-hw">
+                  Male
+                  <br>Price: Php 1,400.00
+                  <input type="radio" name="radhwpack5" checked/>
+                  <div class="control__indicator"></div>
+                </label> &emsp;&emsp;
+                <label class="control control--radio radio-hw">
+                  Female
+                  <br>Price: Php 1,600.00
+                  <input type="radio" name="radhwpack5" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+
+              <hr />
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <!-- End of Services -->
+
+            <br />
+            <br />
+            <hr>
+            <h3 class="alert alert-info">Glutathione Drip "12G"</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> Glutathione 6.5g
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> Collagen 1.5g
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> Vitamin C 1g
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>4.</b> Vitamin B2 1g
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>5.</b> Placenta 1g
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>6.</b> A.Stem Cell 500mg
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>7.</b> Vitamin E 500mg
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 4,000.00/session </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <!-- End of Service -->
+
+            <br />
+            <br />
+            <hr>
+            <h3 class="alert alert-info">Glutathione IV Push</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> Glutathione
+                <sub>1,200mg</sub> with Vitamin C
+                <sub>500mg</sub>
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <center>
+                <label class="control control--radio radio-hw">
+                  Per session
+                  <br>Price: Php 1,500.00
+                  <input type="radio" name="radglutapush1" checked/>
+                  <div class="control__indicator"></div>
+                </label>
+                <label class="control control--radio radio-hw">
+                  Per 5 sessions
+                  <br>Price: Php 7,000.00
+                  <input type="radio" name="radglutapush1" />
+                  <div class="control__indicator"></div>
+                </label>
+                <label class="control control--radio radio-hw">
+                  Per 10 sessions
+                  <br>Price: Php 13,000.00
+                  <input type="radio" name="radglutapush1" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> Glutathione
+                <sub>1,500mg</sub> with Vitamin C
+                <sub>500mg</sub>
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <center>
+                <label class="control control--radio radio-hw">
+                  Per session
+                  <br>Price: Php 1,800.00
+                  <input type="radio" name="radglutapush2" checked/>
+                  <div class="control__indicator"></div>
+                </label>
+                <label class="control control--radio radio-hw">
+                  Per 5 sessions
+                  <br>Price: Php 8,000.00
+                  <input type="radio" name="radglutapush2" />
+                  <div class="control__indicator"></div>
+                </label>
+                <label class="control control--radio radio-hw">
+                  Per 10 sessions
+                  <br>Price: Php 15,500.00
+                  <input type="radio" name="radglutapush2" />
+                  <div class="control__indicator"></div>
+                </label>
+              </center>
+              <div class="p-price">
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <!-- End of Service -->
+
+            <br />
+            <br />
+            <hr>
+            <h3 class="alert alert-info">Other Services</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> Reflexology
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <center>
+                <div class="row" style="padding-left: 50px;">
+                  <div class="col-md-3">
+                    <label> Hand</label>
+                    <label> Price: Php 200.00 </label>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                  </div>
+                  <div class="col-md-3">
+                    <label> Feet </label>
+                    <label> Price: Php 280.00 </label>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                  </div>
+                  <div class="col-md-3">
+                    <label> Hand and Feet </label>
+                    <label> Price: Php 399.00 </label>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                  </div>
+                </div>
+              </center>
+            </div>
+
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> Ear Candling
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 200.00</label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> Traditional Herbal Steam Bath “Suob”
+                <sub>30mins</sub>
+                <br/> &nbsp;&nbsp;with Swedish Massage
+                <sub>60mins</sub>
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 950.00</label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+            <!-- End of Service -->
+
+            <h3 class="alert alert-info">Kiddie Price</h3>
+            <br />
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>1.</b> Swedish Massage
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <hr />
+              <div class="p-price">
+                <label> Price: Php 299.00 </label>
+                <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>2.</b> Spa Treatment</p>
+              <p class="p-head" style="text-align: center;">Mandarin Orange
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-3">
+                  <label> Hand Spa </label>
+                  <label> Price: Php 190.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Hand Spa with
+                    <br />Manicure </label>
+                  <label> Price: Php 259.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label> Foot Spa </label>
+                  <label> Price: Php 299.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-3">
+                  <label>Foot Spa with
+                    <br />Pedicure </label>
+                  <label> Price: Php 350.00 </label>
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <hr>
+            <div style="padding-left: 30px;">
+              <p class="p-head">
+                <b>3.</b> Straight </p>
+              <p class="p-head" style="text-align: center;">Basic Cleaning
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-4">
+                  <label> Hand Spa </label>
+                  <br />
+                  <label> Price: Php 80.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label> Feet Spa </label>
+                  <br />
+                  <label> Price: Php 90.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label>Hand and Feet Spa </label>
+                  <br />
+                  <label> Price: Php 150.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div style="padding-left: 30px;">
+              <p class="p-head" style="text-align: center;">Basic With Nail Polish
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-4">
+                  <label> Hand Spa </label>
+                  <br />
+                  <label> Price: Php 100.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label> Feet Spa </label>
+                  <br />
+                  <label> Price: Php 110.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label>Hand and Feet Spa </label>
+                  <br />
+                  <label> Price: Php 200.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div style="padding-left: 30px;">
+              <p class="p-head" style="text-align: center;">Polish Change
+                <a>
+                  <span class="glyphicon glyphicon-info-sign" style="float: right;" aria-hidden="true"></span>
+                  <span class="sr-only">View Information</span>
+                </a>
+              </p>
+              <br />
+              <div class="row" style="padding-left: 50px;">
+                <div class="col-md-4">
+                  <label> Hand Spa </label>
+                  <br />
+                  <label> Price: Php 50.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label> Feet Spa </label>
+                  <br />
+                  <label> Price: Php 50.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+                <div class="col-md-4">
+                  <label>Hand and Feet Spa </label>
+                  <br />
+                  <label> Price: Php 100.00 </label>
+                  <br />
+                  <br />
+                  <button type="button" class="btn btn-primary" name="btnAddCart"> Add to Cart </button>
+                </div>
+              </div>
+            </div>
+            <!-- End of Service -->
+          </form>
+        </div>
+        <!-- End of Column 7 -->
+        <div class="col-md-3 div-orders sidebar2" style="padding-top: 30px;">
+          <h3 class="headServ" style="font-size: 20px;">Your Order(s)</h3>
+          <hr>
+          <div class="row">
+            <div class="col-md-8 ordername">
+              <span class="badge">2</span> MS-SwdMsg
+              <br />
+              <span class="badge">1</span> BS-AnAgBdyScr
+              <br />
+              <span class="badge">2</span> OS-EarCndl
+              <br />
+            </div>
+            <div class="col-md-4 ordername">
+              399.00
+              <a href="#">
+                <span class="glyphicon glyphicon-remove" title="Remove" aria-hidden="true"></span>
+              </a>
+              900.00
+              <a href="#">
+                <span class="glyphicon glyphicon-remove" title="Remove" aria-hidden="true"></span>
+              </a>
+              200.00
+              <a href="#">
+                <span class="glyphicon glyphicon-remove" title="Remove" aria-hidden="true"></span>
+              </a>
+            </div>
+          </div>
+          <br />
+          <button type="button" class="btn btn-primary" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#doneOrderModal">
+            Done </button>
+          <button type="button" class="btn btn-primary" style="float: right;" name="btnViewOrder" data-toggle="modal" data-target="#viewOrderModal">
+            View </button>
+          <hr>
+          <p style="text-align: right;"> TOTAL: Php 2,098.00</p>
+          <br />
+          <br />
+          <p>Contact us!</p>
+          <p>EForea Nail and Body Spa</p>
+          <p>Unit 102 #71 P. Tuazon St.,
+            <br /> Barangay Kaunlaran
+            <br /> 1100 Quezon City, Philippines</p>
+          <p>0977 801 2700</p>
+        </div>
+        <!-- End of Column 2/Sidebar2 -->
+      </div>
+      <!-- End of Row -->
+    </div>
+    <!-- End of Body -->
+  </div>
+
+  <!-- Modals -->
+  <!-- View Order Modal -->
+  <div class="modal fade" id="viewOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Your Service Cart</h4>
+        </div>
+        <div class="modal-body">
+          <table width="100%">
+            <tr>
+              <th class="th-modal" width="15%"> Quantity </th>
+              <th class="th-modal" width="50%"> Service </th>
+              <th class="th-modal" width="20%"> Amount </th>
+              <th class="th-modal" width="30%"> Total Amount </th>
+            </tr>
+            <tr>
+              <td class="td-quantity"> 2 </td>
+              <td> MS-Swedish Massage </td>
+              <td> 399.00 </td>
+              <td> 798.00 </td>
+            </tr>
+            <tr>
+              <td> 1 </td>
+              <td> BS-Anti Aging Body Scrub </td>
+              <td> 900.00 </td>
+              <td> 900.00 </td>
+            </tr>
+            <tr>
+              <td> 2 </td>
+              <td> OS-Ear Candling </td>
+              <td> 200.00 </td>
+              <td> 400.00 </td>
+            </tr>
+          </table>
+          <hr>
+          <p style="text-align: right; font-size: 17px;">
+            <strong>Total:</strong>
+            <span style="font-size: 15px;" class="badge">Php 2,098.00</span>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Reserve Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DONE ORDER MODAL -->
+  <div class="modal fade" id="doneOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Reserve Now?</h4>
+        </div>
+        <div class="modal-body">
+          Upon clicking confirm, you are no longer able to edit the services you reserved. Continue?
+          <br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD TO CART MODAL -->
+  <div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Add to Cart?</h4>
+        </div>
+        <div class="modal-body">
+          <center>
+            <table width="100%">
+              <tr style="background-color: #D9E3EA;">
+                <th class="thtd-addCart">Service Name: </th>
+                <td class="thtd-addCart">
+                  <span id="serviceHolder"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="thtd-addCart">Price: </th>
+                <td class="thtd-addCart">
+                  <span id="priceHolder"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="thtd-addCart">Quantity: </th>
+                <td class="thtd-addCart">
+                  <input type="number" name="txtQuantity" value=1 min=1 style="width: 100px;"> </td>
+              </tr>
+            </table>
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" name="btnAddOrder" data-dismiss="modal" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO MODAL -->
+  <div class="modal fade" id="infoServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title info-label">BlahBlah Lorem</h4>
+        </div>
+        <div class="modal-body">
+          <center>
+            <img src="assets/images/s-swedish.jpg" width="300" height="300">
+            <h4>Description:</h4>
+            <p class="info-desc"></p>
+            <h5>
+              <strong>Price:</strong> PHP<span class="info-price"></span>/ <span class="info-time"></span>hour/s
+            </h5>
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="assets/bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/scroll.js"></script>
+  <script type="text/javascript" src="assets/js/navbar-scroll.js"></script>
+  <script type="text/javascript" src="assets/js/ejs_production.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+</html>

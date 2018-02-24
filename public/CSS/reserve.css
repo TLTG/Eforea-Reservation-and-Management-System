@@ -1,0 +1,413 @@
+@font-face 
+{
+    font-family: Quicksand;
+    src: url("font/Quicksand-Regular.ttf") format("truetype");
+}
+
+body
+{
+  font-family: Quicksand;
+  min-height: 2000px;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
+.navbar
+{
+	font-family: Quicksand;
+	height: 70px;
+	font-size: 16px;
+  background-color: #034777;
+}
+
+.nav
+{
+  padding-right: 20px;
+}
+
+.nav > li > a:hover
+{
+  color: white;
+  background-color: #034777;
+}
+
+.nav > li > a {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #A4A4A4;
+  font-size: 15px;
+}
+
+#active-menu
+{
+  color: white;
+  background-color: #567489;
+}
+
+.reserve-btn
+{
+  border: solid 1px;
+  border-color: red;
+  padding: 100px;
+  border-radius: 5px;
+}
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #F5F5F5;
+    border-right: 1px solid #eee;
+    height: 100%;
+    font-size: 13px;
+    line-height: 30px;
+  }
+}
+
+.sidebar2 {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar2 {
+    position: fixed;
+    top: 51px;  
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden; /* Scrollable contents if viewport is shorter than content. */
+    background-color: white;
+    border-right: 1px solid #eee;
+    font-size: 13px;
+    padding-top: 120px;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+  list-style-type: none;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 0px;
+  text-decoration: none;
+  color: #034777;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+.nav-sidebar > li > a:hover
+{
+  color: black;
+}
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+.main .page-header {
+  margin-top: 0;
+}
+
+.modal-header
+{
+	background-color: #5784A4;
+	color: white;
+}
+
+p.p-head
+{
+  font-size: 16px;
+}
+
+.p-price
+{
+  float: right;
+  text-align: right;
+}
+
+.badge
+{
+  background-color: #337AB7;
+}
+
+.btn-primary
+{
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.btn-default
+{
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+hr.hr-sepserv
+{
+  border-color: 1px solid #ccc;
+}
+
+
+/*CHECKBOX*/
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: #E1E1E1;
+}
+.control--radio .control__indicator {
+  border-radius: 60%;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+  background: #ccc;
+}
+.control input:checked ~ .control__indicator {
+  background: #034777;
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: #0e647d;
+}
+.control input:disabled ~ .control__indicator {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+
+.control--radio .control__indicator:after {
+  left: 7px;
+  top: 7px;
+  height: 6px;
+  width: 6px;
+  border-radius: 100%;
+  background: #fff;
+}
+.control--radio input:disabled ~ .control__indicator:after {
+  background: #7b7b7b;
+}
+
+/* SEARCH BAR */
+.search-container {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+input#search-bar {
+  margin: 0 auto;
+  width: 200px;
+  height: 45px;
+  padding: 0 20px;
+  border: 1px solid #D0CFCE;
+  outline: none;
+  font-size: 12px;
+  background-color: #F5F5F5;
+}
+::placeholder
+{
+  color: black;
+}
+input#search-bar:focus {
+  border: 1px solid #008ABF;
+  transition: 0.35s ease;
+  color: black;
+}
+input#search-bar:focus::-webkit-input-placeholder {
+  color: black;
+  transition: opacity 0.45s ease;
+  opacity: 0;
+}
+input#search-bar:focus::-moz-placeholder {
+  color: black;
+  transition: opacity 0.45s ease;
+  opacity: 0;
+}
+input#search-bar:focus:-ms-placeholder {
+  color: black;
+  transition: opacity 0.45s ease;
+  opacity: 0;
+}
+
+.search-icon {
+  position: relative;
+  float: right;
+  width: 70px;
+  height: 70px;
+  top: -60px;
+  right: -20px;
+  margin: 0 auto;
+}
+
+.radio-hw
+{
+	font-size: 16px; 
+	padding-left: 30px;
+	display: inline-block;
+}
+
+.hwrow
+{
+	padding-left: 20px;
+}
+
+ul.list-ul
+{
+  list-style-type: none;
+  padding-left: 0px;
+  line-height: 25px;
+  text-align: right;
+  font-size: 12px;
+  padding-right: 10px;
+}
+
+.li-navlist
+{
+  color: white;
+  text-decoration: none;
+}
+
+/*li.li-navlist:hover
+{
+  text-align: left;
+  color: red;
+  background-color: #E2E2E2;
+  text-decoration: none;
+  padding-left: 10px;
+  border-left: 5px solid #034777;
+}*/
+
+li.max-serv
+{
+  padding-left: 30px;
+}
+li.min-serv
+{
+  padding-left: 60px;
+}
+
+li.min-serv:hover,
+li.max-serv:hover
+{
+  color: black;
+  text-shadow: 0px 1px 1px;
+}
+
+.headServ
+{
+	border-left: solid 8px #034777;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+.headServPack
+{
+	border-left: solid 8px #034777;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	margin-left: 80px;
+}
+
+div.div-orders
+{
+  padding: 0px;
+}
+
+.ordername
+{
+  line-height: 30px;
+  font-size: 13px;
+}
+
+th.th-modal
+{
+  font-size: 17px;
+  line-height: 50px;
+}
+
+th.thtd-addCart
+{
+  width: 30%;
+  height: 40px;
+  padding: 10px;
+}
+
+td.thtd-addCart
+{
+  width: 70%;
+  height: 40px;
+  padding: 10px;
+}
+
+h3.h3-categories
+{
+  padding-left: 10px; 
+  font-size: 22px; 
+  color: #034777; 
+  text-align: center;
+}

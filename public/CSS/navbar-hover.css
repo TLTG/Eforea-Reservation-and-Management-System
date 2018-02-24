@@ -1,0 +1,215 @@
+.navbar a {
+/*  font-size: 1.5em;*/
+  padding: .25em;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+/** Border Out Animation **/
+.borders-out {
+  background-color: #8A95A5;
+}
+
+.borders-out a:before, .borders-out a:after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  content: "";
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.borders-out a:before {
+  top: 0px;
+  transform: translateY(10px);
+}
+.borders-out a:after {
+  bottom: 0px;
+  transform: translateY(-10px);
+}
+
+.borders-out a:hover:before, .borders-out a:hover:after {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/** Border In Animation **/
+.borders-in {
+  background-color: #B9C6AE;
+}
+
+.borders-in a:before, .borders-in a:after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  content: "";
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.borders-in a:before {
+  top: 0;
+  transform: translateY(-10px);
+}
+.borders-in a:after {
+  bottom: 0;
+  transform: translateY(10px);
+}
+
+.borders-in a:hover:before, .borders-in a:hover:after {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/** Circle Animation **/
+.circle a:before, .circle a:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border: 4px solid white;
+  transform: translateX(-50%) translateY(-50%) scale(0.8);
+  border-radius: 50%;
+  background: transparent;
+  content: "";
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+.circle a:after {
+  border-width: 2px;
+  transition: all 0.4s;
+}
+
+.circle a:hover:before {
+  opacity: .6;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+.circle a:hover:after {
+  opacity: .6;
+  transform: translateX(-50%) translateY(-50%) scale(1.3);
+}
+
+/** Rounded Brackets **/
+.rounded-brackets {
+  background-color: #A59E8B;
+}
+
+.rounded-brackets a:before, .rounded-brackets a:after {
+  position: absolute;
+  opacity: 0;
+  font-size: 1.25em;
+  top: 0;
+  transition: all 0.3s;
+}
+
+.rounded-brackets a:before {
+  content: '(';
+  left: -12px;
+  transform: translateX(10px);
+}
+.rounded-brackets a:after {
+  content: ')';
+  right: -12px;
+  transform: translateX(-10px);
+}
+
+.rounded-brackets a:hover:before, .rounded-brackets a:hover:after {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+/** Line Width **/
+.linewidth a:before, .linewidth a:after {
+  position: absolute;
+  opacity: 0;
+  width: 0%;
+  height: 2px;
+  content: '';
+  background: #FFF;
+  transition: all 0.3s;
+}
+
+.linewidth a:before {
+  left: 0px;
+  top: 0px;
+}
+.linewidth a:after {
+  right: 0px;
+  bottom: 0px;
+}
+
+.linewidth a:hover:before, .linewidth a:hover:after {
+  width: 100%;
+  opacity: 1;
+}
+
+/** Pull Right **/
+
+.pullright a:before {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  content: '';
+  background: #FFF;
+  opacity: .3;
+  transition: all 0.3s;
+}
+
+.pullright a:hover:before {
+  width: 100%;
+}
+
+.text-highlight {
+  background-color: #A58BA0;
+}
+
+.text-highlight a:before {
+  position: absolute;
+  color: #D695C9;
+  bottom: 5;
+  right: 5;
+  overflow: hidden;
+  content: attr(alt);
+  transition: all 0.4s;
+  transform: scale(1.3);
+  opacity: 0;
+  font-weight: 400;
+}
+
+.text-highlight a:hover:before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.double-highlight a:before, .double-highlight a:after {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  top: 0px;
+  content: '';
+  background: #FFF;
+  opacity: 0.3;
+  transition: all 0.4s;
+}
+.double-highlight a:before {
+  left: 0;
+}
+.double-highlight a:after {
+  right: 0;
+}
+
+.double-highlight a:hover:before, .double-highlight a:hover:after {
+  width: 100%;
+  opacity: .15;
+}
