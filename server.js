@@ -1,23 +1,37 @@
 //Imports
 var express = require('express');
-var db = require('./model/db');
 var app = express();
+var db = require('./model/db');
+var parser = require('body-parser');
+var cookie_parser = require('cookie-parser');
+var session = require('express-session');
 
-//Configurations
+//Configurations.
 app.set('view engine', 'ejs'); //this change the view engine to ejs, (mahirap kasi yung default)
+app.use(parser.urlencoded({ extended: false }));
+app.use(parser.json());
+app.use(cookie_parser());
+app.use(session({
+    secret: "Secret Thing",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { 'cart_items' : '-1:1,' }
+}));
 app.use(require('express-promise')()); //this makes promises come true. Still can't use it properly soo disable muna. 
 app.use('/', require('./controller/routes')); //this will route everything.
 app.use('/assets', express.static(__dirname + '/public')); //this make public folder static/public
 
-//Initialize DB connection and Server Port Listener
+//Establish DB connection then open Server port listener.
 db.connect(db.MODE_PRODUCTION, function (err) {
     if (err) {
-        console.log('Unable to connect to MySQL.');
+        console.error('[SERVER] Unable to connect to MySQL. Please check the MySQL connection and restart the server.');
         process.exit(1);
     } else {
         //Change yung port pag production na.
-        app.listen(80, function () {
-            console.log('Listening on port 80...');
+        var server = app.listen(80).on('error',function(err){
+            console.error('[SERVER] Network related error. Port must be in use. ' + err);
+            process.exit(1);
         });
+        console.log('[SERVER] Listening in port: ' + server.address().port);
     }
 });

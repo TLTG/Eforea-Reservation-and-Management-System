@@ -25,7 +25,7 @@ exports.countService = function(id, done){
 }
 
 exports.insertReservation = function(data, done){
-    var sql = "CALL addReservation(?,?,?,?,1,?)";
+    var sql = "CALL addReservation(?,?,?,?,?)";
     db.get().query(sql, data, function(err, results){
         if(err) return done(err);
         done(null, results[0]);

@@ -1621,37 +1621,14 @@
           </form>
         </div>
         <!-- End of Column 7 -->
-        <div class="col-md-3 div-orders sidebar2" style="padding-top: 30px;">
+        <div class="col-md-3 div-orders sidebar2" style="padding-top: 30px; ">
           <h3 class="headServ" style="font-size: 20px;">Your Order(s)</h3>
           <hr>
-          <div class="row">
-            <div class="col-md-8 ordername">
-              <span class="badge">2</span> MS-SwdMsg
-              <br />
-              <span class="badge">1</span> BS-AnAgBdyScr
-              <br />
-              <span class="badge">2</span> OS-EarCndl
-              <br />
-            </div>
-            <div class="col-md-4 ordername">
-              399.00
-              <a href="#">
-                <span class="glyphicon glyphicon-remove" title="Remove" aria-hidden="true"></span>
-              </a>
-              900.00
-              <a href="#">
-                <span class="glyphicon glyphicon-remove" title="Remove" aria-hidden="true"></span>
-              </a>
-              200.00
-              <a href="#">
-                <span class="glyphicon glyphicon-remove" title="Remove" aria-hidden="true"></span>
-              </a>
-            </div>
-          </div>
+          <div class="order-container" style="overflow-y: auto; height: 100px; overflow-x:hidden"></div>
           <br />
           <button type="button" class="btn btn-primary" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#doneOrderModal">
             Done </button>
-          <button type="button" class="btn btn-primary" style="float: right;" name="btnViewOrder" data-toggle="modal" data-target="#viewOrderModal">
+          <button type="button" onclick="viewOrderModal()" class="btn btn-primary" style="float: right;" name="btnViewOrder" data-toggle="modal" data-target="#viewOrderModal">
             View </button>
           <hr>
           <p style="text-align: right;"> TOTAL: Php 2,098.00</p>
@@ -1682,7 +1659,7 @@
           </button>
           <h4 class="modal-title" id="myModalLabel">Your Service Cart</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body viewOrderMod">
           <table width="100%">
             <tr>
               <th class="th-modal" width="15%"> Quantity </th>
@@ -1717,7 +1694,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Reserve Now</button>
         </div>
       </div>
     </div>
@@ -1773,14 +1749,15 @@
               <tr>
                 <th class="thtd-addCart">Quantity: </th>
                 <td class="thtd-addCart">
-                  <input type="number" name="txtQuantity" value=1 min=1 style="width: 100px;"> </td>
+                  <input type="number" id="itemnum" name="txtQuantity" value=1 min=1 style="width: 100px;"> </td>
               </tr>
             </table>
           </center>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" name="btnAddOrder" data-dismiss="modal" class="btn btn-primary">Add</button>
+          <input type="hidden" id="item_id" value="">
+          <input type="submit" onclick="addToCart()" name="btnAddOrder" data-dismiss="modal" class="btn btn-primary" value="Add">
         </div>
       </div>
     </div>
