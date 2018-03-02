@@ -4,10 +4,33 @@ var guessUser = [];
 var request;
 
 exports.getUserBySID = function(param0){
+    //console.log(JSON.stringify(guessUser));
     guessUser.forEach(element => {
         if(element.sid === param0){
             return element;
         }
+    });
+}
+
+function checkUser(param0) {
+    return new Promise(function (fulfill, reject) {
+        var currentUser = null;
+        guessUser.forEach(elem => {
+            if (elem.sid === param0.sessionid) {
+                currentUser = elem;
+            }
+            //console.log("[SERVER] returning guess");            
+        });
+        if (currentUser === null) {
+            var newUser = {
+                sid: param0.sessionid,
+                cart: []
+            };
+            guessUser.push(newUser);
+            currentUser = newUser;
+            //console.log("[SERVER] new guess");
+        }
+        fulfill({categories: param0.categories, services: param0.services, cart: currentUser.cart});
     });
 }
 
@@ -67,33 +90,11 @@ var func3 = function (data) {
     });
 }
 
-function checkUser(param0) {
-    return new Promise(function (fulfill, reject) {
-        var currentUser = null;
-        guessUser.forEach(elem => {
-            if (elem.sid === request.sessionid) {
-                currentUser = elem;
-            }
-            //console.log("[SERVER] returning guess");            
-        });
-        if (currentUser === null) {
-            var newUser = {
-                sid: request.sessionid,
-                cart: []
-            };
-            guessUser.push(newUser);
-            currentUser = newUser;
-            //console.log("[SERVER] new guess");
-        }
-        fulfill({categories: param0.categories, services: param0.services, cart: currentUser.cart});
-    });
-}
-
 var onErr = function (err) {
     console.error('[SERVER] ' + err);
 }
 
-module.exports = function (req, res, next) {
+exports.reserveContent = function (req, res, next) {
     request = req;
     func1()
         .then(func2, onErr)

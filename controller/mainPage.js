@@ -1,8 +1,7 @@
 var express = require('express'),
     router = express.Router();
 var reserveGET = require('../middleware/reserveContent'),
-    reservePOST = require('../middleware/reserve'),
-    cart = require('../middleware/cart');
+    reservePOST = require('../middleware/reserve');
 
 router.get('/', function (req, res) {
     res.render('main/index');
@@ -19,10 +18,12 @@ router.get('/schedule', function (req, res) {
 router.get('/about-us', function (req, res) {
     res.render('main/about');
 });
-router.get('/reserve', reserveGET, function(req, res){
+router.get('/reserve', reserveGET.reserveContent, function(req, res){
     res.render('main/reservation', res.locals.param);
 });
-router.post('/reserve', reservePOST, function(req, res){});
+router.post('/reserve', reservePOST, function(req, res){
+    res.send(true);
+});
 
 router.get('/testReserve', function(req, res){
     res.render('main/test');

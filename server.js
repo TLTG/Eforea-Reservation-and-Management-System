@@ -8,23 +8,23 @@ var session = require('express-session');
 
 //Configurations.
 app.set('view engine', 'ejs'); //this change the view engine to ejs, (mahirap kasi yung default)
-app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
+app.use(parser.urlencoded({ extended: false }));
 app.use(cookie_parser());
 app.use(session({
     secret: "Secret Thing",
     resave: false,
-    saveUninitialized: true,
-    cookie: { 'cart_items' : '-1:1,' }
+    saveUninitialized: true
 }));
 app.use(require('express-promise')()); //this makes promises come true. Still can't use it properly soo disable muna. 
 app.use('/', require('./controller/routes')); //this will route everything.
 app.use('/assets', express.static(__dirname + '/public')); //this make public folder static/public
+app.use(require('./middleware/errorHandler'));
 
 //Establish DB connection then open Server port listener.
 db.connect(db.MODE_PRODUCTION, function (err) {
     if (err) {
-        console.error('[SERVER] Unable to connect to MySQL. Please check the MySQL connection and restart the server.');
+        console.error('[SERVER] Unable to connect to MySQL. Please check the MySQL connection and restart the server. ' + err);
         process.exit(1);
     } else {
         //Change yung port pag production na.

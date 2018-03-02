@@ -1,0 +1,294 @@
+@font-face 
+{
+    font-family: Quicksand;
+    src: url("font/Quicksand-Regular.ttf") format("truetype");
+}
+
+
+/* Hides the horizontal overflow */
+body 
+{
+  font-family: Quicksand;
+  overflow-x: hidden;
+}
+
+.msg-p
+{
+  font-size: 80px;
+  text-align: center;
+  text-shadow: 5px 5px black;
+}
+
+.msg-p2
+{
+  font-size: 15px;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.p-serv
+{
+  color: #5784A4;
+}
+
+/* Resize in Mobile View */
+@media (min-width: 0) and (max-width: 767px) {
+  p,
+  .body-text {
+    font-size: 10px !important;
+  }
+  .down-arrow {
+    font-size: 20px !important;
+  }
+}
+/* Resize in Tablet View */
+@media (min-width: 768px) and (max-width: 991px) {
+  p,
+  .body-text {
+    font-size: 35px !important;
+  }
+  .down-arrow {
+    font-size: 30px !important;
+  }
+}
+/* Line Separators CSS */
+.line-separator {
+  display: block;
+  width: 50%;
+  height: 1px;
+  text-align: center;
+  margin: 20px auto;
+  border-bottom: 1px solid grey;
+}
+/* First Wrap Background */
+.first-wrap {
+  height: 100%;
+  width: 100vw;
+  /*background: #ffffff url("https://images.unsplash.com/photo-1445251836269-d158eaa028a6?fit=crop&fm=jpg&h=950&q=80&w=1920") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url("../images/login-bg.jpeg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Second Wrap Background */
+.second-wrap {
+  padding-top: 50px;
+  height: 1500px;
+  width: 150vw;
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2) ), url("../images/2ndwrap.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Third Wrap Background */
+.third-wrap {
+  height: 1000px;
+  width: 100vw;
+  /*background: #ffffff url("../images/2ndwrap.jpg") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2) ), url("../images/2ndwrap2.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Fourth Wrap Background */
+.fourth-wrap {
+  height: 1000px;
+  width: 100vw;
+  /*background: #ffffff url("../images/2ndwrap.jpg") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4) ), url("../images/2ndwrap3.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Fifth Wrap Background */
+.fifth-wrap {
+  height: 1000px;
+  width: 100vw;
+  /*background: #ffffff url("../images/2ndwrap.jpg") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2) ), url("../images/2ndwrap5.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Sixth Wrap Background */
+.sixth-wrap {
+  height: 1000px;
+  width: 100vw;
+  /*background: #ffffff url("../images/2ndwrap.jpg") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4) ), url("../images/2ndwrap4.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Seventh Wrap Background */
+.seventh-wrap {
+  height: 1000px;
+  width: 100vw;
+  /*background: #ffffff url("../images/2ndwrap.jpg") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2) ), url("../images/2ndwrap6.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Eighth Wrap Background */
+.eighth-wrap {
+  height: 1000px;
+  width: 100vw;
+  /*background: #ffffff url("../images/2ndwrap.jpg") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2) ), url("../images/2ndwrap7.png") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.first-div {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+}
+.first-div .first-inner-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+}
+.first-div .first-inner-div .down-arrow {
+  font-size: 40px;
+  color: #fff;
+}
+.first-div .first-inner-div p {
+  padding: 10px;
+  letter-spacing: 0.20em;
+  /*background-color: rgba(0, 0, 0, 0.3);*/
+}
+.second-div {
+  display: table;
+  height: 25vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.second-div p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+}
+.third-div {
+  display: table;
+  height: 50vh;
+  width: 100vw;
+  background-color: transparent;
+}
+.fourth-div {
+  display: table;
+  height: 25vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.fourth-div p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+}
+.fifth-div {
+  display: table;
+  height: 50vh;
+  width: 100vw;
+  background-color: transparent;
+}
+#back-to-top {
+  position: fixed;
+  bottom: 10px;
+  right: 40px;
+  z-index: 9999;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 30px;
+  background-color: black;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: opacity 0.2s ease-out;
+  opacity: 0.5;
+}
+#back-to-top:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000;
+}
+#back-to-top.show {
+  opacity: 1;
+}
+/* NEW UPDATE */
+.new-update {
+  padding: 20px;
+  text-align: center;
+}
+
+/*-------ABOUT US----------*/
+/* First Wrap Background AU */
+.first-wrapAU {
+  height: 100%;
+  width: 100vw;
+  /*background: #ffffff url("https://images.unsplash.com/photo-1445251836269-d158eaa028a6?fit=crop&fm=jpg&h=950&q=80&w=1920") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ), url("../images/aboutus-wallp2.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+/* Second Wrap Background AU */
+.second-wrapAU {
+  padding-top: 50px;
+  height: 260px;
+  width: 150vw;
+  /*background: #ffffff url("https://images.unsplash.com/photo-1445251836269-d158eaa028a6?fit=crop&fm=jpg&h=950&q=80&w=1920") no-repeat fixed;*/
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url("../images/about-us-1.png") no-repeat fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+input[type="button"].login
+{
+  font-size: 14px;
+  width: 112px;
+  height: 37px;
+  -moz-border-radius: 19px;
+  -webkit-border-radius: 19px;
+  border-radius: 19px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #034777;
+  border:1px solid #034777;
+  border:none;
+  color: #fff;
+  font-weight: bold;
+  opacity: .8;
+}
+
+input[type="button"].login:hover
+{
+  background-color: black; 
+  border:2px solid #034777; 
+  color:#fff; 
+  cursor:pointer;
+  opacity: 0.5;
+}
+
+input[type="button"].login:focus
+{
+  outline: none;
+}
+
+.msg-p2AU
+{
+  font-size: 15px;
+  text-align: center;
+  text-transform: lowercase;
+  color: black;
+  text-shadow: 1px 1px #C7D6E0;
+}
