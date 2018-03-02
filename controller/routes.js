@@ -1,12 +1,13 @@
+// route.js : This contains the routing of the server.
+//Imports
 var express = require('express');
 var router = express.Router();
-var parser = require('body-parser');
-
-router.use(parser.urlencoded({ extended: false }));
-router.use(parser.json());
 
 router.use('/', require('./mainPage'));
 router.use('/admin', require('./admin'));
+/*router.get('*', function(req, res){
+    res.send("404 Error: Page not Found!");
+});*/
 
 //export this router to use in our server.js
 module.exports = router;

@@ -13,7 +13,7 @@ exports.MODE_TEST = 'mode_test';
 exports.connect = function (mode,done){
   dbstate.pool = mysql.createPool({
     connection: 20,
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: '',
     database: mode === exports.MODE_PRODUCTION ? production_db : test_db

@@ -1,10 +1,11 @@
 {
-  "name": "eforea",
+  "name": "eforea-server",
   "version": "1.0.0",
   "description": "Website for Eforea Business Process",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "TGTL",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "ejs": "^2.5.5",
     "express": "^4.16.2",
     "express-promise": "^0.4.0",
-    "express-session": "^1.15.6"
+    "express-session": "^1.15.6",
+    "mysql": "^2.15.0"
   }
 }

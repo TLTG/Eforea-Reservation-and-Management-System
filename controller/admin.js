@@ -20,12 +20,16 @@ router.post('/', function (req, res){
             res.send('Internal Server Error');
             console.log(err);
         }else{
-            var user_data = {
-                id: result.id,
-                usertype: result.usertype
-            }
-            if(user_data.usertype==1){
-                res.render('admin/dashboard');
+            if(result !== undefined){
+                var user_data = {
+                    id: result.id,
+                    usertype: result.usertype
+                }
+                if(user_data.usertype==1){
+                    res.render('admin/dashboard');
+                }
+            }else{
+                res.send("invalid user/password");
             }
         }
     });
