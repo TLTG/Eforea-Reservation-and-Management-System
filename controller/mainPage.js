@@ -18,15 +18,13 @@ router.get('/schedule', function (req, res) {
 router.get('/about-us', function (req, res) {
     res.render('main/about');
 });
-router.get('/reserve', reserveGET.reserveContent, function(req, res){
-    res.render('main/reservation', res.locals.param);
+router.get('/reserve', function(req, res){
+    res.render('main/reservation');
 });
+router.get('/reserve/data', reserveGET.reserveContent);
+
 router.post('/reserve', reservePOST, function(req, res){
     res.send(true);
-});
-
-router.get('/testReserve', function(req, res){
-    res.render('main/test');
 });
 
 module.exports = router;

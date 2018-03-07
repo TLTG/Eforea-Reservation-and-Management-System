@@ -16,9 +16,83 @@ $(document).ready(function () {
             header.classList.remove("sticky");
         }
     }
+
+    if(document.cookie.cart != undefined){
+        var cart = JSON.parse(document.cookie.cart);
+        userData.cart = cart;
+    }else{
+
+    }
+
+    getContent();
 });
 
+function getContent(){
+    $.get('/reserve/data', function(data){
+        if(data === undefined){
+            alert('Server Connection Timeout, Try again later');
+            console.error('Server response error');
+            return; 
+        } 
+        serv = data.services;
+        var html = "";
+        data.categories.forEach(service => {
+            html += " <li class='li-navlist'><a href='#' onclick='hideMenuExcept("+ service.id +")'><span class='badge'>" + service.count + "</span>  " + service.name + "</a></li>";
+        });
+        html += "<li class='li-navlist'><a href='#' onclick='hideMenuExcept(-1)'>View All </a></li>";
+        $('.category-list').html(html);
+
+        html = "";
+        //console.log(JSON.stringify(data.categories));
+        data.categories.forEach(element => {
+            //console.log(element.name);
+            html = "<form method='post' class='menu menu-"+ element.id +"'><h3 class='alert alert-info'>" + element.name + "</h3><br/>";
+            var a=1; 
+            data.services.forEach(elem => {
+                //console.log(elem.name);
+                if(elem.category == element.id){
+                    if(elem.type == 0){
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p><hr><div class='p-price'><label> Price: Php" + elem.amount + "</label><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + elem.amount + "\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></div><br /><br /><hr class='hr-sepserv'>";                       
+                    }else if(elem.type == 1){
+                        var price = elem.amount.split('/');
+                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div class='col-md-4'><label> Hand Spa </label><br /><label> Price: Php "+ price[0] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-4'><label> Feet Spa </label><br /><label> Price: Php "+ price[1] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-4'><label> Hand and Feet Spa </label><br /><label> Price: Php "+ price[2] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "</div><br /><hr class='hr-sepserv'>";
+                    }else if(elem.type == 2){
+                        var price = elem.amount.split('/');
+                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div class='col-md-3'><label> Hand Spa </label><br /><label> Price: Php "+ price[0] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-3'><label> Hand Spa with <br />Manicure</label><br /><label> Price: Php "+ price[1] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-3'><label> Feet Spa </label><br /><label> Price: Php "+ price[2] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-3'><label> Feet Spa with <br />Pedicure </label><br /><label> Price: Php "+ price[3] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[3] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "</div><br /><hr class='hr-sepserv'>";
+                    }else if(elem.type == 3){
+                        var price = elem.amount.split('/');
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<center id='item-"+ elem.id +"'><label class='control control--radio radio-hw'>Male<br>Price: Php "+ price[0] +".00<input type='radio' name='radiohw1' value='"+ price[0] +"' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
+                        html += "<label class='control control--radio radio-hw'>Female<br>Price: Php "+ price[1] +".00<input type='radio' name='radiohw1' value='"+ price[1] +"'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name +"\"})' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
+                        html += "</div><br /><hr class='hr-sepserv'>";
+                    }else{
+                        var price = elem.amount.split('/');
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<center id='item-"+ elem.id +"'><label class='control control--radio radio-hw'>Per session<br>Price: Php "+ price[0] +".00<input type='radio' name='radiohw1' value='"+ price[0] +"' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
+                        html += "<label class='control control--radio radio-hw'>Per 5 session<br>Price: Php "+ price[1] +".00<input type='radio' name='radiohw1' value='"+ price[1] +"'><div class='control__indicator'></div></label> &emsp;&emsp;";
+                        html += "<label class='control control--radio radio-hw'>Per 10 session<br>Price: Php "+ price[2] +".00<input type='radio' name='radiohw1' value='"+ price[2] +"'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name +"\"})' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
+                        html += "</div><br /><hr class='hr-sepserv'>";
+                    }
+                    a++;
+                }
+            });
+            html += "</form>";
+            $('.service-list').append(html);
+        });
+    });
+}
+
 var order = [];
+var serv = [];
 var userData = {
     name: '',
     number: '',
@@ -61,7 +135,7 @@ function addToCart() {
                 }
             });
             if(flag){
-                var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span>" + _name + "</div><div class='col-md-4'>P" + _price + ".00<a href='#'<span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
+                var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span>" + _name + "</div><div class='col-md-4'>P" + _price + ".00<a href='#' onclick='removeToCart(\""+ _id +"\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
                 $('.order-container').append(newOrder);
                 order.push({
                     id: _id,
@@ -78,6 +152,35 @@ function addToCart() {
             alert("Reservation Limit Reaches! (5 services)");
         }
     //});
+}
+
+function addCartModal1(data) {
+    var id = data.id;
+    var serviceName = data.name;
+    var price = $("#item-"+id +" input[name='radiohw1']:checked").val();
+    $('#serviceHolder').html(serviceName);
+    $('#serviceHolder').val(serviceName);
+    $('#priceHolder').html(price);
+    $('#priceHolder').val(price);
+    $('#item_id').val(id);
+}
+
+function removeToCart(param){
+    $('.id_'+param).remove();
+    var x=0, a=-1, _total=0;
+    order.forEach(element => {
+        _total += parseInt(element.price) * parseInt(element.quant);
+        if(element.id == param){
+            a=x;
+            _total -= parseInt(element.price) * parseInt(element.quant);
+        }else{
+            x++;
+        }
+    });    
+    if(a!=-1){
+        order.splice(a,1);
+        $('.totalParag').html(_total);
+    }
 }
 
 function viewOrderModal(){
@@ -127,6 +230,28 @@ function submitReservation(){
         }else{
             alert("Can't process you request. Try again later.");
             window.location="/reserve";
+        }
+    });
+}
+
+function hideMenuExcept(param){
+    if(param != -1){
+        $('.menu-show').addClass('menu');
+        $('.menu-show').removeClass('menu-show');
+        $('.menu-'+param).removeClass('menu');
+        $('.menu-'+param).addClass('menu-show');
+        $('.menu-show').css("display", "inline");
+        $('.menu').css("display", "none");
+    }else{
+        $('.menu').css("display", "inline");
+    }
+}
+
+function searchService(){
+    var look = $('#search-bar').val();
+    serv.forEach(element => {
+        if(look.toLowerCase() == element.name.toLowerCase()){
+            hideMenuExcept(element.category);
         }
     });
 }

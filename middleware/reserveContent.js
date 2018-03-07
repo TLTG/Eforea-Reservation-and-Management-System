@@ -12,7 +12,8 @@ exports.getUserBySID = function(param0){
     });
 }
 
-function checkUser(param0) {
+//niremove ko na to kasi nasa client na yung cart nila. rereuse ko nalang sa admin side.
+/*function checkUser(param0) { 
     return new Promise(function (fulfill, reject) {
         var currentUser = null;
         guessUser.forEach(elem => {
@@ -32,7 +33,7 @@ function checkUser(param0) {
         }
         fulfill({categories: param0.categories, services: param0.services, cart: currentUser.cart});
     });
-}
+}*/
 
 function func1() {
     return new Promise(function (fulfill, reject) {
@@ -42,14 +43,18 @@ function func1() {
             else {
                 var cat = result;
                 cat.forEach(element => {
-                    categories.push({ id: element.id, name: element.name });
+                    categories.push({ 
+                        id: element.id, 
+                        name: element.name, 
+                        count: element.count, 
+                    });
                 });
                 fulfill(categories);
             }
         });
     });
 }
-
+/*  This is disbled due to uncertain conditions na nagpapalala ng anxiety ko.
 var func2 = function (data) {
     return new Promise(function (fulfill, reject) {
         var categories = [];
@@ -66,7 +71,7 @@ var func2 = function (data) {
         });
         fulfill(categories);
     });
-}
+}*/
 
 var func3 = function (data) {
     return new Promise(function (fulfill, reject) {
@@ -80,6 +85,7 @@ var func3 = function (data) {
                         name: element.name,
                         desc: element.description,
                         time: element.time,
+                        type: element.serviceType,
                         category: element.category,
                         amount: element.amount
                     });
@@ -97,11 +103,10 @@ var onErr = function (err) {
 exports.reserveContent = function (req, res, next) {
     request = req;
     func1()
-        .then(func2, onErr)
+        //.then(func2, onErr)
         .then(func3, onErr)
-        .then(checkUser, onErr)
         .then(function (data) {
-            res.locals.param = data;
-            next();
+            //console.log(JSON.stringify(data));
+            res.send(data);
         }, onErr);
 }

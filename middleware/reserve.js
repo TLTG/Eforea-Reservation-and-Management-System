@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
     //var currUser = reservation.getUserBySID(req.sessionid);
     var userData = JSON.parse(req.body.data);
     var action = req.body.action;
-    console.log(action);
+
     if (action === 'reserve') {
         //console.log('reserving');
         var name = userData.name;
