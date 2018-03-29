@@ -24,10 +24,15 @@ $(document).ready(function () {
 
     }
 
+
+
     getContent();
 });
 
 function getContent(){
+    var noOrder = "<div class='row ordername'><center><p style='padding-top: 60px'>No services selected.</p></center></div>"       
+    $('.order-container').append(noOrder);
+
     $.get('/reserve/data', function(data){
         if(data === undefined){
             alert('Server Connection Timeout, Try again later');
@@ -135,21 +140,30 @@ function addToCart() {
                 }
             });
             if(flag){
-                var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span>" + _name + "</div><div class='col-md-4'>P" + _price + ".00<a href='#' onclick='removeToCart(\""+ _id +"\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
-                $('.order-container').append(newOrder);
-                order.push({
-                    id: _id,
-                    name: _name,
-                    price: _price,
-                    quant: _quantity
-                });
+                if (order.length<=1)
+                {
+                    var noOrder = "<div class='row ordername'><center><p></p></center></div>"       
+                    $('.order-container').html(noOrder);
+                    var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span> " + _name + "</div><div class='col-md-4'>&#8369; " + _price + ".00 <a href='#' onclick='removeToCart(\""+ _id +"\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
+                    $('.order-container').append(newOrder);
+                }
+                else{
+                    var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span> " + _name + "</div><div class='col-md-4'>&#8369; " + _price + ".00 <a href='#' onclick='removeToCart(\""+ _id +"\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
+                    $('.order-container').append(newOrder);
+                    order.push({
+                        id: _id,
+                        name: _name,
+                        price: _price,
+                        quant: _quantity
+                    });
+                }
                 $('.totalParag').html(_total + parseInt(_price * _quantity));
                 document.cookie = "cart:" + order;
             }else{
-                alert("Same entry already reserve!");
+                alert("Same entry is already reserved!");
             }
         }else{
-            alert("Reservation Limit Reaches! (5 services)");
+            alert("Reservation limit is reached! (5 services)");
         }
     //});
 }
@@ -166,6 +180,7 @@ function addCartModal1(data) {
 }
 
 function removeToCart(param){
+    $('#myModal').modal('show');
     $('.id_'+param).remove();
     var x=0, a=-1, _total=0;
     order.forEach(element => {
@@ -199,9 +214,9 @@ function viewOrderModal(){
     });
     orders += "</table>";
     if(total == 0){
-        orders += "<h3>Nothing Selected</h3>";
+        orders += "<center><h3>Nothing Selected</h3></center>";
     }
-    orders += "<p style='text-align: right; font-size: 17px;'><strong>Total:</strong><span style='font-size: 15px;' class='badge'>Php "+ total +".00</span></p>";
+    orders += "<br><br><p style='text-align: right; font-size: 17px;'><strong>Total: </strong><span style='font-size: 15px;' class='badge'> &#8369; "+ total +".00</span></p>";
     $('.viewOrderMod').html(orders);
 }
 
