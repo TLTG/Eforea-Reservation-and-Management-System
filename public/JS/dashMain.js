@@ -37,6 +37,7 @@ $(document).ready(function () {
 		$(".right_col5").hide();
 		$(".right_col2").show();
 	});
+
 	$("#services2").click(function () {
 		reset();
 		$(".right_col").hide();
@@ -45,6 +46,7 @@ $(document).ready(function () {
 		$(".right_col5").hide();
 		$(".right_col2").show();
 	});
+
 	$("#schedule").click(function () {
 		reset();
 		$(".right_col").hide();
@@ -53,6 +55,7 @@ $(document).ready(function () {
 		$(".right_col5").hide();
 		$(".right_col3").show();
 	});
+
 	$("#reservations").click(function () {
 		$(".right_col").hide();
 		$(".right_col2").hide();
@@ -90,7 +93,6 @@ $(document).ready(function () {
 		document.getElementById("btnPrim").innerHTML = "Hide Filter";
 		document.getElementById("btnDef").innerHTML = "Hide Filter";
 	}
-
 	// $(".btnDeclineReq").click(function()
 	// {
 	// 	 var newh = "<p> hehe </p>";
@@ -102,8 +104,8 @@ $(document).ready(function () {
 	// 	$(".fa-circle").hide();
 	// 	$(".fa-circle-o").show();
 	// });
-
 	$('#btnserv1').click(function () {
+
 		$("#serv1").show();
 		$("#serv2").hide();
 		$("#serv3").hide();
@@ -125,7 +127,7 @@ $(document).ready(function () {
 		document.getElementById("btnserv9").classList.remove('activegrp1');
 		document.getElementById("btnserv10").classList.remove('activegrp1');
 	});
-
+  
 	$('#btnserv2').click(function () {
 		$("#serv1").hide();
 		$("#serv2").show();
@@ -334,9 +336,9 @@ $(document).ready(function () {
 		document.getElementById("btnserv10").classList.add('activegrp1');
 	});
 
-
 	function reset() {
 		$(".inbox-body").hide();
 		$(".temp-msg").show();
 	}
 });
+//Have you ever the news that your dead?
