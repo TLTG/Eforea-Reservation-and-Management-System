@@ -1,112 +1,1801 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Eforea - Administration</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<!-- VENDOR CSS -->
-	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
-	<!-- MAIN CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <!-- ICONS -->
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/images/Icons/Eforea - Icon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/images/icon-main.png">
+
+  <title>EForea | Admin</title>
+
+  <!-- Bootstrap -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="assets/vendor/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="assets/vendor/iCheck/skins/flat/green.css" rel="stylesheet">
+
+  <!-- bootstrap-progressbar -->
+  <link href="assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+  <!-- JQVMap -->
+  <!-- <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/> -->
+  <!-- bootstrap-daterangepicker -->
+  <link href="assets/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="assets/CSS/custom.min.css" rel="stylesheet">
+  <link href="assets/CSS/dashStyle.css" rel="stylesheet" type="text/css" />
+  <link href="assets/CSS/modal.css" rel="stylesheet" type="text/css" />
+
 </head>
 
-<body>
-    <!-- Wrapper -->
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="brand">
-                <!--<a href="index.html"><img src="assets/img/logo4.png" alt="Eforea Logo" class="img-responsive logo"></a> -->
-                <a>EFOREA</a>
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col menu_fixed">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="index.html" class="site_title">
+              <!-- <img src="../assets/images/icon-main.png" width="15%"> -->
+              <!-- <i class="fa fa-paw"></i> -->
+              <span> EForea |
+                <span style="font-size: 14px;">Nail & Body Spa</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <!-- menu profile quick info -->
+          <div class="profile clearfix">
+            <div class="profile_pic">
+              <img src="assets/images/user.png" alt="..." class="img-circle profile_img">
             </div>
-            <div class="container-fluid">
-                <div class="navbar-btn">
-                    <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-                </div>
-                <div class="navbar-btn navbar-btn-right"></div>
-                <div class="navbar-menu">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-                                <i class="lnr lnr-alarm"></i>
-                                <!-- Server based tong data na to, for reference lang
-                                <span class="badge bg-danger">5</span> 
-                                -->
-                            </a>
-                            <ul class="dropdown-menu notifications"><!-- (For referencing lang to, mostly ng info dito mangagaling sa server)
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li> -->
-                                <li><a href="#" class="more">See all notifications</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lnr lnr-user"></span> <span>Samuel</span><i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+            <div class="profile_info">
+              <span>Welcome,</span>
+              <h2>Administrator</h2>
             </div>
-        </nav>
-        <!-- Sidebar Menu -->
-        <div id="sidebar-nav" class="sidebar">
-            <div class="sidebar-scroll">
-                <nav>
-                    <ul class="nav">
-                        <li><a href="#" class="dash-btn active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                        <li><a href="#" class="que-btn"><i class="lnr lnr-cog"></i> <span>Query</span></a></li>
-                    </ul>
-                </nav>
+          </div>
+          <!-- /menu profile quick info -->
+
+          <br />
+
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <h3>General</h3>
+              <ul class="nav side-menu">
+                <li class="active">
+                  <a id="home">
+                    <i class="fa fa-home"></i> Home </a>
+                </li>
+                <li>
+                  <a>
+                    <i class="fa fa-heart"></i> Services
+                    <span class="fa fa-chevron-down"></span>
+                  </a>
+                  <ul class="nav child_menu">
+                    <li>
+                      <a id="services1">Individual </a>
+                    </li>
+                    <li>
+                      <a id="services2">Packaged </a>
+                    </li>
+                    <li>
+                      <a id="services3">Deleted </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a id="schedule">
+                    <i class="fa fa-calendar"></i> Schedule</span>
+                  </a>
+                </li>
+                <li>
+                  <a id="reservations">
+                    <i class="fa fa-check-square-o"></i> Reservation Requests </a>
+                </li>
+                <li>
+                  <a id="therapists">
+                    <i class="fa fa-user-md"></i> Therapists </a>
+                </li>
+              </ul>
             </div>
+
+          </div>
+          <!-- /sidebar menu -->
+
+          <!-- /menu footer buttons -->
+          <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Settings">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="/admin/logout">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+          </div>
+          <!-- /menu footer buttons -->
         </div>
-        <!-- Main container (Dito lahat ng contents)-->
-        <div class="main">
-            <div class="main-content">
-                <div class="container-fluid">
-                    <div class="dashboard">
-                        <h3 class="page-title">Overview</h3>
-                        <div class="panel">
-                            <div class="panel-heading">
-        
-                            </div>
-                            <div class="panel-body">
-                                    
-                            </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle">
+                <i class="fa fa-bars"></i>
+              </a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="color:lightgray">Administrator&nbsp;&nbsp;
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li>
+                    <a href="javascript:;">
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:;">Help</a>
+                  </li>
+                  <li>
+                    <a href="/admin/logout">
+                      <i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <!-- top tiles -->
+        <div class="row tile_count">
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top">
+              <i class="fa fa-calendar"></i>&nbsp; Reservations</span>
+            <br>
+            <div class="count pull-right reserve_count">12</div>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top">
+              <i class="fa fa-user-md therapist_count"></i>&nbsp; Therapists</span>
+            <br>
+            <div class="count pull-right">10</div>
+          </div>
+          <div class="time col-md-8 col-sm-4 col-xs-6 pull-right">
+            <span class="hms"></span>
+            <span class="ampm"></span>
+            <br>
+            <span class="date"></span>
+          </div>
+        </div>
+        <!-- /top tiles -->
+
+        <div class="row">
+          <div class="row">
+            <!-- Start to do list -->
+            <div class="col-md-7 col-sm-7 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Today's Schedule</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                      </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-wrench"></i>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">Settings 1</a>
+                        </li>
+                        <li>
+                          <a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="close-link">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <ul class="list-unstyled timeline">
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>Entertainment</span>
+                          </a>
                         </div>
-                    </div>
-                    <div class="query">
-                        <h3 class="page-title">Queries</h3>
-                        <div class="panel">
-                            <div class="panel-heading">
-            
-                            </div>
-                            <div class="panel-body">
-                                        
-                            </div>
-                        </div>                        
-                    </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                          </h2>
+                          <div class="byline">
+                            <span>13 hours ago</span> by
+                            <a>Jane Smith</a>
+                          </div>
+                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers
+                            that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward
+                            and…
+                            <a>Read&nbsp;More</a>
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>Entertainment</span>
+                          </a>
+                        </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                          </h2>
+                          <div class="byline">
+                            <span>13 hours ago</span> by
+                            <a>Jane Smith</a>
+                          </div>
+                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers
+                            that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward
+                            and…
+                            <a>Read&nbsp;More</a>
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>Entertainment</span>
+                          </a>
+                        </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                          </h2>
+                          <div class="byline">
+                            <span>13 hours ago</span> by
+                            <a>Jane Smith</a>
+                          </div>
+                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers
+                            that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward
+                            and…
+                            <a>Read&nbsp;More</a>
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
                 </div>
+              </div>
             </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>To Do List
+                    <small>Sample tasks</small>
+                  </h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                      </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-wrench"></i>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">Settings 1</a>
+                        </li>
+                        <li>
+                          <a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="close-link">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <div class="">
+                    <ul class="to_do">
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Schedule meeting with new client </p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Create email address for new intern</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Have IT fix the network printer</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Copy backups to offsite location</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Create email address for new intern</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Have IT fix the network printer</p>
+                      </li>
+                      <li>
+                        <p>
+                          <input type="checkbox" class="flat"> Copy backups to offsite location</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End to do list -->
+
+            <!-- start of weather widget -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Daily active users
+                    <small>Sessions</small>
+                  </h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                      </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-wrench"></i>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">Settings 1</a>
+                        </li>
+                        <li>
+                          <a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="close-link">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="temperature">
+                        <b>Monday</b>, 07:30 AM
+                        <span>F</span>
+                        <span>
+                          <b>C</b>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="weather-icon">
+                        <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="weather-text">
+                        <h2>Texas
+                          <br>
+                          <i>Partly Cloudy Day</i>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="weather-text pull-right">
+                      <h3 class="degrees">23</h3>
+                    </div>
+                  </div>
+
+                  <div class="clearfix"></div>
+
+                  <div class="row weather-days">
+                    <div class="col-sm-2">
+                      <div class="daily-weather">
+                        <h2 class="day">Mon</h2>
+                        <h3 class="degrees">25</h3>
+                        <canvas id="clear-day" width="32" height="32"></canvas>
+                        <h5>15
+                          <i>km/h</i>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="daily-weather">
+                        <h2 class="day">Tue</h2>
+                        <h3 class="degrees">25</h3>
+                        <canvas height="32" width="32" id="rain"></canvas>
+                        <h5>12
+                          <i>km/h</i>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="daily-weather">
+                        <h2 class="day">Wed</h2>
+                        <h3 class="degrees">27</h3>
+                        <canvas height="32" width="32" id="snow"></canvas>
+                        <h5>14
+                          <i>km/h</i>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="daily-weather">
+                        <h2 class="day">Thu</h2>
+                        <h3 class="degrees">28</h3>
+                        <canvas height="32" width="32" id="sleet"></canvas>
+                        <h5>15
+                          <i>km/h</i>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="daily-weather">
+                        <h2 class="day">Fri</h2>
+                        <h3 class="degrees">28</h3>
+                        <canvas height="32" width="32" id="wind"></canvas>
+                        <h5>11
+                          <i>km/h</i>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="daily-weather">
+                        <h2 class="day">Sat</h2>
+                        <h3 class="degrees">26</h3>
+                        <canvas height="32" width="32" id="cloudy"></canvas>
+                        <h5>10
+                          <i>km/h</i>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- end of weather widget -->
+          </div>
         </div>
-        <div class="clearfix"></div>
-        <!-- Footer (I don't know if need pa to pero ilalagay ko parin) --> 
-        <footer>
-            <a></a>
-        </footer>
+      </div>
     </div>
-    <!-- JavaScript Imports -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/JS/klorofil-common.js"></script>
-    <script src="assets/JS/admin.js"></script>
+    <!-- /page content -->
+
+    <!-- page content SERVICES-->
+    <div class="right_col2" role="main" style="display: none">
+      <div class="page-title">
+        <!-- <div class="title_left">
+	    <h3>Services </h3><hr>
+	    </div> -->
+        <div class="row">
+          <div class="col-md-8 col-sm-8 col-xs-6 form-group">
+            <h3>Services </h3>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-6 form-group pull-right top_search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="_btngrp1">
+        <center>
+          <div class="btn-group btngrp1">
+            <button class="btn btn-default activegrp1" type="button" id="btnserv1">All</button>
+            <button class="btn btn-default" type="button" id="btnserv2">Massage Services</button>
+            <button class="btn btn-default" type="button" id="btnserv3">Body Scrub</button>
+            <button class="btn btn-default" type="button" id="btnserv4">Spa Treatment</button>
+            <button class="btn btn-default" type="button" id="btnserv5">Paraffin Treatment</button>
+            <button class="btn btn-default" type="button" id="btnserv6">Straight</button>
+            <button class="btn btn-default" type="button" id="btnserv7">Hair Waxing</button>
+            <button class="btn btn-default" type="button" id="btnserv8">Glutathione</button>
+            <button class="btn btn-default" type="button" id="btnserv9">Other Services</button>
+            <button class="btn btn-default" type="button" id="btnserv10">Kiddie Price</button>
+          </div>
+        </center>
+      </div>
+
+      <!-- All Services -->
+      <br>
+      <div id="serv1" class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Massage Services</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li>
+                  <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                  </a>
+                </li>
+                <li>
+                  <a class="close-link">
+                    <i class="fa fa-close"></i>
+                  </a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Body Scrub</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li>
+                  <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                  </a>
+                </li>
+                <li>
+                  <a class="close-link">
+                    <i class="fa fa-close"></i>
+                  </a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv2" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Massage Services</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv3" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Body Scrub</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv4" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Spa Treatment</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv5" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Paraffin Treatment</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv6" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Straight</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv7" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Hair Waxing</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv8" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Glutathione</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv9" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Other Services</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="serv10" class="row" style="display: none;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Kiddie Price</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="10%">Service Code</th>
+                    <th width="30%">Service Name</th>
+                    <th width="30%">Description</th>
+                    <th width="15%">Price</th>
+                    <th width="15%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">MS-SwdMsg</th>
+                    <td>Swedish Massage</td>
+                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
+                      muscle knots, called adhesions.</td>
+                    <td>&#8369;399.00</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                          <span class="fa fa-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
+                          <span class="fa fa-trash"></span> Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- page content RESERVATIONS-->
+    <div class="right_col4" role="main" style="display: none">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Messages </h3>
+        </div>
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Reservation Requests</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li>
+                  <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                  </a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="row">
+                <div class="col-sm-3 mail_list_column">
+                  <hr>
+                  <h5 class="headmsg">Today</h5>
+                  <br>
+                  <a href="#">
+                    <div class="mail_list">
+                      <div class="left">
+                        <i class="fa fa-circle"></i>
+                      </div>
+                      <div class="right msg">
+                        <h3 class="name-inbox">Graciella C. Tatel
+                          <small>3:00 PM</small>
+                        </h3>
+                        <p class="servtype">[Home Service]</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="mail_list">
+                      <div class="left">
+                        <i class="fa fa-circle"></i>
+                      </div>
+                      <div class="right msg">
+                        <h3 class="name-inbox">Perrine Clarisse B. Laganzo
+                          <small>4:20 PM</small>
+                        </h3>
+                        <p class="servtype">[Regular Service]</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="mail_list">
+                      <div class="left">
+                        <i class="fa fa-circle-o"></i>
+                      </div>
+                      <div class="right msg">
+                        <h3 class="name-inbox">Christian Paul R. Tupas
+                          <small>5:00 PM</small>
+                        </h3>
+                        <p class="servtype">[Regular Service]</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="mail_list">
+                      <div class="left">
+                        <i class="fa fa-circle-o"></i>
+                      </div>
+                      <div class="right msg">
+                        <h3 class="name-inbox">Janelle Joy R. Gabat
+                          <small>6:19 PM</small>
+                        </h3>
+                        <p class="servtype">[Home Service]</p>
+                      </div>
+                    </div>
+                  </a>
+
+                  <hr>
+                  <h5 class="headmsg">Yesterday</h5>
+                  <br>
+                  <a href="#">
+                    <div class="mail_list">
+                      <div class="left">
+                        <i class="fa fa-circle-o"></i>
+                      </div>
+                      <div class="right msg">
+                        <h3 class="name-inbox">Kenard Smith B. Bautista
+                          <small>3.00 PM</small>
+                        </h3>
+                        <p class="servtype">[Regular Service]</p>
+                      </div>
+                    </div>
+                  </a>
+
+                  <hr>
+                  <h5 class="headmsg">Feb. 28, 2018</h5>
+                  <br>
+                  <a href="#">
+                    <div class="mail_list">
+                      <div class="left">
+                        <i class="fa fa-circle-o"></i>
+                      </div>
+                      <div class="right msg">
+                        <h3 class="name-inbox">Harry Potter
+                          <small>8.09 AM</small>
+                        </h3>
+                        <p class="servtype">[Home Service]</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <!-- /MAIL LIST -->
+
+                <!-- CONTENT MAIL -->
+                <div class="col-sm-9 mail_view">
+                  <div class="temp-msg">
+                    <h1>Open a request...</h1>
+                    <span>
+                      <i class="fa fa-envelope-o"></i>
+                    </span>
+                  </div>
+                  <div class="inbox-body" style="display: none;">
+                    <div class="mail_heading row">
+                      <div class="time date col-md-6 pull-right">
+                        <span class="date2"></span>
+                      </div>
+                      <div class="col-md-6">
+                        <h3 class="sender-name"> Graciella C. Tatel</h3>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="sender-info row">
+                      <div class="req-header">
+                        <h4>Customer Information</h4>
+                      </div>
+                      <br>
+                      <div class="col-md-8 col-sm-6">
+                        <p>
+                          Type of Service:
+                          <span class="inforeq info-homeserv">Home Service</span>
+                          <br> Gender:
+                          <span class="inforeq info-gender">Female</span>
+                          <br> Address:
+                          <span class="inforeq info-address"> Blk 43 Lot 1 RC 11, Area G, CSJDM, Bulacan</span>
+                          <br> Contact Number:
+                          <span class="inforeq info-phone">0956 586 7353</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 col-sm-6">
+                        <p>
+                          Date to Reserve:
+                          <span class="inforeq info-homeserv">March 17, 2018</span>
+                          <br> Time to Reserve:
+                          <span class="inforeq info-gender">Not Specified</span>
+                        </p>
+                        <br>
+                        <br>
+                        <button class="btn btn-sm btn-default pull-right" type="button">
+                          <i class="fa fa-check-square-o"></i> Check Schedule</button>
+                      </div>
+                    </div>
+                    <div class="view-mail">
+                      <div class="req-header">
+                        <h4>Requested Service(s)</h4>
+                      </div>
+                      <div style="padding: 5px;">
+                        <br>
+                        <table width="100%">
+                          <tr>
+                            <th class="th-modal" width="15%"> Quantity </th>
+                            <th class="th-modal" width="50%"> Service </th>
+                            <th class="th-modal" width="20%"> Amount </th>
+                            <th class="th-modal" width="30%"> Total </th>
+                          </tr>
+                          <tr>
+                            <td class="td-quantity"> 2 </td>
+                            <td> MS-Swedish Massage </td>
+                            <td> 399.00 </td>
+                            <td> 798.00 </td>
+                          </tr>
+                          <tr>
+                            <td> 1 </td>
+                            <td> BS-Anti Aging Body Scrub </td>
+                            <td> 900.00 </td>
+                            <td> 900.00 </td>
+                          </tr>
+                          <tr>
+                            <td> 2 </td>
+                            <td> OS-Ear Candling </td>
+                            <td> 200.00 </td>
+                            <td> 400.00 </td>
+                          </tr>
+                        </table>
+
+                        <br>
+                        <br>
+                        <br>
+                        <p class="totalpricereq">Total Amount:
+                          <span>&#8369;2,098.00</span>
+                        </p>
+                      </div>
+
+                      <div class="note">
+                        <h4>Note:</h4>
+                        <p class="reqnote">Pwede ba tumawad cyst? hekhek</p>
+                      </div>
+
+                    </div>
+                    <br>
+                    <br>
+                    <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-sm btn-primary" name="btnApproveReq" data-toggle="modal" href="#modal1">
+                        <i class="fa fa-check"></i> Approve</button>
+                      <button type="button" class="btn btn-sm btn-default button" id="one" name="btnDeclineReq" onclick='modal1({"head":"Decline Request?", "prim": "Decline","def": "Cancel" })'
+                        data-toggle="modal" href="#modal-container">
+                        <i class="fa fa-times"></i> Decline</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- /CONTENT MAIL -->
+                <!-- onclick='modal1({"head":"Decline Request?", "prim": "Decline","def": "Cancel" })'  -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        EForea Nail and Body Spa | Copyright 2018
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+  </div>
+
+  <!-- Modals -->
+  <!-- View Order Modal -->
+  <div tabindex="-1">
+    <div class="modal-background">
+      <div class="modal" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalHeader">Decline Request?</h4>
+          </div>
+          <div class="modal-body">
+            <p id="modalBody">Are you sure you want to decline this reservation request?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnPrim" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-default" id="btnDef" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-container">
+    <div class="modal-background">
+      <div class="modal">
+        <h2>I'm a Modal</h2>
+        <p>Hear me roar.</p>
+        <!-- <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+					<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+				</svg> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEdit">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalHeader">Edit Service</h4>
+          </div> -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_content">
+                <div>
+                  <center>
+                    <span class="fa fa-leaf"></span>
+                    <hr>
+                  </center>
+                </div>
+                <br />
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="servId">Service Code
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                      <input type="text" id="servId" required="required" class="form-control col-md-7 col-xs-12" value="MS-SwdMsg">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="servName">Service Name
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                      <input type="text" id="servName" name="last-name" required="required" class="form-control col-md-7 col-xs-12" value="Swedish Massage">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="servDesc" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                      <textarea id="servDesc" class="form-control" required="required" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                        data-parsley-maxlength="200" rows=5>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Price
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                      <input id="servPrice" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" value="&#8369;399.00">
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="btnPrim" data-dismiss="modal">
+            <span class="fa fa-check"></span> Save</button>
+          <button type="button" class="btn btn-primary" id="btnPrim" data-dismiss="modal">
+            <span class="fa fa-refresh"></span> Reset</button>
+          <button type="button" class="btn btn-default" id="btnDef" data-dismiss="modal">
+            <span class="fa fa-remove"></span> Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="assets/vendor/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="assets/vendor/nprogress/nprogress.js"></script>
+  <!-- Chart.js -->
+  <script src="assets/vendor/Chart.js/dist/Chart.min.js"></script>
+  <!-- gauge.js -->
+  <script src="assets/vendor/gauge.js/dist/gauge.min.js"></script>
+  <!-- bootstrap-progressbar -->
+  <script src="assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <!-- iCheck -->
+  <script src="assets/vendor/iCheck/icheck.min.js"></script>
+  <!-- Skycons -->
+  <script src="assets/vendor/skycons/skycons.js"></script>
+  <!-- Flot -->
+  <script src="assets/vendor/Flot/jquery.flot.js"></script>
+  <script src="assets/vendor/Flot/jquery.flot.pie.js"></script>
+  <script src="assets/vendor/Flot/jquery.flot.time.js"></script>
+  <script src="assets/vendor/Flot/jquery.flot.stack.js"></script>
+  <script src="assets/vendor/Flot/jquery.flot.resize.js"></script>
+  <!-- Flot plugins -->
+  <!-- <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script> -->
+  <!-- DateJS -->
+  <script src="assets/vendor/DateJS/build/date.js"></script>
+  <!-- JQVMap -->
+  <!-- <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> -->
+  <!-- bootstrap-daterangepicker -->
+  <script src="assets/vendor/moment/min/moment.min.js"></script>
+  <script src="assets/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <!-- bootstrap-wysiwyg -->
+  <script src="assets/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+  <script src="assets/vendor/jquery.hotkeys/jquery.hotkeys.js"></script>
+  <script src="assets/vendor/google-code-prettify/src/prettify.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="assets/JS/custom.min.js"></script>
+  <script src="assets/JS/time.js"></script>
+  <script src="assets/JS/dashMain.js"></script>
+  <script src="assets/JS/modal.js"></script>
 </body>
+
 </html>
