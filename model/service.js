@@ -31,3 +31,19 @@ exports.insertReservation = function(data, done){
         done(null, results[0]);
     });
 }
+
+exports.deleteService = function(id, done) {
+    var sql = "CALL delService(?)";
+    db.get().query(sql, [id], function(err, results){
+        if(err) return done(err);
+        done(null, results[0]);
+    });
+}
+
+exports.updateService = function(data, done){
+    var sql = "CALL editService(?,?,?,?,?)";
+    db.get().query(sql, data, function(err, results){
+        if(err) return done(err);
+        done(null, results[0]);
+    });
+}

@@ -5,17 +5,14 @@ var db = require('./model/db');
 var parser = require('body-parser');
 var cookie_parser = require('cookie-parser');
 var session = require('express-session');
+var systemCtrl = require('./middleware/systemControl'); 
 
 //Configurations.
 app.set('view engine', 'ejs'); //this change the view engine to ejs, (mahirap kasi yung default)
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 app.use(cookie_parser());
-app.use(session({
-    secret: "Secret Thing",
-    resave: false,
-    saveUninitialized: true
-}));
+app.use(session({secret: "Secret Thing", resave: false, saveUninitialized: true}));
 app.use(require('express-promise')()); //this makes promises come true. Still can't use it properly soo disable muna. 
 app.use('/', require('./controller/routes')); //this will route everything.
 app.use('/assets', express.static(__dirname + '/public')); //this make public folder static/public
@@ -33,5 +30,6 @@ db.connect(db.MODE_PRODUCTION, function (err) {
             process.exit(1);
         });
         console.log('[SERVER] Listening in port: ' + server.address().port);
+        systemCtrl.readPrompt();
     }
 });

@@ -1,38 +1,16 @@
 var express = require('express'),
     router = express.Router(),
-    auth = require('../model/user.js');
+    auth = require('../middleware/auth'),
+    maintenance = require('../middleware/adminServiceCtrl');
 
-router.get('/', function (req, res){
-    res.render('admin/login');
-});
+router.get('/', auth.checkUsers);
 
-router.get('/testAdmin', function (req, res){
-    res.render('admin/dashboard');
-});
+router.post('/', auth.login);
 
-router.post('/', function (req, res){
-    var cred = {
-        user: req.body.username,
-        pass: req.body.password
-    }
-    auth.login(cred.user, cred.pass, function (err, result){
-        if(err) {
-            res.send('Internal Server Error');
-            console.log(err);
-        }else{
-            if(result !== undefined){
-                var user_data = {
-                    id: result.id,
-                    usertype: result.usertype
-                }
-                if(user_data.usertype==1){
-                    res.render('admin/dashboard');
-                }
-            }else{
-                res.send("invalid user/password");
-            }
-        }
-    });
-});
+router.get('/logout', auth.logout);
+
+router.post('/delService', maintenance.delService);
+
+router.post('/updateService', maintenance.updateService);
 
 module.exports = router;

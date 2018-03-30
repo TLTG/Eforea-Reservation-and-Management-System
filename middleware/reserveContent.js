@@ -106,7 +106,6 @@ exports.reserveContent = function (req, res, next) {
         //.then(func2, onErr)
         .then(func3, onErr)
         .then(function (data) {
-            //console.log(JSON.stringify(data));
             res.send(data);
         }, onErr);
 }
