@@ -17,7 +17,18 @@ $(document).ready(function(){
 	});
 });
 
-function login(){
+/* function login(){
 	var cred = $('#credential').serializeArray();
-	//alert(JSON.stringify(cred));
-}
+	alert(JSON.stringify(cred));
+} */
+
+$('#credential').submit(function(e){
+	e.preventDefault();
+	$.post('/admin', $('#credential').serialize(),function(data, status){
+		if(data[0] == 2){
+			location.reload();
+		}else if(data[0] == 0){
+			alert(data[1]);
+		}
+	});
+});

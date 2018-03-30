@@ -116,7 +116,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Settings">
               <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="/admin/logout">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="admin/logout">
               <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
           </div>
@@ -150,7 +150,7 @@
                     <a href="javascript:;">Help</a>
                   </li>
                   <li>
-                    <a href="/admin/logout">
+                    <a href="admin/logout">
                       <i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
@@ -169,11 +169,11 @@
             <span class="count_top">
               <i class="fa fa-calendar"></i>&nbsp; Reservations</span>
             <br>
-            <div class="count pull-right reserve_count">12</div>
+            <div class="count pull-right">12</div>
           </div>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top">
-              <i class="fa fa-user-md therapist_count"></i>&nbsp; Therapists</span>
+              <i class="fa fa-user-md"></i>&nbsp; Therapists</span>
             <br>
             <div class="count pull-right">10</div>
           </div>
@@ -523,1135 +523,1155 @@
     <div class="right_col2" role="main" style="display: none">
       <div class="page-title">
         <!-- <div class="title_left">
-	    <h3>Services </h3><hr>
-	    </div> -->
-        <div class="row">
-          <div class="col-md-8 col-sm-8 col-xs-6 form-group">
-            <h3>Services </h3>
-          </div>
-          <div class="col-md-4 col-sm-4 col-xs-6 form-group pull-right top_search">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div>
+    <h3>Services </h3><hr>
+    </div> -->
+        <div class="row" style="border-bottom: solid 1px #034777; padding-bottom: 10px">
+          <div class="col-md-8 col-sm-8 col-xs-6">
+            <h3>Individual Services </h3>
           </div>
         </div>
       </div>
 
-      <div class="_btngrp1">
-        <center>
-          <div class="btn-group btngrp1">
-            <button class="btn btn-default activegrp1" type="button" id="btnserv1">All</button>
-            <button class="btn btn-default" type="button" id="btnserv2">Massage Services</button>
-            <button class="btn btn-default" type="button" id="btnserv3">Body Scrub</button>
-            <button class="btn btn-default" type="button" id="btnserv4">Spa Treatment</button>
-            <button class="btn btn-default" type="button" id="btnserv5">Paraffin Treatment</button>
-            <button class="btn btn-default" type="button" id="btnserv6">Straight</button>
-            <button class="btn btn-default" type="button" id="btnserv7">Hair Waxing</button>
-            <button class="btn btn-default" type="button" id="btnserv8">Glutathione</button>
-            <button class="btn btn-default" type="button" id="btnserv9">Other Services</button>
-            <button class="btn btn-default" type="button" id="btnserv10">Kiddie Price</button>
+      <div class="row" style="padding-top: 70px;">
+        <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+          <div class="form-group">
+            <label style="font-weight: lighter; ">Select services to display: </label>
+            <select id="serviceDD" class="form-control" onchange='selectCat()' style="font-size: 13px">
+              
+            </select>
           </div>
-        </center>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4 form-group top_search">
+          <br>
+          <div class="input-group">
+            <input id="search_box" type="text" class="form-control" onchange="searchCat()" placeholder="Search...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="searchCat()">Go!</button>
+            </span>
+          </div>
+        </div>
       </div>
 
-      <!-- All Services -->
+      <div class="pull-right">
+        <div class="input-group">
+          <button class="btn btn-default" type="button">Add Category</button>
+          <button class="btn btn-default" type="button">Add Service</button>
+        </div>
+      </div>
       <br>
-      <div id="serv1" class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Massage Services</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li>
-                  <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                  </a>
-                </li>
-                <li>
-                  <a class="close-link">
-                    <i class="fa fa-close"></i>
-                  </a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <br>
+      <br>
+      <!-- TRY -->
+      <div class="row servcolumn">
+        <div class="col-md-4 col-sm-4 col-xs-2 serv-left-div">
+          <div class="activetdhead1">
+            <center>
+              <h4 id="listserv">Service List</h4>
+            </center>
+          </div>
+          <br>          
+          <div id="serviceList">
+            <!-- Container ng Services -->
+            <div class="no_result" style="display: none"><h2>No Result<h2></div>
           </div>
         </div>
 
-        <br>
-        <br>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Body Scrub</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li>
-                  <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                  </a>
-                </li>
-                <li>
-                  <a class="close-link">
-                    <i class="fa fa-close"></i>
-                  </a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="col-md-8 col-sm-8 col-xs-10 serv-right-div">
+          <div class="activetdhead1">
+            <center>
+              <h4 id="activetdhead">Service Details</h4>
+            </center>
           </div>
-        </div>
-      </div>
-
-      <div id="serv2" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Massage Services</h2>
-              <div class="clearfix"></div>
+          <div>
+            <div id="serviceDetail">
+            
             </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
 
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv3" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Body Scrub</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv4" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Spa Treatment</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv5" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Paraffin Treatment</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv6" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Straight</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv7" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Hair Waxing</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv8" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Glutathione</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv9" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Other Services</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="serv10" class="row" style="display: none;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Kiddie Price</h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width="10%">Service Code</th>
-                    <th width="30%">Service Name</th>
-                    <th width="30%">Description</th>
-                    <th width="15%">Price</th>
-                    <th width="15%"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">MS-SwdMsg</th>
-                    <td>Swedish Massage</td>
-                    <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up
-                      muscle knots, called adhesions.</td>
-                    <td>&#8369;399.00</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
-                          <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1">
-                          <span class="fa fa-trash"></span> Delete</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /page content -->
-
-    <!-- page content RESERVATIONS-->
-    <div class="right_col4" role="main" style="display: none">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Messages </h3>
-        </div>
-        <div class="title_right">
-          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="clearfix"></div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Reservation Requests</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li>
-                  <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                  </a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <div class="row">
-                <div class="col-sm-3 mail_list_column">
-                  <hr>
-                  <h5 class="headmsg">Today</h5>
-                  <br>
-                  <a href="#">
-                    <div class="mail_list">
-                      <div class="left">
-                        <i class="fa fa-circle"></i>
-                      </div>
-                      <div class="right msg">
-                        <h3 class="name-inbox">Graciella C. Tatel
-                          <small>3:00 PM</small>
-                        </h3>
-                        <p class="servtype">[Home Service]</p>
-                      </div>
+            <div class="row" style="border-bottom: solid 1px #034777; padding: 20px;">
+              <div class="col-md-9 col-sm-9">
+                <br>
+                <br>
+                <hr>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
+                <br>
+                <div>
+                  <center>
+                    <div style="float: left;">
+                      <span class="fa fa-edit facustom btnEdit" data-toggle="modal" href=""></span>
+                      <p class="falabel">EDIT</p>
                     </div>
-                  </a>
-                  <a href="#">
-                    <div class="mail_list">
-                      <div class="left">
-                        <i class="fa fa-circle"></i>
-                      </div>
-                      <div class="right msg">
-                        <h3 class="name-inbox">Perrine Clarisse B. Laganzo
-                          <small>4:20 PM</small>
-                        </h3>
-                        <p class="servtype">[Regular Service]</p>
-                      </div>
+                    <div>
+                      <span class="fa fa-trash facustom1 btnDel"></span>
+                      <p class="falabel">DELETE</p>
                     </div>
-                  </a>
-                  <a href="#">
-                    <div class="mail_list">
-                      <div class="left">
-                        <i class="fa fa-circle-o"></i>
-                      </div>
-                      <div class="right msg">
-                        <h3 class="name-inbox">Christian Paul R. Tupas
-                          <small>5:00 PM</small>
-                        </h3>
-                        <p class="servtype">[Regular Service]</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div class="mail_list">
-                      <div class="left">
-                        <i class="fa fa-circle-o"></i>
-                      </div>
-                      <div class="right msg">
-                        <h3 class="name-inbox">Janelle Joy R. Gabat
-                          <small>6:19 PM</small>
-                        </h3>
-                        <p class="servtype">[Home Service]</p>
-                      </div>
-                    </div>
-                  </a>
-
-                  <hr>
-                  <h5 class="headmsg">Yesterday</h5>
-                  <br>
-                  <a href="#">
-                    <div class="mail_list">
-                      <div class="left">
-                        <i class="fa fa-circle-o"></i>
-                      </div>
-                      <div class="right msg">
-                        <h3 class="name-inbox">Kenard Smith B. Bautista
-                          <small>3.00 PM</small>
-                        </h3>
-                        <p class="servtype">[Regular Service]</p>
-                      </div>
-                    </div>
-                  </a>
-
-                  <hr>
-                  <h5 class="headmsg">Feb. 28, 2018</h5>
-                  <br>
-                  <a href="#">
-                    <div class="mail_list">
-                      <div class="left">
-                        <i class="fa fa-circle-o"></i>
-                      </div>
-                      <div class="right msg">
-                        <h3 class="name-inbox">Harry Potter
-                          <small>8.09 AM</small>
-                        </h3>
-                        <p class="servtype">[Home Service]</p>
-                      </div>
-                    </div>
-                  </a>
+                  </center>
                 </div>
-                <!-- /MAIL LIST -->
-
-                <!-- CONTENT MAIL -->
-                <div class="col-sm-9 mail_view">
-                  <div class="temp-msg">
-                    <h1>Open a request...</h1>
-                    <span>
-                      <i class="fa fa-envelope-o"></i>
-                    </span>
-                  </div>
-                  <div class="inbox-body" style="display: none;">
-                    <div class="mail_heading row">
-                      <div class="time date col-md-6 pull-right">
-                        <span class="date2"></span>
-                      </div>
-                      <div class="col-md-6">
-                        <h3 class="sender-name"> Graciella C. Tatel</h3>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="sender-info row">
-                      <div class="req-header">
-                        <h4>Customer Information</h4>
-                      </div>
-                      <br>
-                      <div class="col-md-8 col-sm-6">
-                        <p>
-                          Type of Service:
-                          <span class="inforeq info-homeserv">Home Service</span>
-                          <br> Gender:
-                          <span class="inforeq info-gender">Female</span>
-                          <br> Address:
-                          <span class="inforeq info-address"> Blk 43 Lot 1 RC 11, Area G, CSJDM, Bulacan</span>
-                          <br> Contact Number:
-                          <span class="inforeq info-phone">0956 586 7353</span>
-                        </p>
-                      </div>
-                      <div class="col-md-4 col-sm-6">
-                        <p>
-                          Date to Reserve:
-                          <span class="inforeq info-homeserv">March 17, 2018</span>
-                          <br> Time to Reserve:
-                          <span class="inforeq info-gender">Not Specified</span>
-                        </p>
-                        <br>
-                        <br>
-                        <button class="btn btn-sm btn-default pull-right" type="button">
-                          <i class="fa fa-check-square-o"></i> Check Schedule</button>
-                      </div>
-                    </div>
-                    <div class="view-mail">
-                      <div class="req-header">
-                        <h4>Requested Service(s)</h4>
-                      </div>
-                      <div style="padding: 5px;">
-                        <br>
-                        <table width="100%">
-                          <tr>
-                            <th class="th-modal" width="15%"> Quantity </th>
-                            <th class="th-modal" width="50%"> Service </th>
-                            <th class="th-modal" width="20%"> Amount </th>
-                            <th class="th-modal" width="30%"> Total </th>
-                          </tr>
-                          <tr>
-                            <td class="td-quantity"> 2 </td>
-                            <td> MS-Swedish Massage </td>
-                            <td> 399.00 </td>
-                            <td> 798.00 </td>
-                          </tr>
-                          <tr>
-                            <td> 1 </td>
-                            <td> BS-Anti Aging Body Scrub </td>
-                            <td> 900.00 </td>
-                            <td> 900.00 </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </td>
-                            <td> OS-Ear Candling </td>
-                            <td> 200.00 </td>
-                            <td> 400.00 </td>
-                          </tr>
-                        </table>
-
-                        <br>
-                        <br>
-                        <br>
-                        <p class="totalpricereq">Total Amount:
-                          <span>&#8369;2,098.00</span>
-                        </p>
-                      </div>
-
-                      <div class="note">
-                        <h4>Note:</h4>
-                        <p class="reqnote">Pwede ba tumawad cyst? hekhek</p>
-                      </div>
-
-                    </div>
-                    <br>
-                    <br>
-                    <div class="btn-group pull-right">
-                      <button type="button" class="btn btn-sm btn-primary" name="btnApproveReq" data-toggle="modal" href="#modal1">
-                        <i class="fa fa-check"></i> Approve</button>
-                      <button type="button" class="btn btn-sm btn-default button" id="one" name="btnDeclineReq" onclick='modal1({"head":"Decline Request?", "prim": "Decline","def": "Cancel" })'
-                        data-toggle="modal" href="#modal-container">
-                        <i class="fa fa-times"></i> Decline</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- /CONTENT MAIL -->
-                <!-- onclick='modal1({"head":"Decline Request?", "prim": "Decline","def": "Cancel" })'  -->
               </div>
             </div>
+
+            <div class='row servlower'></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- All Services -->
+    <br>
+    <!--  <div id="serv1" class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Massage Services</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="10%">Service Code</th>
+                <th width="30%">Service Name</th>
+                <th width="30%">Description</th>
+                <th width="15%">Price</th>
+                <th width="15%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">MS-SwdMsg</th>
+                <td>Swedish Massage</td>
+                <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</td>
+                <td>&#8369;399.00</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit"><span class="fa fa-edit" ></span> Edit</button>
+                    <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1"><span class="fa fa-trash" ></span> Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">MS-SwdMsg</th>
+                <td>Swedish Massage</td>
+                <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</td>
+                <td>&#8369;399.00</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit"><span class="fa fa-edit"></span> Edit</button>
+                    <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1"><span class="fa fa-trash"></span> Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">MS-SwdMsg</th>
+                <td>Swedish Massage</td>
+                <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</td>
+                <td>&#8369;399.00</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit"><span class="fa fa-edit"></span> Edit</button>
+                    <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1"><span class="fa fa-trash"></span> Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+      </div>
+
+  <br><br>
+  <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Body Scrub</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="10%">Service Code</th>
+                <th width="30%">Service Name</th>
+                <th width="30%">Description</th>
+                <th width="15%">Price</th>
+                <th width="15%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">MS-SwdMsg</th>
+                <td>Swedish Massage</td>
+                <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</td>
+                <td>&#8369;399.00</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit"><span class="fa fa-edit"></span> Edit</button>
+                    <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1"><span class="fa fa-trash"></span> Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">MS-SwdMsg</th>
+                <td>Swedish Massage</td>
+                <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</td>
+                <td>&#8369;399.00</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit"><span class="fa fa-edit"></span> Edit</button>
+                    <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1"><span class="fa fa-trash"></span> Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">MS-SwdMsg</th>
+                <td>Swedish Massage</td>
+                <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</td>
+                <td>&#8369;399.00</td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit"><span class="fa fa-edit"></span> Edit</button>
+                    <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modal1"><span class="fa fa-trash"></span> Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+      </div>
+      </div> -->
+
+    <div id="serv2" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Massage Services</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    <!-- /page content -->
 
+    <div id="serv3" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Body Scrub</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
 
-    <!-- footer content -->
-    <footer>
-      <div class="pull-right">
-        EForea Nail and Body Spa | Copyright 2018
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
+    </div>
+
+    <div id="serv4" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Spa Treatment</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serv5" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Paraffin Treatment</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serv6" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Straight</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serv7" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Hair Waxing</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serv8" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Glutathione</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serv9" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Other Services</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="serv10" class="row" style="display: none;">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Kiddie Price</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="10%">Service Code</th>
+                  <th width="30%">Service Name</th>
+                  <th width="30%">Description</th>
+                  <th width="15%">Price</th>
+                  <th width="15%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">MS-SwdMsg</th>
+                  <td>Swedish Massage</td>
+                  <td>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle
+                    knots, called adhesions.</td>
+                  <td>&#8369;399.00</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success btn-tbl" data-toggle="modal" href="#modalEdit">
+                        <span class="fa fa-edit"></span> Edit</button>
+                      <button type="button" class="btn btn-danger btn-tbl" data-toggle="modal" href="#modalDelete">
+                        <span class="fa fa-trash"></span> Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /page content -->
+
+  <!-- page content RESERVATIONS-->
+  <div class="right_col4" role="main" style="display: none">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Reservation Requests </h3>
+      </div>
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="row">
+              <div class="col-sm-3 mail_list_column">
+                <a href="#">
+                  <div class="mail_list">
+                    <hr>
+                    <h5 class="headmsg">Today</h5>
+                    <br>
+                    <div class="left">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="right msg">
+                      <h3 class="name-inbox">Graciella C. Tatel
+                        <small>3:00 PM</small>
+                      </h3>
+                      <p class="servtype">[Home Service]</p>
+                    </div>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="mail_list">
+                    <div class="left">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="right msg">
+                      <h3 class="name-inbox">Perrine Clarisse B. Laganzo
+                        <small>4:20 PM</small>
+                      </h3>
+                      <p class="servtype">[Regular Service]</p>
+                    </div>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="mail_list">
+                    <div class="left">
+                      <i class="fa fa-circle-o"></i>
+                    </div>
+                    <div class="right msg">
+                      <h3 class="name-inbox">Christian Paul R. Tupas
+                        <small>5:00 PM</small>
+                      </h3>
+                      <p class="servtype">[Regular Service]</p>
+                    </div>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="mail_list">
+                    <div class="left">
+                      <i class="fa fa-circle-o"></i>
+                    </div>
+                    <div class="right msg">
+                      <h3 class="name-inbox">Janelle Joy R. Gabat
+                        <small>6:19 PM</small>
+                      </h3>
+                      <p class="servtype">[Home Service]</p>
+                    </div>
+                  </div>
+                </a>
+
+                <hr>
+                <h5 class="headmsg">Yesterday</h5>
+                <br>
+                <a href="#">
+                  <div class="mail_list">
+                    <div class="left">
+                      <i class="fa fa-circle-o"></i>
+                    </div>
+                    <div class="right msg">
+                      <h3 class="name-inbox">Kenard Smith B. Bautista
+                        <small>3.00 PM</small>
+                      </h3>
+                      <p class="servtype">[Regular Service]</p>
+                    </div>
+                  </div>
+                </a>
+
+                <hr>
+                <h5 class="headmsg">Feb. 28, 2018</h5>
+                <br>
+                <a href="#">
+                  <div class="mail_list">
+                    <div class="left">
+                      <i class="fa fa-circle-o"></i>
+                    </div>
+                    <div class="right msg">
+                      <h3 class="name-inbox">Harry Potter
+                        <small>8.09 AM</small>
+                      </h3>
+                      <p class="servtype">[Home Service]</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <!-- /MAIL LIST -->
+
+              <!-- CONTENT MAIL -->
+              <div class="col-sm-9 mail_view">
+                <div class="temp-msg">
+                  <h1>Open a request...</h1>
+                  <span>
+                    <i class="fa fa-envelope-o"></i>
+                  </span>
+                </div>
+                <div class="inbox-body" style="display: none;">
+                  <div class="mail_heading row">
+                    <div class="time date col-md-6 pull-right">
+                      <span class="date2"></span>
+                    </div>
+                    <div class="col-md-6">
+                      <h3 class="sender-name"> Graciella C. Tatel</h3>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="sender-info row">
+                    <div class="req-header">
+                      <h4>Customer Information</h4>
+                    </div>
+                    <br>
+                    <div class="col-md-8 col-sm-6">
+                      <p>
+                        Type of Service:
+                        <span class="inforeq info-homeserv">Home Service</span>
+                        <br> Gender:
+                        <span class="inforeq info-gender">Female</span>
+                        <br> Address:
+                        <span class="inforeq info-address"> Blk 43 Lot 1 RC 11, Area G, CSJDM, Bulacan</span>
+                        <br> Contact Number:
+                        <span class="inforeq info-phone">0956 586 7353</span>
+                      </p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                      <p>
+                        Date to Reserve:
+                        <span class="inforeq info-homeserv">March 17, 2018</span>
+                        <br> Time to Reserve:
+                        <span class="inforeq info-gender">Not Specified</span>
+                      </p>
+                      <br>
+                      <br>
+                      <button class="btn btn-sm btn-default pull-right" type="button">
+                        <i class="fa fa-check-square-o"></i> Check Schedule</button>
+                    </div>
+                  </div>
+                  <div class="view-mail">
+                    <div class="req-header">
+                      <h4>Requested Service(s)</h4>
+                    </div>
+                    <div style="padding: 5px;">
+                      <br>
+                      <table width="100%">
+                        <tr>
+                          <th class="th-modal" width="15%"> Quantity </th>
+                          <th class="th-modal" width="50%"> Service </th>
+                          <th class="th-modal" width="20%"> Amount </th>
+                          <th class="th-modal" width="30%"> Total </th>
+                        </tr>
+                        <tr>
+                          <td class="td-quantity"> 2 </td>
+                          <td> MS-Swedish Massage </td>
+                          <td> 399.00 </td>
+                          <td> 798.00 </td>
+                        </tr>
+                        <tr>
+                          <td> 1 </td>
+                          <td> BS-Anti Aging Body Scrub </td>
+                          <td> 900.00 </td>
+                          <td> 900.00 </td>
+                        </tr>
+                        <tr>
+                          <td> 2 </td>
+                          <td> OS-Ear Candling </td>
+                          <td> 200.00 </td>
+                          <td> 400.00 </td>
+                        </tr>
+                      </table>
+
+                      <br>
+                      <br>
+                      <br>
+                      <p class="totalpricereq">Total Amount:
+                        <span>&#8369;2,098.00</span>
+                      </p>
+                    </div>
+
+                    <div class="note">
+                      <h4>Note:</h4>
+                      <p class="reqnote">Pwede ba tumawad cyst? hekhek</p>
+                    </div>
+
+                  </div>
+                  <br>
+                  <br>
+                  <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" name="btnApproveReq" data-toggle="modal" href="#modal1">
+                      <i class="fa fa-check"></i> Approve</button>
+                    <button type="button" class="btn btn-sm btn-default" name="btnDeclineReq" onclick='modal1({"head":"Decline Request?", "prim": "Decline","def": "Cancel" })'
+                      data-toggle="modal" href="#modal1">
+                      <i class="fa fa-times"></i> Decline</button>
+                  </div>
+                </div>
+              </div>
+              <!-- /CONTENT MAIL -->
+              <!-- onclick='modal1({"head":"Decline Request?", "prim": "Decline","def": "Cancel" })'  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /page content -->
+
+
+  <!-- footer content -->
+  <footer>
+    <div class="pull-right">
+      EForea Nail and Body Spa | Copyright 2018
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
   </div>
   </div>
 
   <!-- Modals -->
   <!-- View Order Modal -->
   <div tabindex="-1">
-    <div class="modal-background">
-      <div class="modal" role="document">
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1">
+      <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
               <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title" id="modalHeader">Decline Request?</h4>
@@ -1666,136 +1686,129 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="modal-container">
+    <!-- <div id="modal-container">
     <div class="modal-background">
       <div class="modal">
         <h2>I'm a Modal</h2>
         <p>Hear me roar.</p>
-        <!-- <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-					<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-				</svg> -->
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEdit">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <!-- <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="modalHeader">Edit Service</h4>
-          </div> -->
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_content">
-                <div>
-                  <center>
-                    <span class="fa fa-leaf"></span>
-                    <hr>
-                  </center>
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEdit">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body" style="padding: 0px">
+            <div class="row" style="padding: 5px">
+              <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px">
+                <div class="x_content">
+                  <div style="border-bottom: solid #034777; border-width: 10px; padding-bottom: 5px">
+                    <center>
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-lotus.png" alt="Lotus-image">
+                    </center>
+                  </div>
+                  <br />
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="servIdEdit">Service Code
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="text" id="servIdEdit" required="required" class="form-control col-md-7 col-xs-12" value="MS-SwdMsg" disabled>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="servNameEdit">Service Name
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="text" id="servNameEdit" name="last-name" required="required" class="form-control col-md-7 col-xs-12" value="Swedish Massage">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Price
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input id="servPriceEdit" class="form-control col-md-7 col-xs-12" required="required" type="text" value="&#8369;399.00">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="servDescEdit" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                      <div class="col-md-8 col-sm-8 col-xs-12">
+                        <textarea id="servDescEdit" class="form-control" required="required" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                          data-parsley-maxlength="200" rows=5>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</textarea>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <br />
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="servId">Service Code
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                      <input type="text" id="servId" required="required" class="form-control col-md-7 col-xs-12" value="MS-SwdMsg">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="servName">Service Name
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                      <input type="text" id="servName" name="last-name" required="required" class="form-control col-md-7 col-xs-12" value="Swedish Massage">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="servDesc" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                      <textarea id="servDesc" class="form-control" required="required" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20"
-                        data-parsley-maxlength="200" rows=5>It is a various hands-on techniques including gliding, kneading, and cross-fiber friction to break up muscle knots, called adhesions.</textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Price
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                      <input id="servPrice" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" value="&#8369;399.00">
-                    </div>
-                  </div>
-
-                </form>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" id="btnPrim" data-dismiss="modal">
-            <span class="fa fa-check"></span> Save</button>
-          <button type="button" class="btn btn-primary" id="btnPrim" data-dismiss="modal">
-            <span class="fa fa-refresh"></span> Reset</button>
-          <button type="button" class="btn btn-default" id="btnDef" data-dismiss="modal">
-            <span class="fa fa-remove"></span> Cancel</button>
+
+          <div class="modal-footer">
+            <center>
+              <button type="button" class="btn btn-default" id="update" data-dismiss="modal">
+                <span class="fa fa-check"></span> Save</button>
+              <button type="button" class="btn btn-default" id="btnPrim2">
+                <span class="fa fa-refresh"></span> Reset</button>
+              <button type="button" class="btn btn-default" id="btnDef" data-dismiss="modal">
+                <span class="fa fa-remove"></span> Cancel</button>
+            </center>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- jQuery -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="assets/vendor/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="assets/vendor/nprogress/nprogress.js"></script>
-  <!-- Chart.js -->
-  <script src="assets/vendor/Chart.js/dist/Chart.min.js"></script>
-  <!-- gauge.js -->
-  <script src="assets/vendor/gauge.js/dist/gauge.min.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-  <!-- iCheck -->
-  <script src="assets/vendor/iCheck/icheck.min.js"></script>
-  <!-- Skycons -->
-  <script src="assets/vendor/skycons/skycons.js"></script>
-  <!-- Flot -->
-  <script src="assets/vendor/Flot/jquery.flot.js"></script>
-  <script src="assets/vendor/Flot/jquery.flot.pie.js"></script>
-  <script src="assets/vendor/Flot/jquery.flot.time.js"></script>
-  <script src="assets/vendor/Flot/jquery.flot.stack.js"></script>
-  <script src="assets/vendor/Flot/jquery.flot.resize.js"></script>
-  <!-- Flot plugins -->
-  <!-- <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="assets/vendor/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="assets/vendor/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="assets/vendor/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="assets/vendor/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="assets/vendor/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="assets/vendor/Flot/jquery.flot.js"></script>
+    <script src="assets/vendor/Flot/jquery.flot.pie.js"></script>
+    <script src="assets/vendor/Flot/jquery.flot.time.js"></script>
+    <script src="assets/vendor/Flot/jquery.flot.stack.js"></script>
+    <script src="assets/vendor/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <!-- <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
     <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
     <script src="vendors/flot.curvedlines/curvedLines.js"></script> -->
-  <!-- DateJS -->
-  <script src="assets/vendor/DateJS/build/date.js"></script>
-  <!-- JQVMap -->
-  <!-- <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <!-- DateJS -->
+    <script src="assets/vendor/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <!-- <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
     <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> -->
-  <!-- bootstrap-daterangepicker -->
-  <script src="assets/vendor/moment/min/moment.min.js"></script>
-  <script src="assets/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
-  <!-- bootstrap-wysiwyg -->
-  <script src="assets/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-  <script src="assets/vendor/jquery.hotkeys/jquery.hotkeys.js"></script>
-  <script src="assets/vendor/google-code-prettify/src/prettify.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="assets/vendor/moment/min/moment.min.js"></script>
+    <script src="assets/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="assets/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="assets/vendor/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="assets/vendor/google-code-prettify/src/prettify.js"></script>
 
-  <!-- Custom Theme Scripts -->
-  <script src="assets/JS/custom.min.js"></script>
-  <script src="assets/JS/time.js"></script>
-  <script src="assets/JS/dashMain.js"></script>
-  <script src="assets/JS/modal.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="assets/JS/custom.min.js"></script>
+    <script src="assets/JS/time.js"></script>
+    <script src="assets/JS/dashMain.js"></script>
+    <script src="assets/JS/dashCtrl.js"></script>
+    <!-- <script src="assets/JS/modal.js"></script> -->
 </body>
 
 </html>
