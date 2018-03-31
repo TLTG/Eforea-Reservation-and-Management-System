@@ -3,12 +3,12 @@ $(document).ready(function () {
     $("#step-2").hide();
     $("#step-3").hide();
 
-    $('input.timepicker').timepicker({ 
+    $('input.timepicker').timepicker({
         timeFormat: 'h:mm:ss p',
         minTime: '11:45:00', // 11:45:00 AM,
         maxHour: 20,
         maxMinutes: 30,
-        startTime: new Date(0,0,0,15,0,0), // 3:00:00 PM - noon
+        startTime: new Date(0, 0, 0, 15, 0, 0), // 3:00:00 PM - noon
         interval: 15 // 15 minutes
     });
 
@@ -18,10 +18,8 @@ $(document).ready(function () {
         myFunction()
     };
 
-    $("#next1").click(function()
-    {
-        if (document.getElementById("servtype1").checked == true)
-        {
+    $("#next1").click(function () {
+        if (document.getElementById("servtype1").checked == true) {
             $("#step-1").hide();
             $("#step-3").hide();
             $("#step-2").show();
@@ -29,8 +27,7 @@ $(document).ready(function () {
             $("#divaddress").show();
             $("#divcontnum").show();
         }
-        else if (document.getElementById("servtype2").checked == true)
-        {
+        else if (document.getElementById("servtype2").checked == true) {
             $("#step-1").hide();
             $("#step-3").hide();
             $("#step-2").show();
@@ -38,87 +35,72 @@ $(document).ready(function () {
             $("#divaddress").hide();
             $("#divcontnum").hide();
         }
-        else
-        {
-            alert ('Please select a type of service reservation.')
+        else {
+            alert('Please select a type of service reservation.')
         }
     });
 
-    $("#next2").click(function()
-    {
+    $("#next2").click(function () {
         var salut = null;
         var fn = document.getElementById("first-name").value;
         var ln = document.getElementById("last-name").value;
         var add = document.getElementById("address").value;
         var cont = document.getElementById("contnum").value;
 
-        if (document.getElementById("gender1").checked == true)
-        {
+        if (document.getElementById("gender1").checked == true) {
             salut = "Mr. ";
         }
-        else
-        {
+        else {
             salut = "Ms/Mrs. ";
         }
 
-        if (document.getElementById("servtype1").checked == true)
-        {
+        if (document.getElementById("servtype1").checked == true) {
             if (fn == "" || fn.length == 0 || fn == null
-            || ln == "" || ln.length == 0 || ln == null
-            || add == "" || add.length == 0 || add == null
-            || cont == "" || cont.length == 0 || cont == null)
-            {
-                alert ('Please fill in all fields.');
+                || ln == "" || ln.length == 0 || ln == null
+                || add == "" || add.length == 0 || add == null
+                || cont == "" || cont.length == 0 || cont == null) {
+                alert('Please fill in all fields.');
             }
-            else
-            {
+            else {
                 document.getElementById("custName").innerHTML = salut + " " + fn + " " + ln;
                 document.getElementById("custAddress").innerHTML = add;
                 $("#step-1").hide();
                 $("#step-2").hide();
-                $("#step-3").show(); 
+                $("#step-3").show();
             }
         }
-        else
-        {
+        else {
             if (fn == "" || fn.length == 0 || fn == null
-            || ln == "" || ln.length == 0 || ln == null)
-            {
-                alert ('Please fill in all fields.');
+                || ln == "" || ln.length == 0 || ln == null) {
+                alert('Please fill in all fields.');
             }
-            else
-            {
+            else {
                 document.getElementById("custName").innerHTML = fn + " " + ln;
                 document.getElementById("custAddress").innerHTML = add;
                 $("#step-1").hide();
                 $("#step-2").hide();
-                $("#step-3").show(); 
+                $("#step-3").show();
             }
         }
     });
 
-    $("#finish").click(function()
-    {
-        if (document.getElementById("agree").checked == true)
-        {
-            alert ('OKI. RESERVED KA NA KUNWARI. MODAL LANGS. WALA PA FUNCTION.')
+    $("#finish").click(function () {
+        if (document.getElementById("agree").checked == true) {
+            alert('OKI. RESERVED KA NA KUNWARI. MODAL LANGS. WALA PA FUNCTION.')
 
         }
-        else
-        {
-            alert ('BEH AGREE KA MUNA. MAY CHECKBOX DYAN. WAG NAGMAMADALI.')
+        else {
+            alert('BEH AGREE KA MUNA. MAY CHECKBOX DYAN. WAG NAGMAMADALI.')
         }
     });
 
-    $("#prev1").click(function()
-    {
+    $("#prev1").click(function () {
         $("#step-1").show();
         $("#step-3").hide();
         $("#step-2").hide();
     });
 
-    $("#prev2").click(function()
-    {
+    $("#prev2").click(function () {
         $("#step-2").show();
         $("#step-1").hide();
         $("#step-3").hide();
@@ -136,29 +118,27 @@ $(document).ready(function () {
         }
     }
 
-    if(document.cookie.cart != undefined){
+    if (document.cookie.cart != undefined) {
         var cart = JSON.parse(document.cookie.cart);
         userData.cart = cart;
-    }else{
+    } else {
 
     }
     getContent();
+    setInitCart();
 });
-    
-function getContent(){
-    var noOrder = "<div class='row ordername'><center><p style='padding-top: 60px'>No services selected.</p></center></div>"       
-                $('.order-container').append(noOrder);
 
-    $.get('/reserve/data', function(data){
-        if(data === undefined){
+function getContent() {
+    $.get('/reserve/data', function (data) {
+        if (data === undefined) {
             alert('Server Connection Timeout, Try again later');
             console.error('Server response error');
-            return; 
-        } 
+            return;
+        }
         serv = data.services;
         var html = "";
         data.categories.forEach(service => {
-            html += " <li class='li-navlist'><a href='#' onclick='hideMenuExcept("+ service.id +")'><span class='badge'>" + service.count + "</span>  " + service.name + "</a></li>";
+            html += " <li class='li-navlist'><a href='#' onclick='hideMenuExcept(" + service.id + ")'><span class='badge'>" + service.count + "</span>  " + service.name + "</a></li>";
         });
         html += "<li class='li-navlist'><a href='#' onclick='hideMenuExcept(-1)'>View All </a></li>";
         $('.category-list').html(html);
@@ -167,40 +147,40 @@ function getContent(){
         //console.log(JSON.stringify(data.categories));
         data.categories.forEach(element => {
             //console.log(element.name);
-            html = "<form method='post' class='menu menu-"+ element.id +"'><h3 class='alert alert-info'>" + element.name + "</h3><br/>";
-            var a=1; 
+            html = "<form method='post' class='menu menu-" + element.id + "'><h3 class='alert alert-info'>" + element.name + "</h3><br/>";
+            var a = 1;
             data.services.forEach(elem => {
                 //console.log(elem.name);
-                if(elem.category == element.id){
-                    if(elem.type == 0){
-                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p><hr><div class='p-price'><label> Price: Php" + elem.amount + "</label><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + elem.amount + "\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></div><br /><br /><hr class='hr-sepserv'>";                       
-                    }else if(elem.type == 1){
+                if (elem.category == element.id) {
+                    if (elem.type == 0) {
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p><hr><div class='p-price'><label> Price: Php" + elem.amount + "</label><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + elem.amount + "\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></div><br /><br /><hr class='hr-sepserv'>";
+                    } else if (elem.type == 1) {
                         var price = elem.amount.split('/');
-                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
-                        html += "<div class='col-md-4'><label> Hand Spa </label><br /><label> Price: Php "+ price[0] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
-                        html += "<div class='col-md-4'><label> Feet Spa </label><br /><label> Price: Php "+ price[1] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
-                        html += "<div class='col-md-4'><label> Hand and Feet Spa </label><br /><label> Price: Php "+ price[2] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div class='col-md-4'><label> Hand Spa </label><br /><label> Price: Php " + price[0] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-4'><label> Feet Spa </label><br /><label> Price: Php " + price[1] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-4'><label> Hand and Feet Spa </label><br /><label> Price: Php " + price[2] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
                         html += "</div><br /><hr class='hr-sepserv'>";
-                    }else if(elem.type == 2){
+                    } else if (elem.type == 2) {
                         var price = elem.amount.split('/');
-                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
-                        html += "<div class='col-md-3'><label> Hand Spa </label><br /><label> Price: Php "+ price[0] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
-                        html += "<div class='col-md-3'><label> Hand Spa with <br />Manicure</label><br /><label> Price: Php "+ price[1] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
-                        html += "<div class='col-md-3'><label> Feet Spa </label><br /><label> Price: Php "+ price[2] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
-                        html += "<div class='col-md-3'><label> Feet Spa with <br />Pedicure </label><br /><label> Price: Php "+ price[3] +".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[3] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div class='col-md-3'><label> Hand Spa </label><br /><label> Price: Php " + price[0] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-3'><label> Hand Spa with <br />Manicure</label><br /><label> Price: Php " + price[1] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-3'><label> Feet Spa </label><br /><label> Price: Php " + price[2] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='col-md-3'><label> Feet Spa with <br />Pedicure </label><br /><label> Price: Php " + price[3] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[3] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
                         html += "</div><br /><hr class='hr-sepserv'>";
-                    }else if(elem.type == 3){
+                    } else if (elem.type == 3) {
                         var price = elem.amount.split('/');
-                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
-                        html += "<center id='item-"+ elem.id +"'><label class='control control--radio radio-hw'>Male<br>Price: Php "+ price[0] +".00<input type='radio' name='radiohw1' value='"+ price[0] +"' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
-                        html += "<label class='control control--radio radio-hw'>Female<br>Price: Php "+ price[1] +".00<input type='radio' name='radiohw1' value='"+ price[1] +"'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name +"\"})' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<center id='item-" + elem.id + "'><label class='control control--radio radio-hw'>Male<br>Price: Php " + price[0] + ".00<input type='radio' name='radiohw1' value='" + price[0] + "' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
+                        html += "<label class='control control--radio radio-hw'>Female<br>Price: Php " + price[1] + ".00<input type='radio' name='radiohw1' value='" + price[1] + "'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\"})' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
                         html += "</div><br /><hr class='hr-sepserv'>";
-                    }else{
+                    } else {
                         var price = elem.amount.split('/');
-                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>"+ a +".</b>"+ elem.name +"<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
-                        html += "<center id='item-"+ elem.id +"'><label class='control control--radio radio-hw'>Per session<br>Price: Php "+ price[0] +".00<input type='radio' name='radiohw1' value='"+ price[0] +"' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
-                        html += "<label class='control control--radio radio-hw'>Per 5 session<br>Price: Php "+ price[1] +".00<input type='radio' name='radiohw1' value='"+ price[1] +"'><div class='control__indicator'></div></label> &emsp;&emsp;";
-                        html += "<label class='control control--radio radio-hw'>Per 10 session<br>Price: Php "+ price[2] +".00<input type='radio' name='radiohw1' value='"+ price[2] +"'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name +"\"})' class='btn btn-primary btn-addCart btn-" + elem.id +"' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<center id='item-" + elem.id + "'><label class='control control--radio radio-hw'>Per session<br>Price: Php " + price[0] + ".00<input type='radio' name='radiohw1' value='" + price[0] + "' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
+                        html += "<label class='control control--radio radio-hw'>Per 5 session<br>Price: Php " + price[1] + ".00<input type='radio' name='radiohw1' value='" + price[1] + "'><div class='control__indicator'></div></label> &emsp;&emsp;";
+                        html += "<label class='control control--radio radio-hw'>Per 10 session<br>Price: Php " + price[2] + ".00<input type='radio' name='radiohw1' value='" + price[2] + "'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\"})' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
                         html += "</div><br /><hr class='hr-sepserv'>";
                     }
                     a++;
@@ -241,53 +221,101 @@ function viewInfo(data) {
     $('.info-label').html(data.name);
 }
 
+function setInitCart(){
+    var cookies = decodeURIComponent(document.cookie).split(';');
+    cookies.forEach(element => {
+        var item = element.split('=');
+        if(item[0] === ' cart'){
+            order = JSON.parse(item[1]);
+            updateCart();
+            var tot = 0;
+            order.forEach(a => {
+                tot += parseInt(a.price) * parseInt(a.quant);
+                displayOrder(a.id,a.quant,a.name,a.price,tot);
+            });
+            $('.totalParag').html(tot);              
+        }
+    });
+}
+
 function addToCart() {
     var _name = $('#serviceHolder').val();
     var _price = $('#priceHolder').val();
     var _quantity = $('#itemnum').val();
     var _id = $('#item_id').val();
-    //$.post('/reserve', { action: 'addToCart', id: _id, num: _quantity}, function(data){
-        if(order.length < 5){
-            var flag = true, _total=0;
-            order.forEach(element => {
-                _total += parseInt(element.price);
-                if(element.id == _id){
-                    flag = false;
-                }
-            });
-            if(flag){
-                if (order.length<=1)
-                {
-                    var noOrder = "<div class='row ordername'><center><p></p></center></div>"       
-                    $('.order-container').html(noOrder);
-                    var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span> " + _name + "</div><div class='col-md-4'>&#8369; " + _price + ".00 <a href='#' onclick='removeToCart(\""+ _id +"\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
-                    $('.order-container').append(newOrder);
-                }
-                else{
-                    var newOrder = "<div class='row ordername id_"+ _id +"'><div class='col-md-8'><span class='badge'>" + _quantity + "</span> " + _name + "</div><div class='col-md-4'>&#8369; " + _price + ".00 <a href='#' onclick='removeToCart(\""+ _id +"\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"       
-                    $('.order-container').append(newOrder);
-                    order.push({
-                    id: _id,
-                    name: _name,
-                    price: _price,
-                    quant: _quantity
-                });
-                }
-                $('.totalParag').html(_total + parseInt(_price * _quantity));
-                document.cookie = "cart:" + order;
-            }else{
-                alert("Same entry is already reserved!");
+    if (order.length < 5) {
+        var flag = true, _total = 0, _totalQuan = 0;
+        order.forEach(element => {
+            _total += parseInt(element.price);
+            _totalQuan += parseInt(element.quant);
+            if (element.id == _id) {
+                flag = false;
             }
-        }else{
-            alert("Reservation limit is reached! (5 services)");
+        });
+        if(_totalQuan + parseInt(_quantity) > 5){
+            alert("Maximum of 5 entry exceeded!");
+            return;            
         }
-    //});
+        if(flag) {
+            displayOrder(_id,_quantity,_name,_price,_total);          
+            order.push({
+                id: _id,
+                name: _name,
+                price: _price,
+                quant: _quantity
+            });
+            document.cookie = "cart=" + JSON.stringify(order) + ";";
+        }else {
+            alert("Same entry is already reserved!");
+        }
+    } else {
+        alert("Reservation limit is reached! (5 services)");
+    }
+    updateCart();
+}
+
+function removeToCart(param) {
+    $('#myModal').modal('show');
+    $('.id_' + param).remove();
+    var x = 0, a = -1, _total = 0;
+    order.forEach(element => {
+        _total += parseInt(element.price) * parseInt(element.quant);
+        if (element.id == param) {
+            a = x;
+            _total -= parseInt(element.price) * parseInt(element.quant);
+        } else {
+            x++;
+        }
+    });
+    if (a != -1) {
+        order.splice(a, 1);
+        $('.totalParag').html(_total);
+        document.cookie = "cart=" + JSON.stringify(order) + ";";
+    }
+    updateCart();
+}
+
+function updateCart(){
+    if(order.length == 0){
+        var noOrder = "<div class='row ordername_empty'><center><p style='padding-top: 60px'>No services selected.</p></center></div>"
+        $('.order-container').html(noOrder);
+        $('.submit').attr("disabled", "disabled");
+    }else{
+        $('.ordername_empty').remove();
+        $('.submit').removeAttr("disabled");
+    }
+}
+
+function displayOrder(_id,_quantity,_name,_price,_total){
+    var newOrder = "<div class='row ordername id_" + _id + "'><div class='col-md-8'><span class='badge'>" + _quantity + "</span>" + _name + "</div><div class='col-md-4'>P" + _price + ".00<a href='#' onclick='removeToCart(\"" + _id + "\")'><span class='glyphicon glyphicon-remove' title='Remove' aria-hidden='true'></span></a></div></div>"
+    $('.order-container').append(newOrder);
+    $('.totalParag').html(_total + parseInt(_price * _quantity));  
 }
 
 function addCartModal1(data) {
     var id = data.id;
     var serviceName = data.name;
-    var price = $("#item-"+id +" input[name='radiohw1']:checked").val();
+    var price = $("#item-" + id + " input[name='radiohw1']:checked").val();
     $('#serviceHolder').html(serviceName);
     $('#serviceHolder').val(serviceName);
     $('#priceHolder').html(price);
@@ -295,26 +323,7 @@ function addCartModal1(data) {
     $('#item_id').val(id);
 }
 
-function removeToCart(param){
-    $('#myModal').modal('show');
-    $('.id_'+param).remove();
-    var x=0, a=-1, _total=0;
-    order.forEach(element => {
-        _total += parseInt(element.price) * parseInt(element.quant);
-        if(element.id == param){
-            a=x;
-            _total -= parseInt(element.price) * parseInt(element.quant);
-        }else{
-            x++;
-        }
-    });    
-    if(a!=-1){
-        order.splice(a,1);
-        $('.totalParag').html(_total);
-    }
-}
-
-function viewOrderModal(){
+function viewOrderModal() {
     var orders = "<table width='100%'><tr><th class='th-modal' width='15%'> Quantity </th><th class='th-modal' width='50%'> Service </th><th class='th-modal' width='20%'> Amount </th><th class='th-modal' width='30%'> Total Amount </th></tr>";
     var total = 0;
     order.forEach(element => {
@@ -329,14 +338,14 @@ function viewOrderModal(){
         orders += temp;
     });
     orders += "</table>";
-    if(total == 0){
+    if (total == 0) {
         orders += "<center><h3>Nothing Selected</h3></center>";
     }
-    orders += "<br><br><p style='text-align: right; font-size: 17px;'><strong>Total: </strong><span style='font-size: 15px;' class='badge'> &#8369; "+ total +".00</span></p>";
+    orders += "<br><br><p style='text-align: right; font-size: 17px;'><strong>Total: </strong><span style='font-size: 15px;' class='badge'> &#8369; " + total + ".00</span></p>";
     $('.viewOrderMod').html(orders);
 }
 
-function validateInfo(){
+function validateInfo() {
     var _userdata = $('#userData').serializeArray();
     userData.name = _userdata[0].value;
     userData.number = _userdata[1].value;
@@ -346,54 +355,68 @@ function validateInfo(){
 
     document.cookie = "userInfo:" + userData;
     //Some validation here. then add condition sa baba.
-    
+
+    //Seryoso need ng validation before mag proceed.
     $('#getUserData').modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
     $('#doneOrderModal').modal('toggle');
 }
-
-function submitReservation(){
-    $.post('/reserve', {action: 'reserve', data: JSON.stringify(userData)},function(returndata){
-        if(returndata){
+//This submits the reservation(var order[]) to the server for processing.
+function submitReservation() {
+    $.post('/reserve', { action: 'reserve', data: JSON.stringify(userData) }, function (returndata) {
+        if (returndata) {
             alert('Successfully Reserve!');
-            window.location="/";
-        }else{
+            window.location = "/";
+        } else {
             alert("Can't process you request. Try again later.");
-            window.location="/reserve";
+            window.location = "/reserve";
         }
     });
 }
-
-function hideMenuExcept(param){
-    if(param != -1){
-        $('.menu-show').addClass('menu');
-        $('.menu-show').removeClass('menu-show');
-        $('.menu-'+param).removeClass('menu');
-        $('.menu-'+param).addClass('menu-show');
+//This hides categories except on the parameter.
+function hideMenuExcept(param) {
+    var apply = function (){
         $('.menu-show').css("display", "inline");
         $('.menu').css("display", "none");
-    }else{
+    }
+    if (param != -1) {
+        $('.menu-show').addClass('menu');
+        $('.menu-show').removeClass('menu-show');
+        $('.menu-' + param).removeClass('menu');
+        $('.menu-' + param).addClass('menu-show');
+        apply();
+    }else {
         $('.menu').css("display", "inline");
+    }
+    $('.no_result').css('display', 'none');    
+    if(param == -2){
+        $('.menu-show').addClass('menu');
+        $('.menu-show').removeClass('menu-show');
+        $('.no_result').css('display', 'inline');
+        apply();
+    }
+}
+//Search
+function searchService() {
+    var look = $('#search-bar').val();
+    var done = false;
+    serv.forEach(element => {
+        if (look.toLowerCase() == element.name.toLowerCase()) {
+            hideMenuExcept(element.category);
+            done = true;
+        }
+    });
+    if(!done){
+        hideMenuExcept(-2);
     }
 }
 
-function searchService(){
-    var look = $('#search-bar').val();
-    serv.forEach(element => {
-        if(look.toLowerCase() == element.name.toLowerCase()){
-            hideMenuExcept(element.category);
-        }
-    });
-}
-
-function successAlert()
-{
+function successAlert() {
     swal("Good job!", "You clicked the button!", "success");
 }
 
-function doneFunction()
-{
+function doneFunction() {
     document.getElementById("servtype1").checked = false;
     document.getElementById("servtype2").checked = false;
     document.getElementById("first-name").value = "";

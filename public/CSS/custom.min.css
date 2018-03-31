@@ -1,3 +1,14 @@
+@font-face 
+{
+    font-family: Quicksand;
+    src: url("font/Quicksand-Regular.ttf") format("truetype");
+}
+
+body
+{
+  font-family: Quicksand;
+}
+
 .x_title h2,table.tile_info td p
 {
 	white-space:nowrap; 
@@ -722,12 +733,13 @@ a{color:#5A738E}
 .nav.navbar-nav>li>a{color:lightgray!important}
 .nav.top_menu>li>a{padding:10px 15px; color:#34495E!important}
 .nav>li>a:focus,.nav>li>a:hover{background-color:transparent}
-.top_search{padding:0}.top_search .form-control
+.top_search{padding:0;}.top_search .form-control
 {
 	box-shadow:inset 0 1px 0 rgba(0,0,0,.075); 
 	border-radius:25px 0 0 25px; 
 	padding-left:20px; 
-	border:1px solid rgba(221,226,232,.49)
+	border:1px solid rgba(221,226,232,.49);
+	height: 35px;
 }
 
 .top_search .form-control:focus{border:1px solid rgba(221,226,232,.49); border-right:0}
@@ -1400,9 +1412,11 @@ ul.quick-list li i{padding-right:10px; color:#757679}
  	border-style: none;
  	background-color: #F7F7F7;
  	border-radius: 0px;
- 	border-bottom: solid 3px #000;
+ 	/*border-bottom: solid 3px #000;*/
+ 	border-left: solid 1px #000;
+ 	border-right: solid 1px #000;
  	color: #022F4F;
- 	padding-bottom: 20px;
+ 	/*padding-bottom: 20px;*/
  }
 
  .btngrp1 .btn:hover
@@ -3130,52 +3144,154 @@ div.note
 	margin-top: 10px;
 }
 
-/*#serv1
+.clickable-row
 {
-	background-color: #FDD0AF;
-}
-*/
-/*#serv2
-{
-	padding-left: 10px;
-}*/
-
-/*#serv3
-{
-	background-color: #D0AFFD;
+	cursor: pointer;
+	margin-left: 10px;
 }
 
-#serv4
+.clickable-row td:hover
 {
-	background-color: #FED7E7;
+	background-color: #B4C6E7;
 }
 
-#serv5
+#activetd
 {
-	background-color: #D7FEE7;
+
+	background-color: #022F4F;
+	color: white;
+	opacity: 0.7;
 }
 
-#serv6
+#activetdhead
 {
-	background-color: #D7E7FE;
+	padding-top: 3px;
+	font-weight: lighter;
 }
 
-#serv7
+.activetdhead1
 {
-	background-color: #FDEE9A;
+	border-top: solid 2px #022F4F;
+	border-bottom: solid 2px #022F4F;
+	height: 50px;
+	color: black;
+	opacity: 0.7;
+	font-weight: lighter;
 }
 
-#serv8
+.serv-left-div
 {
-	background-color: #942E44;
+	padding-right: 20px;
+	overflow-y: auto;
 }
 
-#serv9
+.serv-right-div
 {
-	background-color: blue;
+	/*border-left: solid 1px #034777;*/
 }
 
-#serv10
+.tableserv
 {
-	background-color: yellow;
-}*/
+	border-collapse: collapse;
+	width: 80%;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.tableserv th
+{
+	width: 20%;
+}
+
+.tableserv td
+{
+	width: 80%;
+}
+
+.facustom
+{
+	border-radius: 50px; 
+	font-size: 35px;
+	border: solid 1px #034777;
+	background-color: #F7F7F7;
+	padding: 10px;
+	color: #034777;
+	cursor: pointer;
+}
+
+.facustom1
+{
+	border-radius: 50px; 
+	font-size: 35px;
+	border: solid 1px #034777;
+	background-color: #F7F7F7;
+	padding: 10px;
+	padding-left: 14px;
+	padding-right: 14px;
+	color: #034777;
+	cursor: pointer;
+}
+
+.falabel
+{
+	line-height: 25px;
+	letter-spacing: 1px
+}
+
+.facustom:hover
+{
+	border: solid 1px #F7F7F7;
+	background-color: #034777;
+	padding: 10px;
+	color: #F7F7F7;
+	cursor: pointer;
+}
+
+.facustom1:hover
+{
+	border: solid 1px #F7F7F7;
+	background-color: #034777;
+	padding: 10px;
+	padding-left: 14px;
+	padding-right: 14px;
+	color: #F7F7F7;
+	cursor: pointer;
+}
+
+p.servName
+{
+	text-transform: uppercase;
+	font-size: 20px;
+}
+
+p.servCode
+{
+	line-height: 10px;
+	font-size: 15px;
+}
+
+p.servCateg
+{
+	font-size: 14px;
+}
+
+p.servPrice
+{
+	font-size: 14px;
+}
+
+p.servDesc
+{
+	font-size: 14px;
+}
+
+.servlower
+{
+	background-color: black;
+	height: 100%;
+}
+
+.listserv
+{
+	font-weight: lighter;
+}
