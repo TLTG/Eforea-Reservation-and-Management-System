@@ -1,0 +1,30 @@
+font-face 
+{
+    font-family: Quicksand;
+    src: url("font/Quicksand-Regular.ttf") format("truetype");
+}
+body 
+{
+    font-family: "Quicksand", sans-serif;
+}
+.time 
+{
+    font-family: "Quicksand", sans-serif;
+    color: #034777;
+    padding-top: 8px;
+    text-align: center;
+    width: 200px;
+}
+.hms 
+{
+    font-size: 12pt;
+    font-weight: 200;
+}
+.ampm 
+{
+    font-size: 9pt;
+}
+span.date 
+{
+    font-size: 9pt;
+}

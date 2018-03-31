@@ -1,9 +1,110 @@
 $(document).ready(function () {
+    $("#step-1").show();
+    $("#step-2").hide();
+    $("#step-3").hide();
+
+    $('input.timepicker').timepicker({
+        timeFormat: 'h:mm:ss p',
+        minTime: '11:45:00', // 11:45:00 AM,
+        maxHour: 20,
+        maxMinutes: 30,
+        startTime: new Date(0, 0, 0, 15, 0, 0), // 3:00:00 PM - noon
+        interval: 15 // 15 minutes
+    });
+
     $('.carousel').carousel();
 
     window.onscroll = function () {
         myFunction()
     };
+
+    $("#next1").click(function () {
+        if (document.getElementById("servtype1").checked == true) {
+            $("#step-1").hide();
+            $("#step-3").hide();
+            $("#step-2").show();
+            document.getElementById("servicediv").innerHTML = "Home Service";
+            $("#divaddress").show();
+            $("#divcontnum").show();
+        }
+        else if (document.getElementById("servtype2").checked == true) {
+            $("#step-1").hide();
+            $("#step-3").hide();
+            $("#step-2").show();
+            document.getElementById("servicediv").innerHTML = "Regular Service";
+            $("#divaddress").hide();
+            $("#divcontnum").hide();
+        }
+        else {
+            alert('Please select a type of service reservation.')
+        }
+    });
+
+    $("#next2").click(function () {
+        var salut = null;
+        var fn = document.getElementById("first-name").value;
+        var ln = document.getElementById("last-name").value;
+        var add = document.getElementById("address").value;
+        var cont = document.getElementById("contnum").value;
+
+        if (document.getElementById("gender1").checked == true) {
+            salut = "Mr. ";
+        }
+        else {
+            salut = "Ms/Mrs. ";
+        }
+
+        if (document.getElementById("servtype1").checked == true) {
+            if (fn == "" || fn.length == 0 || fn == null
+                || ln == "" || ln.length == 0 || ln == null
+                || add == "" || add.length == 0 || add == null
+                || cont == "" || cont.length == 0 || cont == null) {
+                alert('Please fill in all fields.');
+            }
+            else {
+                document.getElementById("custName").innerHTML = salut + " " + fn + " " + ln;
+                document.getElementById("custAddress").innerHTML = add;
+                $("#step-1").hide();
+                $("#step-2").hide();
+                $("#step-3").show();
+            }
+        }
+        else {
+            if (fn == "" || fn.length == 0 || fn == null
+                || ln == "" || ln.length == 0 || ln == null) {
+                alert('Please fill in all fields.');
+            }
+            else {
+                document.getElementById("custName").innerHTML = fn + " " + ln;
+                document.getElementById("custAddress").innerHTML = add;
+                $("#step-1").hide();
+                $("#step-2").hide();
+                $("#step-3").show();
+            }
+        }
+    });
+
+    $("#finish").click(function () {
+        if (document.getElementById("agree").checked == true) {
+            alert('OKI. RESERVED KA NA KUNWARI. MODAL LANGS. WALA PA FUNCTION.')
+
+        }
+        else {
+            alert('BEH AGREE KA MUNA. MAY CHECKBOX DYAN. WAG NAGMAMADALI.')
+        }
+    });
+
+    $("#prev1").click(function () {
+        $("#step-1").show();
+        $("#step-3").hide();
+        $("#step-2").hide();
+    });
+
+    $("#prev2").click(function () {
+        $("#step-2").show();
+        $("#step-1").hide();
+        $("#step-3").hide();
+    });
 
     var header = document.getElementById("stickyServ");
     var sticky = header.offsetTop;
@@ -23,7 +124,6 @@ $(document).ready(function () {
     } else {
 
     }
-
     getContent();
     setInitCart();
 });
@@ -310,4 +410,25 @@ function searchService() {
     if(!done){
         hideMenuExcept(-2);
     }
+}
+
+function successAlert() {
+    swal("Good job!", "You clicked the button!", "success");
+}
+
+function doneFunction() {
+    document.getElementById("servtype1").checked = false;
+    document.getElementById("servtype2").checked = false;
+    document.getElementById("first-name").value = "";
+    document.getElementById("last-name").value = "";
+    document.getElementById("gender1").checked = true;
+    document.getElementById("gender2").checked = false;
+    document.getElementById("address").value = "";
+    document.getElementById("contnum").value = "";
+    document.getElementById("date").value = "02-04-2018";
+    document.getElementById("time").value = "12:00";
+    document.getElementById("agree").checked = false;
+    $("#step-1").show();
+    $("#step-2").hide();
+    $("#step-3").hide();
 }

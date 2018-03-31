@@ -8,9 +8,9 @@
 
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="assets/images/icon-main.png">
+  <link rel="icon" href="assets/images/icon-lotus.png">
 
-  <title>Eforea - Reserve Now</title>
+  <title>Eforea | Reserve Now</title>
 
   <!-- Bootstrap core CSS -->
   <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,15 +29,15 @@
     [endif] -->
 
   <link href="assets/CSS/reserve.css" rel="stylesheet">
-  <!-- <link href="CSS/navbar.css" rel="stylesheet"> -->
-  <!--  <link href="CSS/navbar-hover.css" rel="stylesheet"> -->
   <link href="assets/CSS/carousel.css" rel="stylesheet">
+  <link href="public/CSS/sweetalert.css" rel="stylesheet">
+  <link href="public/CSS/jquery.timepicker.css" rel="stylesheet">
+  <link href="public/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 
 <body>
@@ -46,31 +46,18 @@
   <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <img src="assets/images/logo-2.png" style="display: block; float: left; margin-left: 10px; margin-right: auto; width: 38%; padding-top: 1px;"
+        <a href="/" class="site_title">
+          <img src="assets/images/logo-2.png" style="display: block; float: left; margin-left: 10px; margin-right: auto; width: 38%; padding-top: 1px;"
           alt="Eforea Nail and Body Spa">
+        </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/services">Services</a>
-          </li>
-          <li>
-            <a href="/spa-party">Spa Party</a>
-          </li>
-          <li>
-            <a href="/schedule">Schedule</a>
-          </li>
-          <li>
-            <a href="/about-us">About Us</a>
-          </li>
-          <li>
-            <a href="#" id="active-menu">
-              <b>Reserve Now</b>
-            </a>
-          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/schedule">Schedule</a></li>
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="#" id="active-menu"><b>Reserve Now</b></a></li>
         </ul>
       </div>
     </div>
@@ -99,25 +86,25 @@
           <div class="alert alert-info" id="stickyServ">
             <h2 class="modal-title" id="linkserv1" style="text-align: center;">SERVICES Offered</h2>
           </div>
-          <div class="service-list"><div class='row no_result' style="display: none"><center><h1 style='padding-top: 60px'>No Result</h1></center></div></div>
+          <div class="service-list"></div>
         </div>
         <!-- End of Column 7 -->
+
         <div class="col-md-3 div-orders sidebar2" style="padding-top: 30px; ">
           <h3 class="headServ" style="font-size: 20px;">Your Order(s)</h3>
           <hr>
-          <div class="order-container" style="overflow-y: auto; height: 100px; overflow-x:hidden"></div>
+          <div class="order-container" style="overflow-y: auto; height: 150px; overflow-x:hidden"></div>
           <br />
-          <button type="button" class="btn btn-primary submit" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#getUserData">
+          <button type="button" class="btn btn-primary submit" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#doneConfirmModal" onclick="doneFunction()">
             Done </button>
-          <button type="button" onclick="viewOrderModal()" class="btn btn-primary submit" style="float: right;" name="btnViewOrder" data-toggle="modal"
-            data-target="#viewOrderModal">
-            View </button>
+          <button type="button" onclick="viewOrderModal()" class="btn btn-primary submit" style="float: right;" name="btnViewOrder" data-toggle="modal" data-target="#viewOrderModal">
+            <span class="fa fa-eye"></span> View </button>
           <hr>
           <p style="text-align: right;"> TOTAL: Php
             <span class="totalParag">0</span>.00</p>
+            <img class="img-responsive" style="float: right; padding-right: 30px; padding-top: 110px" width="100" height="50" src="assets/images/icon-lotus.png" alt="Lotus-image">
           <br />
-          <br />
-          <p>Contact us!</p>
+          <h4><strong>CONTACT US!</strong></h4>
           <p>EForea Nail and Body Spa</p>
           <p>Unit 102 #71 P. Tuazon St.,
             <br /> Barangay Kaunlaran
@@ -138,7 +125,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span style="color: white; font-size: 25px;">&times;</span>
           </button>
           <h4 class="modal-title" id="myModalLabel">Your Service Cart</h4>
         </div>
@@ -183,22 +170,247 @@
   </div>
 
   <!-- DONE ORDER MODAL -->
-  <div class="modal fade" id="doneOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="doneConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span style="color: white">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Reserve Now?</h4>
+          <h4 class="modal-title" id="myModalLabel">Reserve Now</h4>
         </div>
-        <div class="modal-body">
-          Upon clicking confirm, you are no longer able to edit the services you reserved. Continue?
-          <br />
+        <div class="modal-body" style="height: auto;">
+         <div class="right_col">
+          <div>
+            <div class="clearfix"></div>
+              <div class="x_content">
+                <!-- Smart Wizard -->
+                <br>
+                <div id="wizard" class="form_wizard wizard_horizontal">
+                  <ul class="wizard_steps">
+                    <li>
+                      <a href="#step-1">
+                        <span class="step_no">1</span>
+                        <span class="step_descr">Step 1<br />
+                                          <small>Type of Service Reservation</small></span></a>
+                    </li>
+                    <li>
+                      <a href="#step-2">
+                        <span class="step_no">2</span>
+                        <span class="step_descr">Step 2<br />
+                                          <small>Contact information &amp; Reservation Details</small></span></a>
+                    </li>
+                    <li>
+                      <a href="#step-3">
+                        <span class="step_no">3</span>
+                        <span class="step_descr">Step 3<br />
+                                          <small>Confirm Reservation</small></span></a>
+                    </li>
+                  </ul>
+
+                  <!-- Start of Step 1 -->
+                  <div id="step-1" style="visibility: visible;">
+                  <hr>
+                  <center><h2>Type of Service Reservation</h2>
+                  <p>Select type of service to reserve.</p><br><br>
+                    <form class="form-horizontal form-label-left">
+                      <div class="form-group">
+                        <div>
+                          <input type="radio" id="servtype1" name="selector" onclick="servCheck()">
+                          <label class="radlab" for="servtype1">Home Service</label>
+                          <input type="radio" id="servtype2" name="selector" onclick="servCheck()">
+                          <label class="radlab" for="servtype2">Regular Service</label>
+                        </div>
+                      </div>
+                      <hr>
+                      <div style="padding-right: 20px">
+                        <button type="button" href="#step-2" id="next1" class="buttonNext btn pull-right" style="width: 80px">Next</button><br>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- End of Step 1 -->
+
+                  <!-- Start of Step 2 -->
+                  <div id="step-2">
+                  <br><hr>
+                  <center><h2>Contact Information &amp; Reservation Details</h2>
+                  <p>Fill in your personal and reservation details.</p><br>
+                  <div class="servicediv" id="servicediv">Home Service</div><br><br>
+                </center>
+                    <form class="form-horizontal form-label-left">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                          <input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                          <input type="text" id="last-name" name="last-name" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="radio">
+                            <input id="gender1" name="gender" type="radio" checked>
+                            <label for="gender1" class="radio-label">Male</label>
+                          </div>
+                          <div class="radio">
+                            <input id="gender2" name="gender" type="radio">
+                            <label  for="gender2" class="radio-label">Female</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group" id="divaddress">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address <span class="required">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                          <input type="text" id="address" name="address" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group" id="divcontnum">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contnum">Contact Number <span class="required">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                          <input type="text" id="contnum" name="contnum" required class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div><br><br>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment <span class="required">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="02-04-2018" class="form-control" required>
+                            <script>
+                            $(function(){
+                                $('#date').combodate();    
+                            });
+                            </script>
+                        </div>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Preferred Time <span class="required">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                         <input type="text" id="time" data-format="h:mm" data-template="h : mm" name="time" value="12:00" class="form-control" required="required">
+                         <p style="float: right;">PM</p>
+                          <script>
+                          $(function(){
+                              $('#time').combodate({
+                                  firstItem: 'none', //show 'hour' and 'minute' string at first item of dropdown
+                                  minuteStep: 5
+                              });  
+                          });
+                          </script>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group" style="padding-right: 20px">
+                        <button type="button" id="next2" class="buttonNext btn pull-right" style="width: 80px;">Next</button>
+                        <button type="button" href="#step-1" id="prev1" class="buttonPrevious btn pull-right" style="width: 100px; margin-right: 5px">Previous</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- End of Step 2 -->
+
+                   <!-- Start of Step 3 -->
+                  <div id="step-3">
+                  <hr>
+                  <center><h2>Confirm Reservation</h2>
+                  <p>Review your details and important notes before clicking 'Reserve Now'.</p><br><br>
+                    <form class="form-horizontal form-label-left">
+                      <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="pull-right" style="padding-right: 20px;">
+                            <h5 style="float: left;">Date:&nbsp;&nbsp;&nbsp;</h5>
+                            <h5 id="datetoday" style="float: right;"></h5>
+                            <script>
+                              n =  new Date();
+                              y = n.getFullYear();
+                              m = n.getMonth() + 1;
+                              d = n.getDate();
+                              document.getElementById("datetoday").innerHTML = m + "/" + d + "/" + y;
+                            </script>
+                          </div>
+                        </div>
+
+                        <div style="padding-left: 20px">
+                            <p id="custName" class="custName">Graciella C. Tatel</p>
+                            <p id="custAddress" class="custAddress">RC 11 Area G, CSJDM, Bulacan</p>
+                        </div><br><hr width="200px" class="pull-left"><br><br><br>
+
+                        <div style="padding-left: 20px">
+                            <p style="text-align: left; text-transform: uppercase;"> Service(s) to Reserve:</p>
+                             <table width="100%">
+                              <tr>
+                                <th class="th-modal" width="20%"> Quantity </th>
+                                <th class="th-modal" width="40%"> Service </th>
+                                <th class="th-modal" width="20%"> Amount </th>
+                                <th class="th-modal" width="30%"> Total Amount </th>
+                              </tr>
+                              <tr>
+                                <td class="td-quantity"> 2 </td>
+                                <td> MS-Swedish Massage </td>
+                                <td> 399.00 </td>
+                                <td> 798.00 </td>
+                              </tr>
+                              <tr>
+                                <td> 1 </td>
+                                <td> BS-Anti Aging Body Scrub </td>
+                                <td> 900.00 </td>
+                                <td> 900.00 </td>
+                              </tr>
+                              <tr>
+                                <td> 2 </td>
+                                <td> OS-Ear Candling </td>
+                                <td> 200.00 </td>
+                                <td> 400.00 </td>
+                              </tr>
+                            </table>
+                            <hr>
+                            <p style="text-align: right; font-size: 17px;">
+                              <strong>Total:</strong>
+                              <span style="font-size: 15px; margin-right: 10px;" class="badge">Php 2,098.00</span>
+                            </p>
+                        </div><br>
+                        <div class="row">
+                          <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 30px">
+                            <p style="text-align: left; text-transform: uppercase;">Date and Time of Treatment: </p>
+                            <p id="datetimeReserve" class="custAddress">Tuesday, April 3, 2018  1:00 PM</p>
+                          </div>
+                          <div class="col-md-2 col-lg-2 col-xs-12">
+                            <span class="fa fa-exclamation-circle" style="color: black"></span>
+                          </div>
+                          <div class="col-md-4 col-lg-4 col-xs-12">
+                          </div>
+                        </div>
+                        <br><br>
+                        <div style="background-color: #9E2F46; margin: 0px; padding: 5px;">
+                          <h3 style="text-align: center; color: white">Important Notice:</h3>
+                        </div>
+                        <div>
+                          <p class="notifdiv">No cancellation of reservation.</p>
+                          <p class="notifdiv">Payment shall be made upon completion of service.</p>
+                          <p class="notifdiv2">An immediate on-screen confirmation shall be received after submitting the form. <strong>Do not exit the page until the confirmation is received.</strong></p>
+                        </div>
+                        <div class="checkbox" style="padding-left: 500px; text-align: left;">
+                          <label><input type="checkbox" id="agree" value="">I hereby acknowledge that <strong>I have read and understood</strong> the agreement as provided by the Eforea Nail and Body Spa.</label>
+                        </div><hr>
+                      </div>
+                      <div class="form-group" style="padding-right: 20px">
+                        <a href="#" id="finish" class="buttonFinish btn" style="width: 150px; float: right; margin-right: 5px">Reserve Now!</a>
+                        <a href="#step-2" id="prev2" class="buttonPrevious btn pull-right" style="width: 100px; float: left; margin-right: 5px">Previous</a>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- End of Step 3 -->
+                </div>
+                <!-- End SmartWizard Content -->
+              </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" onclick="submitReservation()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+        <br />
         </div>
       </div>
     </div>
@@ -232,7 +444,7 @@
               <tr>
                 <th class="thtd-addCart">Quantity: </th>
                 <td class="thtd-addCart">
-                  <input type="number" id="itemnum" name="txtQuantity" value=1 min=1 style="width: 100px;"> </td>
+                  <input type="number" id="itemnum" name="txtQuantity" value=1 min=1 max=5 style="width: 100px;"> </td>
               </tr>
             </table>
           </center>
@@ -331,6 +543,9 @@
   <script type="text/javascript" src="assets/js/navbar-scroll.js"></script>
   <script type="text/javascript" src="assets/js/ejs_production.js"></script>
   <script type="text/javascript" src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="assets/js/combodate.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.timepicker.min.js"></script>
 </body>
 
 </html>
