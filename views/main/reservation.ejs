@@ -216,9 +216,9 @@
                     <form class="form-horizontal form-label-left">
                       <div class="form-group">
                         <div>
-                          <input type="radio" id="servtype1" name="selector" onclick="servCheck()">
+                          <input type="radio" id="servtype1" name="selector">
                           <label class="radlab" for="servtype1">Home Service</label>
-                          <input type="radio" id="servtype2" name="selector" onclick="servCheck()">
+                          <input type="radio" id="servtype2" name="selector">
                           <label class="radlab" for="servtype2">Regular Service</label>
                         </div>
                       </div>
@@ -283,7 +283,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment <span class="required">*</span>
                         </label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="02-04-2018" class="form-control" required>
+                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="04-04-2018" class="form-control" required>
                             <script>
                             $(function(){
                                 $('#date').combodate();    
@@ -343,41 +343,45 @@
                         <div style="padding-left: 20px">
                             <p style="text-align: left; text-transform: uppercase;"> Service(s) to Reserve:</p>
                              <table width="100%">
-                              <tr>
-                                <th class="th-modal" width="20%"> Quantity </th>
-                                <th class="th-modal" width="40%"> Service </th>
-                                <th class="th-modal" width="20%"> Amount </th>
-                                <th class="th-modal" width="30%"> Total Amount </th>
-                              </tr>
-                              <tr>
-                                <td class="td-quantity"> 2 </td>
-                                <td> MS-Swedish Massage </td>
-                                <td> 399.00 </td>
-                                <td> 798.00 </td>
-                              </tr>
-                              <tr>
-                                <td> 1 </td>
-                                <td> BS-Anti Aging Body Scrub </td>
-                                <td> 900.00 </td>
-                                <td> 900.00 </td>
-                              </tr>
-                              <tr>
-                                <td> 2 </td>
-                                <td> OS-Ear Candling </td>
-                                <td> 200.00 </td>
-                                <td> 400.00 </td>
-                              </tr>
+                                <thead>
+                                  <tr>
+                                    <th class="th-modal" width="20%"> Quantity </th>
+                                    <th class="th-modal" width="40%"> Service </th>
+                                    <th class="th-modal" width="20%"> Amount </th>
+                                    <th class="th-modal" width="30%"> Total Amount </th>
+                                  </tr>
+                                </thead>
+                                <tbody class="orderContainer">
+                                  <tr>
+                                    <td class="td-quantity"> 2 </td>
+                                    <td> MS-Swedish Massage </td>
+                                    <td> 399.00 </td>
+                                    <td> 798.00 </td>
+                                  </tr>
+                                  <tr>
+                                    <td> 1 </td>
+                                    <td> BS-Anti Aging Body Scrub </td>
+                                    <td> 900.00 </td>
+                                    <td> 900.00 </td>
+                                  </tr>
+                                  <tr>
+                                    <td> 2 </td>
+                                    <td> OS-Ear Candling </td>
+                                    <td> 200.00 </td>
+                                    <td> 400.00 </td>
+                                  </tr>
+                              </tbody>
                             </table>
                             <hr>
                             <p style="text-align: right; font-size: 17px;">
                               <strong>Total:</strong>
-                              <span style="font-size: 15px; margin-right: 10px;" class="badge">Php 2,098.00</span>
+                              <span style="font-size: 15px; margin-right: 10px;" class="badge total">Php 2,098.00</span>
                             </p>
                         </div><br>
                         <div class="row">
                           <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 30px">
                             <p style="text-align: left; text-transform: uppercase;">Date and Time of Treatment: </p>
-                            <p id="datetimeReserve" class="custAddress">Tuesday, April 3, 2018  1:00 PM</p>
+                            <p id="datetimeReserve" class="custAddress">Tuesday, April 4, 2018  1:00 PM</p>
                           </div>
                           <div class="col-md-2 col-lg-2 col-xs-12">
                             <span class="fa fa-exclamation-circle" style="color: black"></span>
@@ -542,6 +546,7 @@
   <script type="text/javascript" src="assets/js/scroll.js"></script>
   <script type="text/javascript" src="assets/js/navbar-scroll.js"></script>
   <script type="text/javascript" src="assets/js/ejs_production.js"></script>
+  <script type="text/javascript" src="assets/vendor/DateJS/build/date.js"></script>
   <script type="text/javascript" src="assets/js/main.js"></script>
   <script type="text/javascript" src="assets/js/sweetalert.min.js"></script>
   <script type="text/javascript" src="assets/js/combodate.js"></script>

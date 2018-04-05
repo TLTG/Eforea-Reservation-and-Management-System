@@ -1,28 +1,41 @@
-var db = require('../model/service');
-    //reservation = require('./reserveContent');
+var db = require('../model/transaction');
+var scheduler = require('./scheduler');
 
 module.exports = function (req, res, next) {
-    //var currUser = reservation.getUserBySID(req.sessionid);
     var userData = JSON.parse(req.body.data);
     var action = req.body.action;
 
     if (action === 'reserve') {
-        //console.log('reserving');
         var name = userData.name;
         var num = userData.number;
         var loc = userData.address;
         var serv = JSON.stringify(userData.cart);
         var resv = userData.data;
 
-        db.insertReservation([name, num, loc, serv, resv], function (err, result) {
-            if (err) {
-                var _err = new Error("Sql Error: " + err );
-                //console.error(err);
-                next(_err);
+        scheduler.checkSched(resv, function(err, data){
+            var out = {
+                status: 0,
+                details: ""
             }
-            else {
-                //console.log("Success " + result);
-                next();
+            if(err) return next(err);
+            if(data.available == false){
+                out.status = 2;
+                out.details = data;
+                res.send(out);
+            }else{
+                db.insertReservation([name, num, loc, serv, resv], function (_err, result) {
+                    if (_err) {
+                        out.details = _err;
+                        res.send(out);                
+                        next(new Error("Sql Error: " + _err ));
+                    }
+                    else {
+                        out.status = 1;
+                        out.details = "Reserve On: " + resv + ". See you!";
+                        res.send(out);
+                        next();
+                    }
+                });
             }
         });
     }
