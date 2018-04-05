@@ -6,7 +6,8 @@
 
 body
 {
-  font-family: Quicksand;
+	background-color: white;
+  	font-family: Quicksand;
 }
 
 .x_title h2,table.tile_info td p
@@ -244,7 +245,8 @@ body
 }
 
 .nav-sm .container.body .right_col, .nav-sm .container.body .right_col2, .nav-sm .container.body .right_col3, 
-	.nav-sm .container.body .right_col4, .nav-sm .container.body .right_col5
+	.nav-sm .container.body .right_col4, .nav-sm .container.body .right_col5, .nav-sm .container.body .right_col6, 
+	.nav-sm .container.body .right_col7, .nav-sm .container.body .right_col8
 {
 	padding:10px 20px; 
 	margin-left:70px; 
@@ -492,14 +494,16 @@ body
 }
 
 body .container.body .right_col, .container.body .right_col2, .container.body .right_col3,
-	.container.body .right_col4,.container.body .right_col5  
+	.container.body .right_col4,.container.body .right_col5, .container.body .right_col6, 
+	.container.body .right_col7, .container.body .right_col8
 {
-	background:#F7F7F7;
-
+	/*background:#F7F7F7;*/
+	background-color: white;
 }
 
 .nav-md .container.body .right_col, .container.body .right_col2, .container.body .right_col3, 
-	.container.body .right_col4, .container.body .right_col5
+	.container.body .right_col4, .container.body .right_col5, .container.body .right_col6, 
+	.container.body .right_col7, .container.body .right_col8
 {
 	padding:10px 20px 0; 
 	margin-left:230px
@@ -518,15 +522,17 @@ body .container.body .right_col, .container.body .right_col2, .container.body .r
 @media (max-width:991px)
 {
 	.nav-md .container.body .right_col, .nav-md .container.body .right_col2, .nav-md .container.body .right_col3,
-		.nav-md .container.body .right_col4, .nav-md .container.body .right_col5,
+		.nav-md .container.body .right_col4, .nav-md .container.body .right_col5, .nav-md .container.body .right_col6,
+		.nav-md .container.body .right_col7, .nav-md .container.body .right_col8
 			.nav-md .container.body .top_nav
 	{width:100%; margin:0}
 	.nav-md .container.body .col-md-3.left_col
 	{display:none}
 	.nav-md .container.body .right_col, .nav-md .container.body .right_col2, .nav-md .container.body .right_col3,
-		.nav-md .container.body .right_col4, .nav-md .container.body .right_col5
+		.nav-md .container.body .right_col4, .nav-md .container.body .right_col5,.nav-md .container.body .right_col6, 
+		.nav-md .container.body .right_col7,.nav-md .container.body .right_col8
 	{width:100%; padding-right:0}
-	.right_col, .right_col2, .right_col3, .right_col4, .right_col5
+	.right_col, .right_col2, .right_col3, .right_col4, .right_col5, .right_col6, .right_col7, .right_col8
 	{padding:10px!important}
 }
 
@@ -3261,7 +3267,7 @@ div.note
 p.servName
 {
 	text-transform: uppercase;
-	font-size: 20px;
+	font-size: 25px;
 }
 
 p.servCode
@@ -3294,4 +3300,163 @@ p.servDesc
 .listserv
 {
 	font-weight: lighter;
+}
+
+.modaltitle
+{
+	background-color: #011727;
+	color: white;
+	width: 85%;
+	float: left;
+}
+
+.h3modaltitle
+{
+	text-align: left;
+	padding-left: 20px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.buttonNext{background:#034777; color: white}
+.buttonNext:hover{border-color: #0E1C33; background:#fff; color: black; font-weight: bold; text-transform: uppercase;}
+.buttonNext:focus{background:#034777; color: white}
+.buttonPrevious{background:#B43650; color: white}
+.buttonPrevious:hover{border-color: #682634; background:#fff; color: black; font-weight: bold; text-transform: uppercase;}
+.buttonPrevious:focus{background:#B43650; color: white}
+.buttonFinish{background:#18A15F; color: white}
+.buttonFinish:hover{border-color: #2B3210; background:#fff; color: black; font-weight: bold; text-transform: uppercase;}
+.buttonFinish:focus{background:#18A15F; color: white}
+
+.modques
+{
+	text-align: center;
+	font-size: 15px;
+	color: black;
+}
+
+.transdiv1H, .transdiv2H
+{
+	padding-bottom: 50px;
+	max-height: 350px;
+	overflow: auto;
+}
+
+.tableregserv
+{
+	/*background-color: lightblue;*/
+	font-size: 14px;
+	text-align: center;
+}
+.tablehomeserv
+{
+	text-align: center;
+	max-height: 300px;
+}
+
+.th-modal
+{
+	text-align: center;
+	font-size: 16px;
+	height: 50px;
+	text-transform: uppercase;
+}
+
+.right_col6
+{
+	height: 1500px;
+}
+
+.radio-label
+{
+	padding-left: 0px;
+}
+
+.inputtxt
+{
+	font-size: 13px;
+	color: black;
+}
+
+.search2
+{
+	font-size: 13px;
+	width: 300px;
+}
+
+.bill
+{
+	float: left;
+	padding-left: 20px;
+}
+
+#custnameDS
+{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.theName
+{
+	text-transform: uppercase;
+	font-size: 25px;
+}
+
+p.theSex
+{
+	line-height: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+p.theAdd
+{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+p.theCont
+{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+p.theTrans
+{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#theSex, #theAdd, #theCont, #theTrans
+{
+	text-transform: uppercase;
+}
+
+.sched-details
+{
+	overflow-y: auto;
+	height: 465px;
+	max-height: 465px;
+	padding: 10px;
+}
+
+.sched-details-none
+{
+	overflow-y: auto;
+	height: 465px;
+	max-height: 465px;
+	padding: 10px;
+}
+
+.schedinfo
+{
+	line-height: 3px;
+	font-size: 15px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.custaddressSched
+{
+	line-height: 10px;
 }

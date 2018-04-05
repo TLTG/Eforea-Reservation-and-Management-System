@@ -26,6 +26,7 @@ $(document).ready(function () {
             document.getElementById("servicediv").innerHTML = "Home Service";
             $("#divaddress").show();
             $("#divcontnum").show();
+
         }
         else if (document.getElementById("servtype2").checked == true) {
             $("#step-1").hide();
@@ -42,10 +43,23 @@ $(document).ready(function () {
 
     $("#next2").click(function () {
         var salut = null;
+        var orderList = "";
+        var total = 0;
         var fn = document.getElementById("first-name").value;
         var ln = document.getElementById("last-name").value;
         var add = document.getElementById("address").value;
         var cont = document.getElementById("contnum").value;
+        var revDate = $('#date').val().split('-');
+        revDate.push($('#time').val());
+        var revDate = Date.parse(revDate[1] + "/" + revDate[0] + "/" + revDate[2] + " " + revDate[3]);
+
+        userData.name = fn + " " + ln;
+        userData.number = cont;
+        userData.address = add;
+        userData.data = revDate.toString('yyyy/MM/dd HH:mm:ss');
+        userData.cart = order;
+
+        console.log(userData.data);
 
         if (document.getElementById("gender1").checked == true) {
             salut = "Mr. ";
@@ -54,12 +68,24 @@ $(document).ready(function () {
             salut = "Ms/Mrs. ";
         }
 
+        order.forEach(element=>{
+            var temp = "<tr>";
+            temp += "<td class='td_quantity'>" + element.quant + "</td>";
+            temp += "<td>" + element.name + "</td>";
+            temp += "<td> " + element.price + ".00</td>";
+            var totVal = element.price * element.quant;            
+            temp += "<td> " + totVal + ".00</td>";
+            temp += "</tr>";
+            total += totVal;
+            orderList += temp;
+        });
+
         if (document.getElementById("servtype1").checked == true) {
             if (fn == "" || fn.length == 0 || fn == null
                 || ln == "" || ln.length == 0 || ln == null
                 || add == "" || add.length == 0 || add == null
                 || cont == "" || cont.length == 0 || cont == null) {
-                alert('Please fill in all fields.');
+                alert('Please fill out all fields.');
             }
             else {
                 document.getElementById("custName").innerHTML = salut + " " + fn + " " + ln;
@@ -72,25 +98,28 @@ $(document).ready(function () {
         else {
             if (fn == "" || fn.length == 0 || fn == null
                 || ln == "" || ln.length == 0 || ln == null) {
-                alert('Please fill in all fields.');
+                alert('Please fill out all fields.');
             }
             else {
-                document.getElementById("custName").innerHTML = fn + " " + ln;
+                document.getElementById("custName").innerHTML = salut + " " + fn + " " + ln;                
                 document.getElementById("custAddress").innerHTML = add;
                 $("#step-1").hide();
                 $("#step-2").hide();
                 $("#step-3").show();
             }
         }
+        $('.orderContainer').html(orderList);
+        $('.total').html("Php " + total +".00");
+        $('#datetimeReserve').html(revDate.toString('dddd, MMMM d, yyyy h:mm tt'));
     });
 
     $("#finish").click(function () {
         if (document.getElementById("agree").checked == true) {
-            alert('OKI. RESERVED KA NA KUNWARI. MODAL LANGS. WALA PA FUNCTION.')
-
+            //alert('OKI. RESERVED KA NA KUNWARI. MODAL LANGS. WALA PA FUNCTION.');
+            submitReservation();
         }
         else {
-            alert('BEH AGREE KA MUNA. MAY CHECKBOX DYAN. WAG NAGMAMADALI.')
+            alert('Please tick the checkbox first, indicating that you have read and understood the agreement.')
         }
     });
 
@@ -198,7 +227,7 @@ var userData = {
     name: '',
     number: '',
     address: '',
-    data: '',
+    data: '',//Reservation Date. Wag baguhin kasi maapektuhan yung server.
     cart: []
 };
 
@@ -362,15 +391,16 @@ function validateInfo() {
     $('.modal-backdrop').remove();
     $('#doneOrderModal').modal('toggle');
 }
-//This submits the reservation(var order[]) to the server for processing.
+//This submits the reservation(var order[]) to the server for processing. if kaya sana ilagay sa modal yung alerts para convenient.
 function submitReservation() {
-    $.post('/reserve', { action: 'reserve', data: JSON.stringify(userData) }, function (returndata) {
-        if (returndata) {
-            alert('Successfully Reserve!');
+    $.post('/reserve', { action: 'reserve', data: JSON.stringify(userData) }, function (response) {
+        if (response.status == 1) {
+            alert('Successfully Reserved! ' + response.details);
             window.location = "/";
-        } else {
+        } else if(response.status == 2){
+            alert('Reservation Conflict! ' + response.details);            
+        }else{
             alert("Can't process you request. Try again later.");
-            window.location = "/reserve";
         }
     });
 }

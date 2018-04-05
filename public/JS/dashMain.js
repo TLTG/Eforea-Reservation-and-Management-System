@@ -1,9 +1,24 @@
 $(document).ready(function () {
 
+	$(".right_col2").hide();
+	$(".right_col3").hide();
+	$(".right_col4").hide();
+	$(".right_col5").hide();
+	$(".right_col6").hide();
+	$(".right_col7").hide();
+	$(".right_col8").hide();
+	$(".right_col").show();
+	
 	var x = (screen.height) - 50;
 	$(".servcolumn").height(x);
 	$(".serv-right-div").height(x);
 	$(".serv-left-div").height(x);
+
+	$('#date').combodate();   
+	$('#time').combodate({
+		firstItem: 'none', //show 'hour' and 'minute' string at first item of dropdown
+		minuteStep: 5
+	});  
 
 	$('.clickable-row tr').click(function (elem) {
 		var activetd = document.getElementById("activetd").html();
@@ -18,8 +33,9 @@ $(document).ready(function () {
 	// .right_col3 schedule
 	// .right_col4 reservations
 	// .right_col5 therapists
-	// .right_col6 packaged services
-	// .right_col7 deleted services
+	// .right_col6 todays transaction
+	// .right_col7 past transaction
+	// .right_col8 deleted services
 
 	$("#home").click(function () {
 		reset();
@@ -27,6 +43,9 @@ $(document).ready(function () {
 		$(".right_col3").hide();
 		$(".right_col4").hide();
 		$(".right_col5").hide();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col8").hide();
 		$(".right_col").show();
 	}); 
 	$("#services1").click(function () {
@@ -35,16 +54,46 @@ $(document).ready(function () {
 		$(".right_col3").hide();
 		$(".right_col4").hide();
 		$(".right_col5").hide();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col8").hide();
 		$(".right_col2").show();
 	});
 
 	$("#services2").click(function () {
 		reset();
 		$(".right_col").hide();
+		$(".right_col2").hide();
 		$(".right_col3").hide();
 		$(".right_col4").hide();
 		$(".right_col5").hide();
-		$(".right_col2").show();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col8").show();
+	});
+
+	$("#trans1").click(function () {
+		reset();
+		$(".right_col").hide();
+		$(".right_col2").hide();
+		$(".right_col3").hide();
+		$(".right_col4").hide();
+		$(".right_col5").hide();
+		$(".right_col7").hide();
+		$(".right_col8").hide();
+		$(".right_col6").show();
+	});
+
+	$("#trans2").click(function () {
+		reset();
+		$(".right_col").hide();
+		$(".right_col2").hide();
+		$(".right_col3").hide();
+		$(".right_col4").hide();
+		$(".right_col5").hide();
+		$(".right_col6").hide();
+		$(".right_col8").hide();
+		$(".right_col7").show();
 	});
 
 	$("#schedule").click(function () {
@@ -53,6 +102,9 @@ $(document).ready(function () {
 		$(".right_col2").hide();
 		$(".right_col4").hide();
 		$(".right_col5").hide();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col8").hide();
 		$(".right_col3").show();
 	});
 
@@ -61,6 +113,9 @@ $(document).ready(function () {
 		$(".right_col2").hide();
 		$(".right_col3").hide();
 		$(".right_col5").hide();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col8").hide();
 		$(".right_col4").show();
 	});
 	$("#therapists").click(function () {
@@ -69,8 +124,13 @@ $(document).ready(function () {
 		$(".right_col2").hide();
 		$(".right_col3").hide();
 		$(".right_col4").hide();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col8").hide();
 		$(".right_col5").show();
+		operation.getStaffData();
 	});
+
 	$(".msg").click(function () {
 		$(".temp-msg").hide();
 		$(".inbox-body").show();
