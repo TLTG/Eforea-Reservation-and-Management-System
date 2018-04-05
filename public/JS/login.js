@@ -28,7 +28,10 @@ $('#credential').submit(function(e){
 		if(data[0] == 2){
 			location.reload();
 		}else if(data[0] == 0){
-			alert(data[1]);
+			//alert(data[1]);
+			swal("Oops!", "Invalid username or password.", "error");
+			document.getElementById('username').value = "";
+			document.getElementById('password').value = "";
 		}
 	});
 });
