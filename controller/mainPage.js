@@ -23,8 +23,8 @@ router.get('/reserve', function(req, res){
 });
 router.get('/reserve/data', reserveGET.reserveContent);
 
-router.post('/reserve', reservePOST, function(req, res){
-    res.send(true);
-});
+router.post('/reserve', reservePOST);
+
+router.get('/reserve/list', reserveGET.getReservations);
 
 module.exports = router;

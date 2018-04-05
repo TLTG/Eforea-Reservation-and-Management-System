@@ -1,4 +1,5 @@
-var db = require('../model/service');
+var db = require('../model/service'),
+    trans = require('../model/transaction');
 
 var guessUser = [];
 var request;
@@ -41,8 +42,7 @@ function func1() {
         db.getCategory(function (err, result) {
             if (err) reject(err);
             else {
-                var cat = result;
-                cat.forEach(element => {
+                result.forEach(element => {
                     categories.push({ 
                         id: element.id, 
                         name: element.name, 
@@ -108,4 +108,15 @@ exports.reserveContent = function (req, res, next) {
         .then(function (data) {
             res.send(data);
         }, onErr);
+}
+
+exports.getReservations = function(req, res, next){
+    trans.getReservation(null, function(err, results){
+        if(err){
+            next(new Error(err));
+            res.send({error: 1});
+        }else{
+            res.send({error: 0, data: results});            
+        }
+    });
 }
