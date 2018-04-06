@@ -16,7 +16,7 @@ exports.recordSession = function(req, res, next){
         }else{
             db.addTransaction([customerID, clients[id].data.sID, clients[id].data.tID, req.body.total, 0], function(err, status){
                 if(err){
-                    next(new Error(err));
+                    //next(new Error(err));
                     return res.send({error: 1});
                 }else{
                     clients.splice(id, 1);
