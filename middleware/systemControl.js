@@ -10,7 +10,8 @@ exports.readPrompt = function (){
             //Other process to execute before shutting down.
             process.exit(0);
         }else if(cmd.trim() === 'clients'){
-            console.log(transac.getClient());
+            //console.log(transac.getClient());
+            console.log(Date.today().toString('yyyy-MM-dd'));
         }
     });
 }

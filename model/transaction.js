@@ -58,3 +58,11 @@ exports.removeSched = function(data, done){
         done(null, true);
     });
 }
+
+exports.dashBoardDetail = function(){
+    var sql1 = "SELECT COUNT(*) as 'transactions' FROM transaction date LIKE('%"+ Date.today().toString('yyyy-MM-dd') +"%')";
+    var sql2 = "SELECT COUNT(*) as 'reservations' FROM web_reservation";
+    var sql3 = "SELECT SUM(total_amount) as 'today_sale' FROM transaction WHERE date LIKE('%"+ Date.today().toString('yyyy-MM-dd') +"%')";
+    var sql2 = "SELECT SUM(total_amount) as 'week_sale' FROM transaction WHERE date BETWEEN '"+ Date.parse('last monday').toString('yyyy-MM-dd 00:00:00') +"' AND '"+ Date.today().toString('yyyy-MM-dd 23:59:59') +"'";  
+    
+}
