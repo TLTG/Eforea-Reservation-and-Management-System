@@ -99,7 +99,7 @@
                   </a>
                 </li>
                 <li>
-                  <a id="therapists">
+                  <a class="therapists">
                     <i class="fa fa-user-md"></i> Therapists </a>
                 </li>
                 <!-- <li>
@@ -202,6 +202,11 @@
               </center>
               <hr>
               <div class="pull-right">
+                <div class="input-group">
+                  <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdate()"
+                    style="width: 150px; margin-right: 5px">
+                    <span class="fa fa-refresh"></span>&nbsp;Refresh</button>
+                </div>
                 <div class="input-group">
                   <button class="btn btn1" id="btnNewSession" type="button" data-toggle="modal" data-target="#newSessionModal" onclick="resetsession()"
                     style="width: 150px; margin-right: 5px">
@@ -583,24 +588,24 @@
                   </center>
                   <hr>
                   <p>Customer Name:</p>
-                  <input type="text" id="custnameSched" required="required" disabled class="form-control col-md-7 col-xs-12">
+                  <input type="text" id="custnameSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserName">
                   <p>Gender:</p>
                   <select class="form-control" id="custgenderSched" style="font-size: 13px">
                     <option>Male</option>
                     <option>Female</option>
                   </select>
                   <p>Address:</p>
-                  <input type="text" id="custaddressSched" required="required" disabled class="form-control col-md-7 col-xs-12">
+                  <input type="text" id="custaddressSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserAdd">
                   <p>Contact Number:</p>
-                  <input type="text" id="custcontnumSched" required="required" disabled class="form-control col-md-7 col-xs-12">
+                  <input type="text" id="custcontnumSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserCont">
                   <hr>
                   <p>Reserved Services:</p>
-                  <textarea id="custservSched" class="form-control" disabled required="required" name="message" data-parsley-trigger="keyup"
+                  <textarea id="custservSched" class="form-control reserServ" disabled required="required" name="message" data-parsley-trigger="keyup"
                     data-parsley-minlength="20" data-parsley-maxlength="200" rows=5></textarea>
                   <p>Total Amount:</p>
-                  <input type="number" id="custtotamtSched" required="required" disabled class="form-control col-md-7 col-xs-12">
+                  <input type="number" id="custtotamtSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserTot">
                   <p>Therapist:</p>
-                  <select class="form-control categList" id="custtherapSched" style="font-size: 13px">
+                  <select class="form-control therapist" id="custtherapSched" style="font-size: 13px">
                     <option>Dobby</option>
                     <option>Umbridge</option>
                   </select>
@@ -1446,7 +1451,7 @@
                         <input type="number" id="contnum" name="contnum" required class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
-                    <div class="form-group" id="datediv">
+                    <!-- <div class="form-group" id="datediv">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment
                         <span class="required">*</span>
                       </label>
@@ -1462,9 +1467,9 @@
                       <div class="col-md-8 col-sm-8 col-xs-12">
                         <input type="text" id="time" data-format="h:mm a" data-template="h : mm a" name="time" value="12:00 PM" class="form-control"
                           required="required">
-                        <!-- <p style="float: right;">PM</p> -->
+                        <!-- <p style="float: right;">PM</p>
                       </div>
-                    </div>
+                    </div> -->
                     <br>
                     <center>
                       <h4>Service and Session Details</h4>
@@ -1487,7 +1492,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <textarea id="selectedServ" class="form-control" disabled required="required" name="message" data-parsley-trigger="keyup"
+                        <textarea id="selectedServ" class="form-control sessServ" disabled required="required" name="message" data-parsley-trigger="keyup"
                           data-parsley-minlength="20" data-parsley-maxlength="200" rows=5>Swedish Massage (&#8369; 399.00)</textarea>
                       </div>
                     </div>
@@ -1504,7 +1509,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <select class="form-control categList" id="therapist" style="font-size: 13px">
+                        <select class="form-control therapist" id="therapist" style="font-size: 13px">
                           <option value="1">Dobby</option>
                           <option value="2">Dolores Umbridge</option>
                           <option value="3">Fred Weasley</option>
@@ -1601,9 +1606,9 @@
                             <table class="table table-striped">
                               <thead>
                                 <tr>
-                                  <th>Qty</th>
+                                  <!-- <th>Qty</th> -->
                                   <th>Service</th>
-                                  <th>Subtotal</th>
+                                  <!-- <th>Subtotal</th> -->
                                   <th>Total</th>
                                 </tr>
                               </thead>
