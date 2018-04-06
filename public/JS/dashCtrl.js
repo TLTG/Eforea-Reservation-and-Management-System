@@ -122,6 +122,11 @@ $(function () {
                 var count = 0;
                 res.data.forEach(x => {
                     html += "<tr><td onclick='showStaffDetail(\"" + count + "\")'>" + x.name + "</td></tr>";
+                    sessions.forEach(y=>{
+                        if(y.data.tID == x.id){
+
+                        }
+                    });
                     thera += "<option value='" + x.id + "'>" + x.name + "</option>";
                     count++;
                     staffName['' + x.id] = x.name;
@@ -164,10 +169,6 @@ $(function () {
     });
     //Reset
     $('#btnPrim2').click(function () {
-        /* document.getElementById('servIdEdit').value = selectedService.id;
-        document.getElementById('servNameEdit').value = selectedService.name;
-        document.getElementById('servPriceEdit').value = selectedService.amount;
-        document.getElementById('servDescEdit').value = selectedService.desc; */
         editServ();
     });
     $('#btnAddSess').click(function () { //Actions when submitting new session
@@ -188,7 +189,8 @@ $(function () {
                     address: add,
                     contact: cont,
                     sID: serv,
-                    tID: $('#therapist').val()
+                    tID: $('#therapist').val(),
+                    stype: st 
                 };
                 transaction.addSession(data, function (res) {
                     if (res == 0) {
@@ -211,8 +213,23 @@ $(function () {
                 swal("Oops!", "Please fill out all required fields.", "error");
             }
             else {
-                swal("Success!", "Session has been created!", "success");
-                $('#newSessionModal').modal('hide');
+                var data = {
+                    name: custNameNS,
+                    address: add,
+                    contact: cont,
+                    sID: serv,
+                    tID: $('#therapist').val(),
+                    stype: st 
+                };
+                transaction.addSession(data, function (res) {
+                    if (res == 0) {
+                        swal("Success!", "Session has been created!", "success");
+                        $('#newSessionModal').modal('hide');
+                        sessionUpdate();
+                    } else {
+                        confirmFunction(-1);
+                    }
+                });
                 //ADD connection to db and session table here
             }
         }
@@ -245,10 +262,6 @@ $(function () {
         $(".sched-details").show();
         $(".edit-details").hide();
     });
-
-    /* $('.fc-month-button').hide();
-    $('.fc-agendaWeek-button').hide();
-    $('.fc-agendaDay-button').hide(); */
 });
 //This is called by every row in the Service List.
 function showDetail(param) {
@@ -368,6 +381,7 @@ function addCategory() { //validation if there are empty fields when clicking AD
                         confirmFunction(-1, stat);
                     } else {
                         confirmFunction(1);
+                        update();
                     }
                 } else {
                     confirmFunction(-1);
@@ -594,7 +608,14 @@ function removeTherapist() { //REMOVE CATEGORY FUNCTION (T)
     $('#confirmModal').modal('show');
     $('#btnone').off();
     $('#btnone').click(function () {
-        confirmFunction(4);
+        operation.sendStaffData(1, {id: selectedStaff.id}, function(res, detail){
+            if(res){
+                confirmFunction(4);
+                operation.getStaffData();
+            }else{
+                confirmFunction(-1);
+            }
+        });
     });
     //DB CONNECTION FOR DELETING OF SESSIONS
 }
@@ -616,6 +637,12 @@ function addTherapist() {
 
         $('#btnone').off();
         $('#btnone').click(function () {
+            var data = {
+                name: fn + " " + ln,
+                contact: cont,
+                address: add,
+                gender:  "Female",
+            }
             //ADD connection to db and therapist table here
             operation.sendStaffData(0, data, function (res, msg) {
                 if (res) {
@@ -623,6 +650,7 @@ function addTherapist() {
                         confirmFunction(-1, msg);
                     } else {
                         confirmFunction(5);
+                        operation.getStaffData();
                     }
                 }
             });
@@ -631,12 +659,12 @@ function addTherapist() {
 }
 
 function resetEditTherapist() {
-    document.getElementById('fnTherapEdit').value = "";
-    document.getElementById('lnTherapEdit').value = "";
-    document.getElementById('addressTEdit').value = "";
-    document.getElementById('contnumTEdit').value = "";
-    document.getElementById("gender1TEdit").checked = true;
-    document.getElementById("gender2TEdit").checked = false;
+    document.getElementById('fnTherapEdit').value = selectedStaff.name.split(' ')[0];
+    document.getElementById('lnTherapEdit').value = selectedStaff.name.split(' ')[1];
+    document.getElementById('addressTEdit').value = selectedStaff.address;
+    document.getElementById('contnumTEdit').value = selectedStaff.contact;
+    document.getElementById("gender1TEdit").checked = false;
+    document.getElementById("gender2TEdit").checked = true;
 }
 
 function editTherapist() {
@@ -743,6 +771,7 @@ function showStaffDetail(param) {
     $('#theAdd').html(x.address);
     $('#theCont').html(x.contact);
     $('#theTrans').html(x.count);
+    selectedStaff = x;
 }
 
 function resetsched() {
