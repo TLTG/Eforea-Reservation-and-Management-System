@@ -15,15 +15,7 @@ var transaction = {
                 sessions.push({id:res.data, data: _data});
                 cb(0);
             }else{
-                if(errorCount == 0){
-                    transaction.addSession(_data, function(res1){
-                        if(res1 == 0){
-                            cb(0);
-                        }
-                    });
-                }else{
                     cb(1);
-                }
             }
         }).fail(function(){
             cb(1);
@@ -53,8 +45,10 @@ var transaction = {
 
 function sessionUpdate(){
     transaction.loadSessions(function(){
-        var html = "";
+        var html1 = "";
+        var html2 = "";
         sessions.forEach(x=>{
+            var html = "";
             var serv = servName[x.data.sID] == undefined ? x.data.sID : servName[x.data.sID];
             html += "<tr>";
             html += "<td>"+ (parseInt(x.id) + 1) +"</td>";
@@ -63,8 +57,14 @@ function sessionUpdate(){
             html += "<td>" + serv + "</td>";
             html += "<td><button class='btn buttonFinish' id='btnDoneTrans' type='button' onclick='doneSession(\""+ x.id +"\")' title='Done' style='width: 50px;'><span class='fa fa-check'></span></button><button class='btn buttonPrevious' id='btnCancTrans' type='button' onclick='cancelSession(\""+ x.id +"\")' title='Cancel/Remove' style'width: 50px;'><span class='fa fa-times'></span></button></td>";
             html += "</tr>";
+            if(x.data.stype == 1){
+                html1 += html;
+            }else{
+                html2 += html;
+            }
         });
-        $('.sessionList').html(html);
+        $('.sessionList').html(html1);
+        $('#homeSession').html(html2);
         $('#sessionNumber').html(sessions.length);
     });
 }
@@ -83,7 +83,13 @@ function doneFreakingSession(){
             confirmFunction(7);
             sessionUpdate();
         }else{
-            confirmFunction(-1);
+            if(errorCount == 0){
+                doneFreakingSession();
+                errorCount++;
+            }else{
+                confirmFunction(-1);
+                errorCount = 0;
+            }
         }
     });
 }

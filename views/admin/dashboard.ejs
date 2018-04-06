@@ -99,7 +99,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="therapists">
+                  <a id="therapists">
                     <i class="fa fa-user-md"></i> Therapists </a>
                 </li>
                 <!-- <li>
@@ -284,43 +284,47 @@
                 <h3>Home Service</h3>
                 <center>
                   <table width="100%" class="table-hover table-striped tablehomeserv">
-                    <tr>
-                      <th class="th-modal" width="3%"> # </th>
-                      <th class="th-modal" width="20%"> Client Name </th>
-                      <th class="th-modal" width="20%"> Therapist </th>
-                      <th class="th-modal" width="30%"> Service(s) </th>
-                      <th class="th-modal" width="15%"> Action </th>
-                    </tr>
-                    <tr>
-                      <td class="td-quantity"> 1 </td>
-                      <td> Graciella C. Tatel </td>
-                      <td> Harry Potter </td>
-                      <td> Swedish Massage </td>
-                      <td>
-                        <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                          style="width: 50px;">
-                          <span class="fa fa-check"></span>
-                        </button>
-                        <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
-                          <span class="fa fa-times"></span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="td-quantity"> 1 </td>
-                      <td> Graciella C. Tatel </td>
-                      <td> Harry Potter </td>
-                      <td> Swedish Massage </td>
-                      <td>
-                        <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                          style="width: 50px;">
-                          <span class="fa fa-check"></span>
-                        </button>
-                        <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
-                          <span class="fa fa-times"></span>
-                        </button>
-                      </td>
-                    </tr>
+                    <thead>
+                      <tr>
+                        <th class="th-modal" width="3%"> # </th>
+                        <th class="th-modal" width="20%"> Client Name </th>
+                        <th class="th-modal" width="20%"> Therapist </th>
+                        <th class="th-modal" width="30%"> Service(s) </th>
+                        <th class="th-modal" width="15%"> Action </th>
+                      </tr>
+                    </thead>
+                    <tbody id="homeSession">
+                      <tr>
+                        <td class="td-quantity"> 1 </td>
+                        <td> Graciella C. Tatel </td>
+                        <td> Harry Potter </td>
+                        <td> Swedish Massage </td>
+                        <td>
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
+                            style="width: 50px;">
+                            <span class="fa fa-check"></span>
+                          </button>
+                          <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
+                            <span class="fa fa-times"></span>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-quantity"> 1 </td>
+                        <td> Graciella C. Tatel </td>
+                        <td> Harry Potter </td>
+                        <td> Swedish Massage </td>
+                        <td>
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
+                            style="width: 50px;">
+                            <span class="fa fa-check"></span>
+                          </button>
+                          <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
+                            <span class="fa fa-times"></span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </center>
               </div>
