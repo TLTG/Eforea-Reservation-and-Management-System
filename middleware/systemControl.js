@@ -1,3 +1,5 @@
+var transac = require('../middleware/transactionCtrl');
+
 exports.readPrompt = function (){
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
@@ -7,6 +9,8 @@ exports.readPrompt = function (){
             console.log('[SERVER] shutting down server...');
             //Other process to execute before shutting down.
             process.exit(0);
+        }else if(cmd.trim() === 'clients'){
+            console.log(transac.getClient());
         }
     });
 }

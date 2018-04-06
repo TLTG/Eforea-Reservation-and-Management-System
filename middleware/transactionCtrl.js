@@ -53,3 +53,7 @@ exports.removeSched = function(req, res, next){
         res.send({error: 0});
     });
 }
+
+exports.getClient = function(){
+    return JSON.stringify(clients);
+}
