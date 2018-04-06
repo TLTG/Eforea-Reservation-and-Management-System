@@ -34,7 +34,7 @@ $(document).ready(function () {
             $("#step-2").show();
             document.getElementById("servicediv").innerHTML = "Regular Service";
             $("#divaddress").hide();
-            $("#divcontnum").hide();
+            //$("#divcontnum").hide();
         }
         else {
             alert('Please select a type of service reservation.')
@@ -59,7 +59,7 @@ $(document).ready(function () {
         userData.data = revDate.toString('yyyy/MM/dd HH:mm:ss');
         userData.cart = order;
 
-        console.log(userData.data);
+        console.log(userData);
 
         if (document.getElementById("gender1").checked == true) {
             salut = "Mr. ";

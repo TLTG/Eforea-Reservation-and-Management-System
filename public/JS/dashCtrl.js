@@ -127,7 +127,7 @@ $(function () {
                     staffName['' + x.id] = x.name;
                 });
                 $('#tList').html(html);
-                $('#therapist').html(thera);
+                $('.therapist').html(thera);
                 showStaffDetail(0);
             }
         });
@@ -175,7 +175,7 @@ $(function () {
         var custNameNS = document.getElementById("custNameNS").value;
         var add = document.getElementById("address").value;
         var cont = document.getElementById("contnum").value;
-        var serv = document.getElementById("serviceSS").value;
+        var serv = $('.sessServ').val();
         var amt = document.getElementById("totAmtNs").value;
 
         if (document.getElementById("servtypelist").value == "1") {
@@ -467,16 +467,14 @@ function doneSession(x) { //REMOVE CATEGORY FUNCTION (T)
     $('#btnone').off();
     $('#btnone').click(function () {
         $('#doneSessionModal').modal('show');
-        var html = "<tr><td>1</td><td>" + servName[sessions[x].data.sID] + "</td><td>" + servPrice[sessions[x].data.sID] + "</td><td>" + servPrice[sessions[x].data.sID] + "</td></tr>";
-        $('#servicesTable').html(html);
         $('#invtoName').html(sessions[x].data.name);
         $('#invtoAddress').html(sessions[x].data.address);
         $('#invtoContnum').html(sessions[x].data.contact);
-        $('.fnlPrice').html(servPrice[sessions[x].data.sID]);
         $('#invoiceNum').html(Math.floor(Math.random() * 1000000));
         $('#invPaymentDue').html(Date.parse('tomorrow').toString('MM/dd/yyyy'));
         selectedService = x;
-        selectedStaff = servPrice[sessions[x].data.sID];
+        $('#servicesTable').html('');
+        getSessionDetail(sessions[x]);
     });
 }
 
@@ -559,8 +557,8 @@ function resetsession() { //resets fields when NEW SESSION is clicked
     document.getElementById("gender2").checked = false;
     document.getElementById("address").value = "";
     document.getElementById("contnum").value = "";
-    document.getElementById("datediv").value = "02-04-2018";
-    document.getElementById("timediv").value = "12:00";
+    //document.getElementById("datediv").value = "02-04-2018";
+    //document.getElementById("timediv").value = "12:00";
     document.getElementById("selectedServ").value = "";
     document.getElementById("totAmtNs").value = "";
 }
@@ -788,18 +786,37 @@ function confirmReserv2() {
 
         $('#btnone').off();
         $('#btnone').click(function () {
-            var count=0;
-            reserEvent.forEach(x=>{
-            if(x._id == selectedService){
-                reserEvent.splice(count, 1);
-                $.post('admin/delSched', x._id, function(res){
-                if(res.error == 0){
-                    confirmFunction(10);
+            var count = 0;
+            reserEvent.forEach(x => {
+                if (x._id == selectedService) {
+                    var data = {
+                        name: $('.reserName').val(),
+                        address: $('.reserAdd').val(),
+                        contact: $('.reserCont').val(),
+                        sID: $('.reserServ').val(),
+                        tID: $('#custtherapSched').val(),
+                        amount: $('.reserTot').val()
+                    };
+                    transaction.addSession(data, function (res) {
+                        if (res == 0) {
+                            reserEvent.splice(count, 1);
+                            $.post('admin/delSched', { id: x._id }, function (res) {
+                                if (res.error == 0) {
+                                    confirmFunction(10);
+                                    loadReservation();
+                                } else {
+                                    confirmFunction(-1);
+                                }
+                            }).fail(function () {
+                                confirmFunction(-1);
+                            });
+                        } else {
+                            confirmFunction(-1);
+                        }
+                    });
                 }
+                count++;
             });
-        }
-        count++;
-    });
         });
     }
 }
@@ -810,7 +827,16 @@ function cancReserve() {
 
     $('#btnone').off();
     $('#btnone').click(function () {
-        confirmFunction(11);
+        $.post('admin/delSched', { id: selectedService }, function (res) {
+            if (res.error == 0) {
+                confirmFunction(11);
+                loadReservation();
+            } else {
+                confirmFunction(-1);
+            }
+        }).fail(function () {
+            confirmFunction(-1);
+        });
     });
     //DB CONNECTION FOR DELETING OF THERAPIST
 }
@@ -852,37 +878,57 @@ function cancReserve2() {
     document.getElementById("custgenderSched").disabled = true;
 }
 
-function loadReservation(){
-    var loadData = function(){
+function loadReservation() {
+    var loadData = function () {
         var events = [];
-        reserList.forEach(x=>{
+        reserList.forEach(x => {
             var date = x.reservationDate.split(' ')[0];
-            var event = {
-                title: x.name,
-                start: new Date(date),
-                end: new Date(date),
-                address: x.address,
-                contnum: x.contact,
-                _id: x.id
-            }
-            events.push(event);
+            var services = JSON.parse(x.service);
+            wrappedItem(JSON.parse(x.service), function (total, names) {
+                var event = {
+                    title: x.name,
+                    start: new Date(date),
+                    end: new Date(date),
+                    address: x.address,
+                    contnum: x.contact,
+                    amount: total,
+                    services: names,
+                    _id: x.id
+                }
+                events.push(event);
+                reserEvent = events;
+                init_calendar();
+                $("#calendar").fullCalendar('removeEvents');
+                $("#calendar").fullCalendar('addEventSource', reserEvent);
+            });
         });
-        reserEvent = events;
-        init_calendar();
-        $("#calendar").fullCalendar('removeEvents');        
-        $("#calendar").fullCalendar('addEventSource', reserEvent);        
     }
-    $.get('/reserve/list', function(res){
-        if(res.error == 0){
+    $.get('/reserve/list', function (res) {
+        if (res.error == 0) {
             reserList = res.data;
             loadData();
-        }   
+        }
     });
 }
 
-function removeSched(x){
-    reserEvent.forEach(a=>{
+function removeSched(x) {
+    reserEvent.forEach(a => {
         reserEvent.splice(x, 1);
         loadReservation();
+    });
+}
+
+function wrappedItem(arr, cb) {
+    var total = 0;
+    var names = "";
+    var out = function () {
+        cb(total, names);
+    }
+    var count = arr.length;
+    arr.forEach(x => {
+        total += parseInt(x.price);
+        names += x.name + ",";
+        count--;
+        if (count == 0) out();
     });
 }
