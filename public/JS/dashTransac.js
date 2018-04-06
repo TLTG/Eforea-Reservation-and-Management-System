@@ -1,5 +1,5 @@
 var sessions = [];
-var serviceOrder = "";
+var serviceOrder = 0;
 var errorCount = 0;
 
 var transaction = {
@@ -51,18 +51,16 @@ var transaction = {
     }
 };
 
-$(function(){
-});
-
 function sessionUpdate(){
     transaction.loadSessions(function(){
         var html = "";
         sessions.forEach(x=>{
+            var serv = servName[x.data.sID] == undefined ? x.data.sID : servName[x.data.sID];
             html += "<tr>";
             html += "<td>"+ (parseInt(x.id) + 1) +"</td>";
             html += "<td>"+ x.data.name +"</td>";
             html += "<td>"+ staffName[x.data.tID] + "</td>";
-            html += "<td>" + servName[x.data.sID] + "</td>";
+            html += "<td>" + serv + "</td>";
             html += "<td><button class='btn buttonFinish' id='btnDoneTrans' type='button' onclick='doneSession(\""+ x.id +"\")' title='Done' style='width: 50px;'><span class='fa fa-check'></span></button><button class='btn buttonPrevious' id='btnCancTrans' type='button' onclick='cancelSession(\""+ x.id +"\")' title='Cancel/Remove' style'width: 50px;'><span class='fa fa-times'></span></button></td>";
             html += "</tr>";
         });
@@ -73,8 +71,9 @@ function sessionUpdate(){
 
 function addToOrder(){
     var x = $('#serviceSS').val();
-    $('#selectedServ').val($('#selectedServ').val() + servName[x] + "\n");
-    serviceOrder += "/" + x;
+    $('#selectedServ').val($('#selectedServ').val() + servName[x] + ",");
+    serviceOrder +=  parseInt(servPrice[x+'']);
+    $('#totAmtNs').val(serviceOrder);
 }
 
 function doneFreakingSession(){
@@ -85,6 +84,30 @@ function doneFreakingSession(){
             sessionUpdate();
         }else{
             confirmFunction(-1);
+        }
+    });
+}
+
+function getSessionDetail(input){
+    var serv = input.data.sID.split(',');
+    var price = 0;
+    serv.forEach(x=>{
+        var name = x;
+    
+        if(x===''){
+            
+        }else{
+            var count = 0;
+            service.services.forEach(y=>{
+                if(y.name===x){
+                    price += parseInt(y.amount);
+                    var html = "<tr><!--<td>1</td>--><td>" + name + "</td><td>" + y.amount + "</td></tr>";
+                    $('#servicesTable').append(html);
+                    $('.fnlPrice').html(price);    
+                    selectedStaff = price;                        
+                }
+                count++;
+            });
         }
     });
 }
