@@ -1,7 +1,7 @@
 var db = require('./db');
 
 exports.insertReservation = function(data, done){
-    var sql = "CALL addReservation(?,?,?,?,?)";
+    var sql = "CALL addReservation(?,?,?,?,?,?)";
     db.get().query(sql, data, function(err, results){
         if(err) return done(err);
         done(null, results[0]);
@@ -59,10 +59,101 @@ exports.removeSched = function(data, done){
     });
 }
 
-exports.dashBoardDetail = function(){
-    var sql1 = "SELECT COUNT(*) as 'transactions' FROM transaction date LIKE('%"+ Date.today().toString('yyyy-MM-dd') +"%')";
+exports.dashBoardDetail = function(_data, done){
+    var sql1 = "SELECT COUNT(*) as 'transactions' FROM transaction WHERE date LIKE '%"+ Date.today().toString('yyyy-MM-dd') +"%' ";
     var sql2 = "SELECT COUNT(*) as 'reservations' FROM web_reservation";
-    var sql3 = "SELECT SUM(total_amount) as 'today_sale' FROM transaction WHERE date LIKE('%"+ Date.today().toString('yyyy-MM-dd') +"%')";
-    var sql2 = "SELECT SUM(total_amount) as 'week_sale' FROM transaction WHERE date BETWEEN '"+ Date.parse('last monday').toString('yyyy-MM-dd 00:00:00') +"' AND '"+ Date.today().toString('yyyy-MM-dd 23:59:59') +"'";  
+    var sql3 = "SELECT SUM(total_amount) as 'today_sale' FROM transaction WHERE date LIKE '%"+ Date.today().toString('yyyy-MM-dd') +"%' ";
+    var sql4 = "SELECT SUM(total_amount) as 'week_sale' FROM transaction WHERE date BETWEEN '"+ Date.parse('last monday').toString('yyyy-MM-dd 00:00:00') +"' AND '"+ Date.today().toString('yyyy-MM-dd 23:59:59') +"'";  
+    var sql5 = "SELECT e.name, COUNT(t.id) as count FROM transaction t, employee e WHERE t.attendantID = e.id GROUP BY e.name ORDER BY count DESC LIMIT 3";
+    var sql6 = "SELECT serviceID FROM transaction";
     
+    var data = {}
+
+    var query1 = function(){
+        return new Promise(function(done, reject){
+            db.get().query(sql1, function(err, result){
+                if(err){
+                    reject(err)
+                }else {
+                    data['transaction'] = result[0].transactions;
+                    done();
+                }
+            });
+        });
+    }
+    var query2 = function(){
+        return new Promise(function(done, reject){
+            db.get().query(sql2, function(err, result){
+                if(err){
+                    reject(err)
+                }else {
+                    data['reservation'] = result[0].reservations;
+                    done();
+                }
+            });
+        });
+    }
+    var query3 = function(){
+        return new Promise(function(done, reject){
+            db.get().query(sql3, function(err, result){
+                if(err){
+                    reject(err)
+                }else {
+                    data['tsale'] = result[0].today_sale;
+                    done();
+                }
+            });
+        });
+    }
+    var query4 = function(){
+        return new Promise(function(done, reject){
+            db.get().query(sql4, function(err, result){
+                if(err){
+                    reject(err)
+                }else {
+                    data['wsale'] = result[0].week_sale;
+                    done();
+                }
+            });
+        });
+    }
+    var query5 = function(){
+        return new Promise(function(done, reject){
+            db.get().query(sql5, function(err, result){
+                if(err){
+                    reject(err)
+                }else {
+                    var arr = [];
+                    result.forEach(element => {
+                        arr.push({
+                            name: element.name,
+                            count: element.count
+                        });
+                    });
+                    data['topEmployee'] = arr;
+                    done();
+                }
+            });
+        });
+    }
+    var query6 = function(){
+        return new Promise(function(done, reject){
+            db.get().query(sql6, function(err, result){
+                if(err){
+                    reject(err)
+                }else {
+                    var out = "";
+                    result.forEach(x=>{
+                        out += x.serviceID + "/";
+                    });
+                    data['services'] = out;
+                    done();
+                }
+            });
+        });
+    }
+
+    query1().then(query2).then(query3).then(query4).then(query5).then(query6).then(function(){
+        done(data);
+    });
 }

@@ -1,5 +1,6 @@
 var sessions = [];
-var serviceOrder = 0;
+var serviceTot = 0;
+var serviceSelc = "";
 var errorCount = 0;
 
 var transaction = {
@@ -15,7 +16,7 @@ var transaction = {
                 sessions.push({id:res.data, data: _data});
                 cb(0);
             }else{
-                    cb(1);
+                cb(1);
             }
         }).fail(function(){
             cb(1);
@@ -64,16 +65,18 @@ function sessionUpdate(){
             }
         });
         $('.sessionList').html(html1);
-        $('#homeSession').html(html2);
+        $('.homeSession').html(html2);
         $('#sessionNumber').html(sessions.length);
+        operation.availStaff();
     });
 }
 
 function addToOrder(){
     var x = $('#serviceSS').val();
     $('#selectedServ').val($('#selectedServ').val() + servName[x] + ",");
-    serviceOrder +=  parseInt(servPrice[x+'']);
-    $('#totAmtNs').val(serviceOrder);
+    serviceTot +=  parseInt(servPrice[x+'']);
+    $('#totAmtNs').val(serviceTot);
+    serviceSelc += x + "/";
 }
 
 function doneFreakingSession(){
@@ -115,5 +118,23 @@ function getSessionDetail(input){
                 count++;
             });
         }
+    });
+}
+
+function loadDashboard(){
+    $.get('admin/dashInfo', function(res){
+        $('.totTran').html(res.transaction);
+        $('.totRes').html(res.reservation);
+        $('.totColT').html(res.tsale);
+        $('.totColW').html(res.wsale);
+        var html = "", count = 1;
+        res.topEmployee.forEach(x=>{
+            html += "<div><p><span class='fa fa-user-md'></span> " + x.name + "</p>";
+            html += "<span id='most"+ count +"t#'> (" + x.count + "<small> transactions</small>)</span></p>";
+            html += "<div><div class='progress progress_sm' style='width: 80%;'></div>";
+            html += "<div class='progress-bar bg-purple' role='progressbar' data-transitiongoal='"+ x.count +"'></div></div>";
+            html += "</div>"
+        });
+        $('.topThera').html(html);
     });
 }

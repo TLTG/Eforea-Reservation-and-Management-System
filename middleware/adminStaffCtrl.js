@@ -15,6 +15,7 @@ exports.editEmployee = function(req, res, next){
     var data = [req.body.id, req.body.name, req.body.contact, req.body.address, req.body.gender];   
     db.editEmployee(data, function(err, result){
         if(err){
+            next(new Error(err));
             res.send({error: 1});
         }else{
             res.send({error: 0});

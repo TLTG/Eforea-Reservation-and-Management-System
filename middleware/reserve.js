@@ -23,7 +23,7 @@ module.exports = function (req, res, next) {
                 out.details = data;
                 res.send(out);
             }else{
-                db.insertReservation([name, num, loc, serv, resv], function (_err, result) {
+                db.insertReservation([name, num, loc, serv, resv, userData.sex], function (_err, result) {
                     if (_err) {
                         out.details = _err;
                         res.send(out);                

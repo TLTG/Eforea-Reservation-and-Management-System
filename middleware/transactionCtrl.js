@@ -9,12 +9,11 @@ exports.getCurrentSession = function(req, res, next){
 exports.recordSession = function(req, res, next){
     var id = req.body.id;
     var customerID;
-    var errCount = 0;
     db.addCustomer([clients[id].data.name, clients[id].data.address, clients[id].data.contact], function(err, customerID){
         if(err){
             res.send({error: 1, detail: "Internal Server Error."});
         }else{
-            db.addTransaction([customerID, clients[id].data.sID, clients[id].data.tID, req.body.total, 0], function(err, status){
+            db.addTransaction([customerID, clients[id].data.services, clients[id].data.tID, req.body.total, 0], function(err, status){
                 if(err){
                     //next(new Error(err));
                     return res.send({error: 1});
@@ -56,4 +55,14 @@ exports.removeSched = function(req, res, next){
 
 exports.getClient = function(){
     return JSON.stringify(clients);
+}
+
+exports.setClient = function(data){
+    clients = JSON.parse(data);
+}
+
+exports.getDashDetail = function(req, res, next){
+    db.dashBoardDetail(null,function(data){
+        res.send(data);
+    });
 }

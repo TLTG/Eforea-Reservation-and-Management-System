@@ -30,4 +30,6 @@ router.post('/recSession', transac.recordSession);
 
 router.post('/delSched', transac.removeSched);
 
+router.get('/dashInfo', transac.getDashDetail);
+
 module.exports = router;

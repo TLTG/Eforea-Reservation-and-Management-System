@@ -10,7 +10,7 @@ exports.addEmployee = function (data, cb) {
 
 exports.editEmployee = function (data, cb) {
     var sql = "CALL editEmployee(?,?,?,?,?)";
-    db.get().query(sql, data[0], function (err, results) {
+    db.get().query(sql, data, function (err, results) {
         if (err) return cb(err);
         cb(null, results[0]);
     });
