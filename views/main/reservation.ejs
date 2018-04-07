@@ -12,8 +12,11 @@
 
   <title>Eforea | Reserve Now</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <link href="assets/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -28,10 +31,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     [endif] -->
 
+    <link href="assets/CSS/sweetalert.css" rel="stylesheet">
+  <link href="assets/CSS/custom-min.css" rel="stylesheet">
   <link href="assets/CSS/reserve.css" rel="stylesheet">
   <link href="assets/CSS/carousel.css" rel="stylesheet">
-  <link href="assets/CSS/sweetalert.css" rel="stylesheet">
-  <link href="assets/CSS/jquery.timepicker.css" rel="stylesheet">
+  <link href="assets/CSS/jquery.timepicker.css" rel="stylesheet" type="text/html">
   <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
@@ -55,7 +59,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
           <li><a href="/services">Services</a></li>
-          <li><a href="/schedule">Schedule</a></li>
+          <!-- <li><a href="/schedule">Schedule</a></li> -->
           <li><a href="/about-us">About Us</a></li>
           <li><a href="#" id="active-menu"><b>Reserve Now</b></a></li>
         </ul>
@@ -77,6 +81,8 @@
               <img class="search-icon" src="assets/images/search-icon.png">
             </a>
           </form>
+
+          <hr>
           <ul class="nav-sidebar category-list">
             
           </ul>
@@ -96,9 +102,9 @@
           <div class="order-container" style="overflow-y: auto; height: 150px; overflow-x:hidden"></div>
           <br />
           <button type="button" class="btn btn-primary submit" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#doneConfirmModal" onclick="doneFunction()">
-            Done </button>
+            <span class="fa fa-check"></span> DONE </button>
           <button type="button" onclick="viewOrderModal()" class="btn btn-primary submit" style="float: right;" name="btnViewOrder" data-toggle="modal" data-target="#viewOrderModal">
-            <span class="fa fa-eye"></span> View </button>
+            <span class="fa fa-eye"></span> VIEW </button>
           <hr>
           <p style="text-align: right;"> TOTAL: Php
             <span class="totalParag">0</span>.00</p>
@@ -222,9 +228,16 @@
                           <label class="radlab" for="servtype2">Regular Service</label>
                         </div>
                       </div>
+                      <div>
                       <hr>
+                      <div>
+                        <p class="notifdiv"><b>HOME SERVICE.</b><br />The therapist will be the one to come to the customer's preferred place to do the service.</p>
+                        <p class="notifdiv"><b>REGULAR SERVICE.</b><br />The customer will be the one to come to our spa to avail the service.</p>
+                      </div>
+                    </div>
+                    <hr>
                       <div style="padding-right: 20px">
-                        <button type="button" href="#step-2" id="next1" class="buttonNext btn pull-right" style="width: 80px">Next</button><br>
+                        <button type="button" href="#step-2" id="next1" class="buttonNext btn pull-right" style="width: 80px">Next <span class="fa fa-arrow-right"></span></button><br>
                       </div>
                     </form>
                   </div>
@@ -276,14 +289,14 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contnum">Contact Number <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-                          <input type="text" id="contnum" name="contnum" required class="form-control col-md-7 col-xs-12">
+                          <input type="number" id="contnum" name="contnum" required class="form-control col-md-7 col-xs-12">
                         </div>
                       </div><br><br>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment <span class="required">*</span>
                         </label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="04-04-2018" class="form-control" required>
+                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="07-04-2018" class="form-control" required>
                             <script>
                             $(function(){
                                 $('#date').combodate();    
@@ -305,10 +318,16 @@
                           </script>
                         </div>
                       </div>
+                      <div>
                       <hr>
+                      <div>
+                        <p class="notifdiv"><b>OPENING AND CLOSING HOURS.</b><br />12:00 P.M. - 12:00 A.M. We're open from Monday to Sunday.</p>
+                    </div>
+                  </div>
+                    <hr>
                       <div class="form-group" style="padding-right: 20px">
-                        <button type="button" id="next2" class="buttonNext btn pull-right" style="width: 80px;">Next</button>
-                        <button type="button" href="#step-1" id="prev1" class="buttonPrevious btn pull-right" style="width: 100px; margin-right: 5px">Previous</button>
+                        <button type="button" id="next2" class="buttonNext btn pull-right" style="width: 80px;">Next <span class="fa fa-arrow-right"></span></button>
+                        <button type="button" href="#step-1" id="prev1" class="buttonPrevious btn pull-right" style="width: 100px; margin-right: 5px"><span class="fa fa-arrow-left"></span> Previous</button>
                       </div>
                     </form>
                   </div>
@@ -340,6 +359,12 @@
                             <p id="custAddress" class="custAddress">RC 11 Area G, CSJDM, Bulacan</p>
                         </div><br><hr width="200px" class="pull-left"><br><br><br>
 
+                        <div class="row" style="padding-left: 20px">
+                          <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 20px">
+                            <p style="text-align: left; text-transform: uppercase;">Type of Service: </p>
+                            <p id="servtypeReserve" class="custservtype"><b></b></p><br><br>
+                          </div>
+                        </div>
                         <div style="padding-left: 20px">
                             <p style="text-align: left; text-transform: uppercase;"> Service(s) to Reserve:</p>
                              <table width="100%">
@@ -381,30 +406,23 @@
                         <div class="row">
                           <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 30px">
                             <p style="text-align: left; text-transform: uppercase;">Date and Time of Treatment: </p>
-                            <p id="datetimeReserve" class="custAddress">Tuesday, April 4, 2018  1:00 PM</p>
+                            <p id="datetimeReserve" class="custAddress">Tuesday, April 7, 2018  1:00 PM</p>
                           </div>
-                          <div class="col-md-2 col-lg-2 col-xs-12">
-                            <span class="fa fa-exclamation-circle" style="color: black"></span>
                           </div>
-                          <div class="col-md-4 col-lg-4 col-xs-12">
-                          </div>
-                        </div>
                         <br><br>
                         <div style="background-color: #9E2F46; margin: 0px; padding: 5px;">
                           <h3 style="text-align: center; color: white">Important Notice:</h3>
                         </div>
                         <div>
-                          <p class="notifdiv">No cancellation of reservation.</p>
                           <p class="notifdiv">Payment shall be made upon completion of service.</p>
-                          <p class="notifdiv2">An immediate on-screen confirmation shall be received after submitting the form. <strong>Do not exit the page until the confirmation is received.</strong></p>
                         </div>
                         <div class="checkbox" style="padding-left: 500px; text-align: left;">
                           <label><input type="checkbox" id="agree" value="">I hereby acknowledge that <strong>I have read and understood</strong> the agreement as provided by the Eforea Nail and Body Spa.</label>
                         </div><hr>
                       </div>
                       <div class="form-group" style="padding-right: 20px">
-                        <a href="#" id="finish" class="buttonFinish btn" style="width: 150px; float: right; margin-right: 5px">Reserve Now!</a>
-                        <a href="#step-2" id="prev2" class="buttonPrevious btn pull-right" style="width: 100px; float: left; margin-right: 5px">Previous</a>
+                        <a href="#" id="finish" class="buttonFinish btn" style="width: 150px; float: right; margin-right: 5px"><span class="fa fa-heart"></span> Reserve Now!</a>
+                        <a href="#step-2" id="prev2" class="buttonPrevious btn pull-right" style="width: 100px; float: left; margin-right: 5px"><span class="fa fa-arrow-left"></span> Previous</a>
                       </div>
                     </form>
                   </div>
@@ -421,7 +439,7 @@
   </div>
 
   <!-- ADD TO CART MODAL -->
-  <div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="addCartModal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -442,7 +460,7 @@
               <tr>
                 <th class="thtd-addCart">Price: </th>
                 <td class="thtd-addCart">
-                  <span id="priceHolder"></span>
+                  <span id="priceHolder"></span><span>.00</span>
                 </td>
               </tr>
               <tr>
@@ -454,9 +472,10 @@
           </center>
         </div>
         <div class="modal-footer">
+          <input type="submit" onclick="addToCart()" name="btnAddOrder" data-dismiss="modal" class="btn btn-primary" value="Add">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <input type="hidden" id="item_id" value="">
-          <input type="submit" onclick="addToCart()" name="btnAddOrder" data-dismiss="modal" class="btn btn-primary" value="Add">
+
         </div>
       </div>
     </div>
@@ -464,7 +483,7 @@
 
   <!-- INFO MODAL -->
   <div class="modal fade" id="infoServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -474,22 +493,22 @@
         </div>
         <div class="modal-body">
           <center>
-            <img src="assets/images/s-swedish.jpg" width="300" height="300">
+            <img src="assets/images/s-swedish.jpg" class="img-circle" width="200" height="200">
+            <hr>
             <h4>Description:</h4>
             <p class="info-desc"></p>
+            <img src="assets/images/icon-lotus.png" style="width: 15%;"
+            alt="Eforea Nail and Body Spa"><br><br>
             <h5>
               <strong>Price:</strong> PHP
-              <span class="info-price"></span>/
+              <span class="info-price"></span><span>.00</span>/
               <span class="info-time"></span>minutes
             </h5>
           </center>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-  </div>
 
   <!-- User Data Modal -->
   <div class="modal fade" id="getUserData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -543,14 +562,14 @@
   <script>window.jQuery || document.write('<script src="assets/bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
+  <script type="text/javascript" src="assets/js/sweetalert.min.js"></script>
   <script type="text/javascript" src="assets/js/scroll.js"></script>
   <script type="text/javascript" src="assets/js/navbar-scroll.js"></script>
   <script type="text/javascript" src="assets/js/ejs_production.js"></script>
   <script type="text/javascript" src="assets/vendor/DateJS/build/date.js"></script>
-  <script type="text/javascript" src="assets/js/main.js"></script>
-  <script type="text/javascript" src="assets/js/sweetalert.min.js"></script>
   <script type="text/javascript" src="assets/js/combodate.js"></script>
   <script type="text/javascript" src="assets/js/jquery.timepicker.min.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
 
 </html>
