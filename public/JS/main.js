@@ -303,7 +303,7 @@ function addToCart() {
                 price: _price,
                 quant: _quantity
             });
-            document.cookie = "cart=" + JSON.stringify(order) + "; expires=";
+            document.cookie = "cart=" + JSON.stringify(order) + ";";
             swal("Success!", "Session has been created!", "success");
             $('#itemnum').val("1");
         }else {
