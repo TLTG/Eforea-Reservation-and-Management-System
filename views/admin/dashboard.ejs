@@ -77,7 +77,7 @@
                 </li>
                 <li>
                   <a>
-                    <i class="fa fa-exchange"></i> Transactions 
+                    <i class="fa fa-exchange"></i> Transactions
                     <span class="fa fa-chevron-down"></span>
                   </a>
                   <ul class="nav child_menu">
@@ -147,7 +147,7 @@
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top">
               <i class="fa fa-exchange"></i> Total Transactions</span>
-            <div class="count">37</div>
+            <div class="count totTran">37</div>
             <span class="count_bottom fa fa-sort-up green">
               <i class="green"> </i>
             </span>
@@ -162,13 +162,15 @@
             <span class="count_top">
               <i class="fa fa-calendar"></i>&nbsp; Total Reservations</span>
             <br>
-            <div class="count">12</div>
+            <div class="count totRes">12</div>
           </div>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top">
               <i class="fa fa-money"></i>&nbsp; Total Collections</span>
             <br>
-            <div class="count">&#8369; 4,071</div>
+            <div class="count">&#8369;
+              <span class="totColT">4,071</span>
+            </div>
             <span class="count_bottom fa fa-sort-up green">
               <i class="green"> </i>
             </span>
@@ -178,7 +180,9 @@
             <span class="count_top">
               <i class="fa fa-money"></i>&nbsp; Total Collections</span>
             <br>
-            <div class="count">&#8369; 10,348</div>
+            <div class="count">&#8369;
+              <span class="totColW">10,348</span>
+            </div>
             <span class="count_bottom fa fa-sort-up green">
               <i class="green"> </i>
             </span>
@@ -198,8 +202,7 @@
               <hr>
               <div class="pull-right">
                 <div class="input-group">
-                  <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdate()"
-                    style="width: 150px; margin-right: 5px">
+                  <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdate()" style="width: 150px; margin-right: 5px">
                     <span class="fa fa-refresh"></span>&nbsp;Refresh</button>
                 </div>
                 <div class="input-group">
@@ -229,8 +232,7 @@
                         <td> Fred Weasley </td>
                         <td> Shiatsu Massage </td>
                         <td>
-                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                            style="width: 50px;">
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
                             <span class="fa fa-check"></span>
                           </button>
                           <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
@@ -244,8 +246,7 @@
                         <td> Dolores Umbridge </td>
                         <td> Ear Candling </td>
                         <td>
-                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                            style="width: 50px;">
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
                             <span class="fa fa-check"></span>
                           </button>
                           <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
@@ -259,8 +260,7 @@
                         <td> Dobby </td>
                         <td> Anti-Aging Body Scrub </td>
                         <td>
-                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                            style="width: 50px;">
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
                             <span class="fa fa-check"></span>
                           </button>
                           <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
@@ -288,15 +288,14 @@
                         <th class="th-modal" width="15%"> Action </th>
                       </tr>
                     </thead>
-                    <tbody id="homeSession">
+                    <tbody class="homeSession">
                       <tr>
                         <td class="td-quantity"> 1 </td>
                         <td> Graciella C. Tatel </td>
                         <td> Harry Potter </td>
                         <td> Swedish Massage </td>
                         <td>
-                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                            style="width: 50px;">
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
                             <span class="fa fa-check"></span>
                           </button>
                           <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
@@ -310,8 +309,7 @@
                         <td> Harry Potter </td>
                         <td> Swedish Massage </td>
                         <td>
-                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done"
-                            style="width: 50px;">
+                          <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
                             <span class="fa fa-check"></span>
                           </button>
                           <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
@@ -392,7 +390,7 @@
                   </h2>
                   <div class="clearfix"></div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-6 ">
+                <div class="col-md-12 col-sm-12 col-xs-6 topThera">
                   <div>
                     <p id="most1t">
                       <span class="fa fa-user-md"></span> Harry James Potter
@@ -417,8 +415,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-6">
                   <div>
                     <p id="most3t">
                       <span class="fa fa-user-md"></span> Dobby
@@ -434,6 +430,8 @@
                     </div>
                   </div>
                 </div>
+                <!-- <div class="col-md-12 col-sm-12 col-xs-6">
+                </div> -->
               </div>
             </div>
             <br>
@@ -571,10 +569,12 @@
           <div class="col-md-4">
             <div class="x_panel">
               <div class="x_content">
-                  <center>
-                    <h3><b>RESERVATION DETAILS</b></h3>
-                  </center>
-                  <div class="sched-details-none">
+                <center>
+                  <h3>
+                    <b>RESERVATION DETAILS</b>
+                  </h3>
+                </center>
+                <div class="sched-details-none">
                   <hr>
                   <br>
                   <center>
@@ -586,8 +586,8 @@
                   <input type="text" id="custnameSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserName">
                   <p>Gender:</p>
                   <select class="form-control" id="custgenderSched" style="font-size: 13px">
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
                   </select>
                   <p>Address:</p>
                   <input type="text" id="custaddressSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserAdd">
@@ -595,7 +595,11 @@
                   <input type="number" id="custcontnumSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserCont">
                   <hr>
                   <p>Type of Service:</p>
-                  <input type="text" id="custservtype" required="required" disabled class="form-control col-md-7 col-xs-12">
+                  <select id="custservtype" class="form-control col-md-7 col-xs-12 reserST" disabled>
+                    <option value="1">Regular Service</option>
+                    <option value="2">Home Service</option>
+                  </select>
+                  <!-- <input type="text" id="custservtype" required="required" disabled class="form-control col-md-7 col-xs-12"> -->
                   <p>Reserved Services:</p>
                   <textarea id="custservSched" class="form-control reserServ" disabled required="required" name="message" data-parsley-trigger="keyup"
                     data-parsley-minlength="20" data-parsley-maxlength="200" rows=5></textarea>
@@ -611,9 +615,11 @@
                   <center>
                     <button type="button" id="btnConfReserv" disabled class="buttonFinish btn" style="width: 280px;" data-toggle="modal" onclick="confirmReserv()">Confirm &amp; Edit Reservation</button>
                     <br>
-                    <button type="button" id="btnCancReserv" disabled class="buttonPrevious btn" style="width: 280px;" onclick="cancReserve()">Cancel Reservation</button><br>
+                    <button type="button" id="btnCancReserv" disabled class="buttonPrevious btn" style="width: 280px;" onclick="cancReserve()">Cancel Reservation</button>
                     <br>
-                    <button type="button" id="btnConfReserv2" class="buttonFinish btn" style="width: 280px;" data-toggle="modal" onclick="confirmReserv2()">Save &amp; Confirm Reservation</button><br>
+                    <br>
+                    <button type="button" id="btnConfReserv2" class="buttonFinish btn" style="width: 280px;" data-toggle="modal" onclick="confirmReserv2()">Save &amp; Confirm Reservation</button>
+                    <br>
                     <br>
                     <button type="button" id="btnCancReserv2" class="buttonPrevious btn" style="width: 280px;" onclick="cancReserve2()">Cancel</button>
                   </center>
@@ -841,12 +847,12 @@
 
       <div class="row">
         <div class="pull-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;">
-          <div class="input-group">
-          <button class="btn btn1" id="btnAddT" type="button" data-toggle="modal" data-target="#addTherapistModal" onclick="resettherapist()"
-            style="width: 150px; margin-right: 5px">
-            <span class="fa fa-plus"></span>&nbsp;Add Therapist</button>
+          <div class="input-group pull-right">
+            <button class="btn btn1" id="btnAddT" type="button" data-toggle="modal" data-target="#addTherapistModal" onclick="resettherapist()"
+              style="width: 150px; margin-right: 5px">
+              <span class="fa fa-plus"></span>&nbsp;Add Therapist</button>
+          </div>
         </div>
-      </div>
       </div>
 
 
@@ -1028,27 +1034,31 @@
           <h3>Home Service</h3>
           <center>
             <table width="100%" class="table-hover table-striped tableregserv">
-              <tr>
-                <th class="th-modal" width="3%"> # </th>
-                <th class="th-modal" width="20%"> Client Name </th>
-                <th class="th-modal" width="20%"> Therapist </th>
-                <th class="th-modal" width="30%"> Service(s) </th>
-                <th class="th-modal" width="15%"> Action </th>
-              </tr>
-              <tr>
-                <td class="td-quantity"> 1 </td>
-                <td> Graciella C. Tatel </td>
-                <td> Harry Potter </td>
-                <td> Swedish Massage </td>
-                <td>
-                  <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
-                    <span class="fa fa-check"></span>
-                  </button>
-                  <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
-                    <span class="fa fa-times"></span>
-                  </button>
-                </td>
-              </tr>
+              <thead>
+                <tr>
+                  <th class="th-modal" width="3%"> # </th>
+                  <th class="th-modal" width="20%"> Client Name </th>
+                  <th class="th-modal" width="20%"> Therapist </th>
+                  <th class="th-modal" width="30%"> Service(s) </th>
+                  <th class="th-modal" width="15%"> Action </th>
+                </tr>
+              </thead>
+              <tbody class="homeSession">
+                <tr>
+                  <td class="td-quantity"> 1 </td>
+                  <td> Graciella C. Tatel </td>
+                  <td> Harry Potter </td>
+                  <td> Swedish Massage </td>
+                  <td>
+                    <button class="btn buttonFinish" id="btnDoneTrans" type="button" onclick="doneSession()" title="Done" style="width: 50px;">
+                      <span class="fa fa-check"></span>
+                    </button>
+                    <button class="btn buttonPrevious" id="btnCancTrans" type="button" onclick="cancelSession()" title="Cancel/Remove" style="width: 50px;">
+                      <span class="fa fa-times"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </center>
         </div>
@@ -1196,8 +1206,7 @@
                         <br>Service</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <br />
@@ -1286,8 +1295,7 @@
                         <br>Service</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <br />
@@ -1368,8 +1376,7 @@
                         <br>Session</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <br />
@@ -1437,7 +1444,9 @@
                     </div>
                     <br>
                     <center>
-                      <h4><b>SERVICE AND SESSION DETAILS</b></h4>
+                      <h4>
+                        <b>SERVICE AND SESSION DETAILS</b>
+                      </h4>
                     </center>
                     <hr>
                     <div class="form-group">
@@ -1512,8 +1521,7 @@
                         <br>Service Invoice</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <div class="row">
@@ -1657,8 +1665,7 @@
                         <br>Therapist</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <br />
@@ -1739,8 +1746,7 @@
                         <br>Therapist Details</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <br />
@@ -1821,8 +1827,7 @@
                         <br>Schedule</h3>
                     </div>
                     <div class="pull-left">
-                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                        style="padding-left: 5px;">
+                      <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                     </div>
                   </div>
                   <form id="demo-form4" data-parsley-validate class="form-horizontal form-label-left">
@@ -1956,8 +1961,7 @@
                         </h3>
                       </div>
                       <div class="pull-left">
-                        <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image"
-                          style="padding-left: 5px;">
+                        <img class="img-responsive" width="80" height="40" src="../assets/images/icon-main.png" alt="Lotus-image" style="padding-left: 5px;">
                       </div>
                     </div>
                   </div>
@@ -2078,7 +2082,7 @@
                         </label>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                           <select class="form-control categList" id="therapistR2" style="font-size: 13px">
-                            <option value="1">Dobby</option>  
+                            <option value="1">Dobby</option>
                             <option value="2">Dolores Umbridge</option>
                             <option value="3">Fred Weasley</option>
                             <option value="4">Harry James Potter</option>

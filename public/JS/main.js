@@ -12,6 +12,11 @@ $(document).ready(function () {
         interval: 15 // 15 minutes
     });
 
+    $('#date').combodate({
+        value: Date.today().toString('dd-MM-yyyy')
+    });
+    //$('#date').val();
+
     $('.carousel').carousel();
 
     window.onscroll = function () {
@@ -67,9 +72,11 @@ $(document).ready(function () {
 
         if (document.getElementById("gender1").checked == true) {
             salut = "Mr. ";
+            userData.sex = '0';
         }
         else {
             salut = "Ms/Mrs. ";
+            userData.sex = '1';
         }
 
         order.forEach(element=>{
@@ -153,11 +160,10 @@ $(document).ready(function () {
     if (document.cookie.cart != undefined) {
         var cart = JSON.parse(document.cookie.cart);
         userData.cart = cart;
-    } else {
-
-    }
+    } else {}
     getContent();
     setInitCart();
+    updateCart();
 });
 
 function getContent() {
@@ -231,7 +237,8 @@ var userData = {
     number: '',
     address: '',
     data: '',//Reservation Date. Wag baguhin kasi maapektuhan yung server.
-    cart: []
+    cart: [],
+    sex: ''
 };
 
 // Massage Services
@@ -296,7 +303,7 @@ function addToCart() {
                 price: _price,
                 quant: _quantity
             });
-            document.cookie = "cart=" + JSON.stringify(order) + ";";
+            document.cookie = "cart=" + JSON.stringify(order) + "; expires=";
             swal("Success!", "Session has been created!", "success");
             $('#itemnum').val("1");
         }else {
@@ -400,8 +407,10 @@ function validateInfo() {
 function submitReservation() {
     $.post('/reserve', { action: 'reserve', data: JSON.stringify(userData) }, function (response) {
         if (response.status == 1) {
+            swal("Success!", "Session has been created! " + response.details, "success");
+            order = [];
+            document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";                        
             window.location = "/";
-            swal("Success!", "Session has been created! " + response.details, "success");            
         } else if(response.status == 2){
             swal("Oops!", "Reservation Conflict! " + response.details, "error"); 
         }else{
@@ -456,8 +465,8 @@ function doneFunction() {
     document.getElementById("gender2").checked = false;
     document.getElementById("address").value = "";
     document.getElementById("contnum").value = "";
-    document.getElementById("date").value = "02-04-2018";
-    document.getElementById("time").value = "12:00";
+    //document.getElementById("date").value = "";
+    //document.getElementById("time").value = "";
     document.getElementById("agree").checked = false;
     $("#step-1").show();
     $("#step-2").hide();
