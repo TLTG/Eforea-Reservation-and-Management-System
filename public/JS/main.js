@@ -34,10 +34,10 @@ $(document).ready(function () {
             $("#step-2").show();
             document.getElementById("servicediv").innerHTML = "Regular Service";
             $("#divaddress").hide();
-            //$("#divcontnum").hide();
+            $("#divcontnum").hide();
         }
         else {
-            alert('Please select a type of service reservation.')
+            swal("Oops!", "Please select a type of service reservation.", "error");
         }
     });
 
@@ -49,6 +49,12 @@ $(document).ready(function () {
         var ln = document.getElementById("last-name").value;
         var add = document.getElementById("address").value;
         var cont = document.getElementById("contnum").value;
+        if (document.getElementById("servtype1").checked == true) {
+            document.getElementById("servtypeReserve").innerHTML="Home Service";
+        }
+        else if (document.getElementById("servtype2").checked == true) {
+            document.getElementById("servtypeReserve").innerHTML="Regular Service";
+        }
         var revDate = $('#date').val().split('-');
         revDate.push($('#time').val());
         var revDate = Date.parse(revDate[1] + "/" + revDate[0] + "/" + revDate[2] + " " + revDate[3]);
@@ -58,8 +64,6 @@ $(document).ready(function () {
         userData.address = add;
         userData.data = revDate.toString('yyyy/MM/dd HH:mm:ss');
         userData.cart = order;
-
-        console.log(userData);
 
         if (document.getElementById("gender1").checked == true) {
             salut = "Mr. ";
@@ -85,7 +89,7 @@ $(document).ready(function () {
                 || ln == "" || ln.length == 0 || ln == null
                 || add == "" || add.length == 0 || add == null
                 || cont == "" || cont.length == 0 || cont == null) {
-                alert('Please fill out all fields.');
+                    swal("Oops!", "Please fill out all fields.", "error");
             }
             else {
                 document.getElementById("custName").innerHTML = salut + " " + fn + " " + ln;
@@ -98,7 +102,7 @@ $(document).ready(function () {
         else {
             if (fn == "" || fn.length == 0 || fn == null
                 || ln == "" || ln.length == 0 || ln == null) {
-                alert('Please fill out all fields.');
+                    swal("Oops!", "Please fill out all fields.", "error");
             }
             else {
                 document.getElementById("custName").innerHTML = salut + " " + fn + " " + ln;                
@@ -115,11 +119,10 @@ $(document).ready(function () {
 
     $("#finish").click(function () {
         if (document.getElementById("agree").checked == true) {
-            //alert('OKI. RESERVED KA NA KUNWARI. MODAL LANGS. WALA PA FUNCTION.');
             submitReservation();
         }
         else {
-            alert('Please tick the checkbox first, indicating that you have read and understood the agreement.')
+            swal("Oops!", "Please tick the checkbox first, indicating that you have read and understood the agreement.", "error");
         }
     });
 
@@ -160,7 +163,7 @@ $(document).ready(function () {
 function getContent() {
     $.get('/reserve/data', function (data) {
         if (data === undefined) {
-            alert('Server Connection Timeout, Try again later');
+            swal("Oops!", "Server Connection Timeout, Try again later.", "error");
             console.error('Server response error');
             return;
         }
@@ -182,17 +185,17 @@ function getContent() {
                 //console.log(elem.name);
                 if (elem.category == element.id) {
                     if (elem.type == 0) {
-                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p><hr><div class='p-price'><label> Price: Php" + elem.amount + "</label><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + elem.amount + "\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></div><br /><br /><hr class='hr-sepserv'>";
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ". </b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p><hr><div class='p-price'><label> Price: Php&nbsp;" + elem.amount + ".00" + "</label><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + elem.amount + "\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'> Add to Cart</button></div></div><br /><br /><hr class='hr-sepserv'>";
                     } else if (elem.type == 1) {
                         var price = elem.amount.split('/');
-                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
-                        html += "<div class='col-md-4'><label> Hand Spa </label><br /><label> Price: Php " + price[0] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
+                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>" + a + ". </b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div class='col-md-4'><label> Hand Spa </label><br /><label> Price: Php " + price[0] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'> Add to Cart</button></div>";
                         html += "<div class='col-md-4'><label> Feet Spa </label><br /><label> Price: Php " + price[1] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
                         html += "<div class='col-md-4'><label> Hand and Feet Spa </label><br /><label> Price: Php " + price[2] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
                         html += "</div><br /><hr class='hr-sepserv'>";
                     } else if (elem.type == 2) {
                         var price = elem.amount.split('/');
-                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div class='row' style='padding-left: 50px;'><p class='p-head'><b>" + a + ". </b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
                         html += "<div class='col-md-3'><label> Hand Spa </label><br /><label> Price: Php " + price[0] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[0] + "\", \"type\": \"0\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
                         html += "<div class='col-md-3'><label> Hand Spa with <br />Manicure</label><br /><label> Price: Php " + price[1] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[1] + "\", \"type\": \"1\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
                         html += "<div class='col-md-3'><label> Feet Spa </label><br /><label> Price: Php " + price[2] + ".00 </label><br /><button type='button' id='mslink' onclick='addCartModal({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\", \"todo\": \"" + price[2] + "\", \"type\": \"2\" })' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div>";
@@ -200,13 +203,13 @@ function getContent() {
                         html += "</div><br /><hr class='hr-sepserv'>";
                     } else if (elem.type == 3) {
                         var price = elem.amount.split('/');
-                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ". </b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
                         html += "<center id='item-" + elem.id + "'><label class='control control--radio radio-hw'>Male<br>Price: Php " + price[0] + ".00<input type='radio' name='radiohw1' value='" + price[0] + "' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
                         html += "<label class='control control--radio radio-hw'>Female<br>Price: Php " + price[1] + ".00<input type='radio' name='radiohw1' value='" + price[1] + "'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\"})' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
                         html += "</div><br /><hr class='hr-sepserv'>";
                     } else {
                         var price = elem.amount.split('/');
-                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ".</b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
+                        html += "<div style='padding-left: 30px;'><p class='p-head'><b>" + a + ". </b>" + elem.name + "<a title='Information' onclick='viewInfo({\"name\":\"" + elem.name + "\", \"desc\":\"" + elem.desc + "\", \"price\":\"" + elem.amount + "\", \"time\":\"" + elem.time + "\"})' name='btnInfo' data-toggle='modal' data-target='#infoServiceModal'><span class='glyphicon glyphicon-info-sign' style='float: right;' aria-hidden='true'></span><span class='sr-only'>View Information</span></a></p>";
                         html += "<center id='item-" + elem.id + "'><label class='control control--radio radio-hw'>Per session<br>Price: Php " + price[0] + ".00<input type='radio' name='radiohw1' value='" + price[0] + "' checked/><div class='control__indicator'></div></label> &emsp;&emsp;";
                         html += "<label class='control control--radio radio-hw'>Per 5 session<br>Price: Php " + price[1] + ".00<input type='radio' name='radiohw1' value='" + price[1] + "'><div class='control__indicator'></div></label> &emsp;&emsp;";
                         html += "<label class='control control--radio radio-hw'>Per 10 session<br>Price: Php " + price[2] + ".00<input type='radio' name='radiohw1' value='" + price[2] + "'><div class='control__indicator'></div></label><hr /><div clas='p-price'><button type='button' id='mslink' onclick='addCartModal1({\"id\":\"" + elem.id + "\", \"name\":\"" + elem.name + "\"})' class='btn btn-primary btn-addCart btn-" + elem.id + "' data-toggle='modal' data-target='#addCartModal'>Add to Cart</button></div></center>";
@@ -282,7 +285,7 @@ function addToCart() {
             }
         });
         if(_totalQuan + parseInt(_quantity) > 5){
-            alert("Maximum of 5 entry exceeded!");
+            swal("Oops!", "Maximum of 5 entry exceeded!", "error");
             return;            
         }
         if(flag) {
@@ -294,11 +297,13 @@ function addToCart() {
                 quant: _quantity
             });
             document.cookie = "cart=" + JSON.stringify(order) + ";";
+            swal("Success!", "Session has been created!", "success");
+            $('#itemnum').val("1");
         }else {
-            alert("Same entry is already reserved!");
+            swal("Oops!", "Same entry is already reserved.", "error");
         }
     } else {
-        alert("Reservation limit is reached! (5 services)");
+        swal("Oops!", "Reservation limit of five (5) services is reached.", "error");
     }
     updateCart();
 }
@@ -395,12 +400,12 @@ function validateInfo() {
 function submitReservation() {
     $.post('/reserve', { action: 'reserve', data: JSON.stringify(userData) }, function (response) {
         if (response.status == 1) {
-            alert('Successfully Reserved! ' + response.details);
             window.location = "/";
+            swal("Success!", "Session has been created! " + response.details, "success");            
         } else if(response.status == 2){
-            alert('Reservation Conflict! ' + response.details);            
+            swal("Oops!", "Reservation Conflict! " + response.details, "error"); 
         }else{
-            alert("Can't process you request. Try again later.");
+            swal("Oops!", "Can't process you request. Try again later.", "error");
         }
     });
 }
@@ -440,10 +445,6 @@ function searchService() {
     if(!done){
         hideMenuExcept(-2);
     }
-}
-
-function successAlert() {
-    swal("Good job!", "You clicked the button!", "success");
 }
 
 function doneFunction() {

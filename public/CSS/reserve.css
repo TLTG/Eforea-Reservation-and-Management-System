@@ -254,7 +254,9 @@ hr.hr-sepserv
   width: 100%;
   display: block;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  height: 80px;
 }
 
 input#search-bar {
@@ -568,13 +570,14 @@ h3.h3-categories
 
  .buttonNext{background:#034777; color: white}
  .buttonNext:hover{border-color: #0E1C33; background:#fff; color: black; font-weight: bold; text-transform: uppercase;}
- .buttonNext:focus{background:#000; color: white}
+ .buttonNext:focus{background:#034777; color: white}
  .buttonPrevious{background:#B43650; color: white}
  .buttonPrevious:hover{border-color: #682634; background:#fff; color: black; font-weight: bold; text-transform: uppercase;}
- .buttonPrevious:focus{background:#000; color: white}
+ .buttonPrevious:focus{background:#B43650; color: white}
  .buttonFinish{background:#18A15F; color: white}
  .buttonFinish:hover{border-color: #2B3210; background:#fff; color: black; font-weight: bold; text-transform: uppercase;}
- .buttonFinish:focus{background:#000; color: white}
+ .buttonFinish:focus{background:#18A15F; color: white}
+ 
  .custName
  {
   font-size: 18px; 
@@ -590,23 +593,13 @@ h3.h3-categories
   line-height: 10px;
  }
 
-/* .buttonservType
- {
-  border-color: lightgray;
-  border-radius: 20px 20px 20px 20px;
-  color: black;
- }
-
- .buttonservType:hover
- {
-  background-color: #A0B3D1;
- }
- 
- .buttonservType:focus
- {
-  background-color: #286090;
-  color: white;
- }*/
+.custservtype
+{
+  font-size: 16px; 
+  text-align: left;
+  line-height: 10px;
+  font-weight: bold;
+}
 
  .buttonGender
  {
@@ -744,4 +737,20 @@ body.modal-open {
   margin: 0px; 
   border-top: solid 2px #034777;
   border-bottom: solid 2px #034777;
+}
+
+.h3modaltitle
+{
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.modaltitle
+{
+  background-color: #011727;
+  color: white;
+  width: 85%;
+  float: left;
 }

@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="assets/images/icon-main.png">
+  <link rel="icon" href="assets/images/icon-lotus.png">
 
   <title>EForea | Admin</title>
 
@@ -35,7 +35,7 @@
   <link href="assets/CSS/custom.min.css" rel="stylesheet">
   <link href="assets/CSS/dashStyle.css" rel="stylesheet" type="text/css">
   <link href="assets/CSS/modal.css" rel="stylesheet" type="text/css">
-  <link href="assets/CSS/sweetalert.css" rel="stylesheet">
+  <link href="assets/CSS/sweetalert.css" rel="stylesheet" type="text/html">
   <link href="assets/CSS/jquery.timepicker.css" rel="stylesheet" type="text/html">
   <link href="public/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/html">
 </head>
@@ -76,10 +76,10 @@
                     <i class="fa fa-home"></i> Home </a>
                 </li>
                 <li>
-                  <a id="trans1">
-                    <i class="fa fa-exchange"></i> Today's Transactions </a>
-                    <!-- <span class="fa fa-chevron-down"></span> -->
-                  <!-- </a>
+                  <a>
+                    <i class="fa fa-exchange"></i> Transactions 
+                    <span class="fa fa-chevron-down"></span>
+                  </a>
                   <ul class="nav child_menu">
                     <li>
                       <a id="trans1">Today's Transactions </a>
@@ -87,7 +87,7 @@
                     <li>
                       <a id="trans2">Past Transactions </a>
                     </li>
-                  </ul> -->
+                  </ul>
                 </li>
                 <li>
                   <a id="schedule" onclick="resetsched()">
@@ -128,11 +128,6 @@
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li>
-                    <a href="javascript:;">
-                      <span>Settings</span>
-                    </a>
-                  </li>
                   <li>
                     <a href="admin/logout">
                       <i class="fa fa-sign-out pull-right"></i> Log Out</a>
@@ -576,10 +571,10 @@
           <div class="col-md-4">
             <div class="x_panel">
               <div class="x_content">
-                <div class="sched-details-none">
                   <center>
-                    <h4>RESERVATION DETAILS</h4>
+                    <h3><b>RESERVATION DETAILS</b></h3>
                   </center>
+                  <div class="sched-details-none">
                   <hr>
                   <br>
                   <center>
@@ -587,10 +582,6 @@
                   </center>
                 </div>
                 <div class="sched-details">
-                  <center>
-                    <h4>RESERVATION DETAILS</h4>
-                  </center>
-                  <hr>
                   <p>Customer Name:</p>
                   <input type="text" id="custnameSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserName">
                   <p>Gender:</p>
@@ -601,8 +592,10 @@
                   <p>Address:</p>
                   <input type="text" id="custaddressSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserAdd">
                   <p>Contact Number:</p>
-                  <input type="text" id="custcontnumSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserCont">
+                  <input type="number" id="custcontnumSched" required="required" disabled class="form-control col-md-7 col-xs-12 reserCont">
                   <hr>
+                  <p>Type of Service:</p>
+                  <input type="text" id="custservtype" required="required" disabled class="form-control col-md-7 col-xs-12">
                   <p>Reserved Services:</p>
                   <textarea id="custservSched" class="form-control reserServ" disabled required="required" name="message" data-parsley-trigger="keyup"
                     data-parsley-minlength="20" data-parsley-maxlength="200" rows=5></textarea>
@@ -846,30 +839,17 @@
         </div>
       </div>
 
-      <div class="row" style="padding-top: 70px;">
-        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-4 form-group top_search pull-right">
+      <div class="row">
+        <div class="pull-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 30px;">
           <div class="input-group">
-            <input id="search_box" type="text" class="form-control" onchange="searchCat()" placeholder="Search...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" onclick="searchCat()">Go!</button>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pull-right">
-        <div class="input-group">
           <button class="btn btn1" id="btnAddT" type="button" data-toggle="modal" data-target="#addTherapistModal" onclick="resettherapist()"
             style="width: 150px; margin-right: 5px">
             <span class="fa fa-plus"></span>&nbsp;Add Therapist</button>
         </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <!-- TRY -->
+      </div>
+
+
       <div class="row servcolumn">
         <div class="col-md-4 col-sm-4 col-xs-2 serv-left-div">
           <div class="activetdhead1">
@@ -1228,7 +1208,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="text" id="servNameAdd" required="required" class="form-control col-md-7 col-xs-12" placeholder="Service">
+                        <input type="text" id="servNameAdd" required="required" class="form-control col-md-7 col-xs-12" placeholder="Service Name">
                       </div>
                     </div>
                     <div class="form-group" id="divcategoryfixed">
@@ -1254,8 +1234,8 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="number" min="0.00" step="0.50" id="servPriceMaleAdd" class="form-control col-md-3 col-xs-12" required="required"
-                          placeholder="0.00">
+                        <input type="number" min="100.00" step="0.50" id="servPriceMaleAdd" class="form-control col-md-3 col-xs-12" required="required"
+                          placeholder="100.00">
                         <br>
                         <br>
                       </div>
@@ -1265,8 +1245,8 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="number" min="0.00" step="0.50" id="servPriceFemaleAdd" class="form-control col-md-3 col-xs-12" required="required"
-                          placeholder="0.00">
+                        <input type="number" min="100.00" step="0.50" id="servPriceFemaleAdd" class="form-control col-md-3 col-xs-12" required="required"
+                          placeholder="100.00">
                       </div>
                     </div>
                     <div class="form-group">
@@ -1336,7 +1316,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="number" min="0.00" step="0.50" id="servPriceMaleEdit" class="form-control col-md-3 col-xs-12" required="required">
+                        <input type="number" min="100.00" step="0.50" id="servPriceMaleEdit" class="form-control col-md-3 col-xs-12" required="required">
                         <br>
                         <br>
                       </div>
@@ -1346,7 +1326,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="number" min="0.00" step="0.50" id="servPriceFemaleEdit" class="form-control col-md-3 col-xs-12" required="required">
+                        <input type="number" min="100.00" step="0.50" id="servPriceFemaleEdit" class="form-control col-md-3 col-xs-12" required="required">
                       </div>
                     </div>
                     <div class="form-group">
@@ -1405,7 +1385,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
-                        <select class="form-control" id="servtypelist" style="font-size: 13px">
+                        <select class="form-control" id="servtypelist" onchange="servListChange()" style="font-size: 13px">
                           <option value="1">Regular Service</option>
                           <option value="2">Home Service</option>
                         </select>
@@ -1455,28 +1435,9 @@
                         <input type="number" id="contnum" name="contnum" required class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
-                    <!-- <div class="form-group" id="datediv">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="02-04-2018" class="form-control"
-                          required>
-                      </div>
-                    </div>
-                    <div class="form-group" id="timediv">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Preferred Time
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-8 col-sm-8 col-xs-12">
-                        <input type="text" id="time" data-format="h:mm a" data-template="h : mm a" name="time" value="12:00 PM" class="form-control"
-                          required="required">
-                        <!-- <p style="float: right;">PM</p>
-                      </div>
-                    </div> -->
                     <br>
                     <center>
-                      <h4>Service and Session Details</h4>
+                      <h4><b>SERVICE AND SESSION DETAILS</b></h4>
                     </center>
                     <hr>
                     <div class="form-group">
@@ -1497,7 +1458,7 @@
                       </label>
                       <div class="col-md-8 col-sm-8 col-xs-12">
                         <textarea id="selectedServ" class="form-control sessServ" disabled required="required" name="message" data-parsley-trigger="keyup"
-                          data-parsley-minlength="20" data-parsley-maxlength="200" rows=5>Swedish Massage (&#8369; 399.00)</textarea>
+                          data-parsley-minlength="20" data-parsley-maxlength="200" rows=5></textarea>
                       </div>
                     </div>
                     <div class="form-group">

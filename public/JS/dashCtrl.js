@@ -8,6 +8,7 @@ var selectedService = null;
 var selectedStaff = null;
 var reserList = [];
 var reserEvent = [];
+var nR, gR, aR, cnR, stR, rsR, taR, tR;
 
 $(function () {
     //swal("Success!", "You are now logged in as an administrator.", "success");
@@ -122,8 +123,8 @@ $(function () {
                 var count = 0;
                 res.data.forEach(x => {
                     html += "<tr><td onclick='showStaffDetail(\"" + count + "\")'>" + x.name + "</td></tr>";
-                    sessions.forEach(y=>{
-                        if(y.data.tID == x.id){
+                    sessions.forEach(y => {
+                        if (y.data.tID == x.id) {
 
                         }
                     });
@@ -190,7 +191,7 @@ $(function () {
                     contact: cont,
                     sID: serv,
                     tID: $('#therapist').val(),
-                    stype: st 
+                    stype: st
                 };
                 transaction.addSession(data, function (res) {
                     if (res == 0) {
@@ -208,8 +209,8 @@ $(function () {
             if (custNameNS == "" || custNameNS.length == 0 || custNameNS == null
                 || serv == "" || serv.length == 0 || serv == null
                 || add == "" || add.length == 0 || add == null
-                || cont == "" || cont.length == 0 || cont == null
-                || amt == "" || amt.length == 0 || amt == null) {
+                || cont == "" || cont.length == 0 || cont == null) {
+                //|| amt == "" || amt.length == 0 || amt == null) {
                 swal("Oops!", "Please fill out all required fields.", "error");
             }
             else {
@@ -219,7 +220,7 @@ $(function () {
                     contact: cont,
                     sID: serv,
                     tID: $('#therapist').val(),
-                    stype: st 
+                    stype: st
                 };
                 transaction.addSession(data, function (res) {
                     if (res == 0) {
@@ -360,8 +361,8 @@ function resetcategory() { //reset ADD CATEGORY fields every time it is opened
 
 function resetservice() { //reset ADD SERVICE fields every time it is opened 
     document.getElementById('servNameAdd').value = "";
-    document.getElementById('servPriceMaleAdd').value = "";
-    document.getElementById('servPriceFemaleAdd').value = "";
+    document.getElementById('servPriceMaleAdd').value = "100.00";
+    document.getElementById('servPriceFemaleAdd').value = "100.00";
     document.getElementById('servDescEdit').value = "";
 }
 
@@ -492,6 +493,19 @@ function doneSession(x) { //REMOVE CATEGORY FUNCTION (T)
     });
 }
 
+function servListChange() {
+    if (document.getElementById("servtypelist").value == "1") {
+        //alert ('Regular');
+        $('#divaddress').hide();
+        $('#divcontnum').hide();
+    }
+    else {
+        //alert ('Home');
+        $('#divaddress').show();
+        $('#divcontnum').show();
+    }
+}
+
 function getloadindiv() { //reset all fields whenever INDIVIDUAL SERVICES is clicked (T)
     document.getElementById('serviceDD').value = "All Services";
     document.getElementById('search_box').value = ""; //Task (-Search: If cleared, back to list of services (T)) shall be done for this to work, 
@@ -561,18 +575,14 @@ function confirmFunction(x, msg) {
 
 function resetsession() { //resets fields when NEW SESSION is clicked
 
-    /* $('#divaddress').hide();
+    $('#divaddress').hide();
     $('#divcontnum').hide();
-    $('#datediv').hide();
-    $('#timediv').hide(); */
     document.getElementById("servtypelist").value = "1";
     document.getElementById("custNameNS").value = "";
     document.getElementById("gender1").checked = true;
     document.getElementById("gender2").checked = false;
     document.getElementById("address").value = "";
     document.getElementById("contnum").value = "";
-    //document.getElementById("datediv").value = "02-04-2018";
-    //document.getElementById("timediv").value = "12:00";
     document.getElementById("selectedServ").value = "";
     document.getElementById("totAmtNs").value = "";
 }
@@ -608,11 +618,11 @@ function removeTherapist() { //REMOVE CATEGORY FUNCTION (T)
     $('#confirmModal').modal('show');
     $('#btnone').off();
     $('#btnone').click(function () {
-        operation.sendStaffData(1, {id: selectedStaff.id}, function(res, detail){
-            if(res){
+        operation.sendStaffData(1, { id: selectedStaff.id }, function (res, detail) {
+            if (res) {
                 confirmFunction(4);
                 operation.getStaffData();
-            }else{
+            } else {
                 confirmFunction(-1);
             }
         });
@@ -641,7 +651,7 @@ function addTherapist() {
                 name: fn + " " + ln,
                 contact: cont,
                 address: add,
-                gender:  "Female",
+                gender: "Female",
             }
             //ADD connection to db and therapist table here
             operation.sendStaffData(0, data, function (res, msg) {
@@ -883,17 +893,36 @@ function confirmReserv() {
     $('#btnCancReserv2').show();
     $('#btnConfReserv').hide();
     $('#btnCancReserv').hide();
+
+    nR = document.getElementById("custnameSched").value;
+    gR = document.getElementById("custgenderSched").value;
+    aR = document.getElementById("custaddressSched").value;
+    cnR = document.getElementById("custcontnumSched").value;
+    stR = document.getElementById("custservtype").value;
+    rsR = document.getElementById("custservSched").value;
+    taR = document.getElementById("custtotamtSched").value;
+    tR = document.getElementById("custtherapSched").value;
+
     document.getElementById("custnameSched").disabled = false;
     document.getElementById("custgenderSched").disabled = false;
     document.getElementById("custaddressSched").disabled = false;
     document.getElementById("custcontnumSched").disabled = false;
     document.getElementById("custservSched").disabled = false;
-    document.getElementById("custtotamtSched").disabled = false;
+    document.getElementById("custservtype").disabled = false;
     document.getElementById("custgenderSched").disabled = false;
     document.getElementById("custtherapSched").disabled = false;
 }
 
 function cancReserve2() {
+    document.getElementById("custnameSched").value = nR;
+    document.getElementById("custgenderSched").value = gR;
+    document.getElementById("custaddressSched").value = aR;
+    document.getElementById("custcontnumSched").value = cnR;
+    document.getElementById("custservtype").value = stR;
+    document.getElementById("custservSched").value = rsR;
+    document.getElementById("custtotamtSched").value = taR;
+    document.getElementById("custtherapSched").value = tR;
+
     $('#btnConfReserv2').hide();
     $('#btnCancReserv2').hide();
     $('#btnConfReserv').show();
