@@ -6,6 +6,7 @@ var parser = require('body-parser');
 var cookie_parser = require('cookie-parser');
 var session = require('express-session');
 var systemCtrl = require('./middleware/systemControl'); 
+require('datejs');
 
 //Configurations.
 app.set('view engine', 'ejs'); //this change the view engine to ejs, (mahirap kasi yung default)
