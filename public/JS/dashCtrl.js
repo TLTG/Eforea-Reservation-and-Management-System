@@ -119,25 +119,53 @@ $(function () {
             if (res.error == 0) {
                 staff = res.data;
                 var html = "";
-                var thera = "";
+                var html1 = "";
                 var count = 0;
-                res.data.forEach(x => {
+                staff.forEach(x => {
                     html += "<tr><td onclick='showStaffDetail(\"" + count + "\")'>" + x.name + "</td></tr>";
-                    sessions.forEach(y => {
-                        if (y.data.tID == x.id) {
-
-                        }
-                    });
-                    thera += "<option value='" + x.id + "'>" + x.name + "</option>";
                     count++;
                     staffName['' + x.id] = x.name;
+                    html1 += "<option value='" + x.id + "'>" + x.name + "</option>";                                                    
                 });
                 $('#tList').html(html);
-                $('.therapist').html(thera);
-                showStaffDetail(0);
+                $('.therapist').html(html1);                                    
+
+                operation['availStaff'] = function(){
+                    var available = [];
+                    var addToAvail = function(cb){
+                        var x = staff.length;
+                        staff.forEach(a=>{
+                            available.push(a.id);
+                            x--;
+                            if(x==0) cb();
+                        });
+                    }
+                    var delUnavail = function(cb){
+                        var count = sessions.length;
+                        sessions.forEach(x=>{
+                            var z = $.inArray(parseInt(x.data.tID), available);
+                            if(z !== -1){
+                                available.splice(z, 1);
+                            }
+                            count--;
+                            if(count == 0) cb();
+                        });
+                    }
+                    addToAvail(function(){
+                        delUnavail(function(){
+                            var html = "";
+                            staff.forEach(x=>{
+                                if($.inArray(parseInt(x.id), available) != -1){
+                                    html += "<option value='" + x.id + "'>" + x.name + "</option>";                                                                                        
+                                }
+                            });
+                            $('.therapist').html(html);                                                                
+                        });
+                    });
+                }
+                showStaffDetail(0);                
             }
         });
-        //$('#therapdetail').html("");
     }
 
     operation = {
@@ -148,8 +176,6 @@ $(function () {
         sendStaffData: _sendStaffData,
         getStaffData: _getStaffData
     };
-    _getData(_displayToDD);
-    _getStaffData();
 
     //This is called when Edit button is pressed            
     $('.btnEdit').on('click', function () {
@@ -181,7 +207,7 @@ $(function () {
         var amt = document.getElementById("totAmtNs").value;
 
         if (document.getElementById("servtypelist").value == "1") {
-            if (custNameNS == "" || custNameNS.length == 0 || custNameNS == null || serviceOrder == "") {
+            if (custNameNS == "" || custNameNS.length == 0 || custNameNS == null || serviceTot == "") {
                 swal("Oops!", "Please fill out all required fields.", "error");
             }
             else {
@@ -191,7 +217,8 @@ $(function () {
                     contact: cont,
                     sID: serv,
                     tID: $('#therapist').val(),
-                    stype: st
+                    stype: st,
+                    services: serviceSelc
                 };
                 transaction.addSession(data, function (res) {
                     if (res == 0) {
@@ -249,20 +276,21 @@ $(function () {
             document.getElementById('read').innerHTML = x;
         }
     });
-
     $('#btnEditR').click(function () {
         $('#btnEditR').hide();
         $('#btnEditR2').show();
         $(".sched-details").hide();
         $(".edit-details").show();
     });
-
     $('#btnCancR').click(function () {
         $('#btnEditR').show();
         $('#btnEditR2').hide();
         $(".sched-details").show();
         $(".edit-details").hide();
     });
+
+    _getData(_displayToDD);
+    _getStaffData();
 });
 //This is called by every row in the Service List.
 function showDetail(param) {
@@ -317,9 +345,10 @@ function selectCat() { //Removed ADD CATEGORY and REMOVE CATEGORY when specific 
         $('#btnAddC').hide();
         $('#btnRemC').hide();
         service.categories.forEach(element => {
-            if (element.name == cat) {
+            if (element.id == cat) {
                 hideMenuExcept(element.id);
                 document.getElementById('categoryfixed').value = element.name;
+                $('.addServ').val(element.id);
                 // Placed value of selected category to categoryfixed textfield
             }
         });
@@ -574,7 +603,8 @@ function confirmFunction(x, msg) {
 }
 
 function resetsession() { //resets fields when NEW SESSION is clicked
-
+    serviceTot = 0;
+    serviceSelc = "";
     $('#divaddress').hide();
     $('#divcontnum').hide();
     document.getElementById("servtypelist").value = "1";
@@ -696,8 +726,23 @@ function editTherapist() {
 
         $('#btnone').off();
         $('#btnone').click(function () {
+            var data = {
+                id: selectedStaff.id,
+                name: fn + " " + ln,
+                contact: cont,
+                address: add,
+                gender: "Female"
+            };
+            console.log(data);
+            operation.sendStaffData(2, data, function(res){
+                if(res){
+                    confirmFunction(9);
+                    operation.getStaffData();
+                }else{
+                    confirmFunction(-1);
+                }
+            });
             //ADD connection to db and therapist table here
-            confirmFunction(9);
         });
     }
     //DB CONNECTION FOR UPDATING OF THERAPIST
@@ -834,15 +879,19 @@ function confirmReserv2() {
                         contact: $('.reserCont').val(),
                         sID: $('.reserServ').val(),
                         tID: $('#custtherapSched').val(),
-                        amount: $('.reserTot').val()
+                        amount: $('.reserTot').val(),
+                        stype: $('.reserST').val(),
+                        services: serviceSelc
                     };
                     transaction.addSession(data, function (res) {
                         if (res == 0) {
                             reserEvent.splice(count, 1);
                             $.post('admin/delSched', { id: x._id }, function (res) {
                                 if (res.error == 0) {
+                                    if(reserEvent.length == 1){ reserEvent = [] }
                                     confirmFunction(10);
                                     loadReservation();
+                                    sessionUpdate();
                                 } else {
                                     confirmFunction(-1);
                                 }
@@ -935,7 +984,7 @@ function cancReserve2() {
     document.getElementById("custtotamtSched").disabled = true;
     document.getElementById("custgenderSched").disabled = true;
 }
-
+var xhalsdj = "";
 function loadReservation() {
     var loadData = function () {
         var events = [];
@@ -951,7 +1000,9 @@ function loadReservation() {
                     contnum: x.contact,
                     amount: total,
                     services: names,
-                    _id: x.id
+                    _id: x.id,
+                    sex: x.isHomeService,
+                    sID: xhalsdj
                 }
                 events.push(event);
                 reserEvent = events;
@@ -986,6 +1037,7 @@ function wrappedItem(arr, cb) {
     arr.forEach(x => {
         total += parseInt(x.price);
         names += x.name + ",";
+        xhalsdj += x.id + "/";
         count--;
         if (count == 0) out();
     });

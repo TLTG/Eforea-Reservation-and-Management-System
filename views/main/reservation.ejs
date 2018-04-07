@@ -31,8 +31,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     [endif] -->
 
-    <link href="assets/CSS/sweetalert.css" rel="stylesheet">
-  <link href="assets/CSS/custom-min.css" rel="stylesheet">
+  <link href="assets/CSS/sweetalert.css" rel="stylesheet">
+  <!-- <link href="assets/CSS/custom-min.css" rel="stylesheet"> -->
   <link href="assets/CSS/reserve.css" rel="stylesheet">
   <link href="assets/CSS/carousel.css" rel="stylesheet">
   <link href="assets/CSS/jquery.timepicker.css" rel="stylesheet" type="text/html">
@@ -52,16 +52,26 @@
       <div class="navbar-header">
         <a href="/" class="site_title">
           <img src="assets/images/logo-2.png" style="display: block; float: left; margin-left: 10px; margin-right: auto; width: 38%; padding-top: 1px;"
-          alt="Eforea Nail and Body Spa">
+            alt="Eforea Nail and Body Spa">
         </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/services">Services</a>
+          </li>
           <!-- <li><a href="/schedule">Schedule</a></li> -->
-          <li><a href="/about-us">About Us</a></li>
-          <li><a href="#" id="active-menu"><b>Reserve Now</b></a></li>
+          <li>
+            <a href="/about-us">About Us</a>
+          </li>
+          <li>
+            <a href="#" id="active-menu">
+              <b>Reserve Now</b>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -84,7 +94,7 @@
 
           <hr>
           <ul class="nav-sidebar category-list">
-            
+
           </ul>
         </div>
 
@@ -101,16 +111,21 @@
           <hr>
           <div class="order-container" style="overflow-y: auto; height: 150px; overflow-x:hidden"></div>
           <br />
-          <button type="button" class="btn btn-primary submit" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#doneConfirmModal" onclick="doneFunction()">
+          <button type="button" class="btn btn-primary submit" style="float: right;" name="btnDoneOrder" data-toggle="modal" data-target="#doneConfirmModal"
+            onclick="doneFunction()">
             <span class="fa fa-check"></span> DONE </button>
-          <button type="button" onclick="viewOrderModal()" class="btn btn-primary submit" style="float: right;" name="btnViewOrder" data-toggle="modal" data-target="#viewOrderModal">
+          <button type="button" onclick="viewOrderModal()" class="btn btn-primary submit" style="float: right;" name="btnViewOrder"
+            data-toggle="modal" data-target="#viewOrderModal">
             <span class="fa fa-eye"></span> VIEW </button>
           <hr>
           <p style="text-align: right;"> TOTAL: Php
             <span class="totalParag">0</span>.00</p>
-            <img class="img-responsive" style="float: right; padding-right: 30px; padding-top: 110px" width="100" height="50" src="assets/images/icon-lotus.png" alt="Lotus-image">
+          <img class="img-responsive" style="float: right; padding-right: 30px; padding-top: 110px" width="100" height="50" src="assets/images/icon-lotus.png"
+            alt="Lotus-image">
           <br />
-          <h4><strong>CONTACT US!</strong></h4>
+          <h4>
+            <strong>CONTACT US!</strong>
+          </h4>
           <p>EForea Nail and Body Spa</p>
           <p>Unit 102 #71 P. Tuazon St.,
             <br /> Barangay Kaunlaran
@@ -186,9 +201,9 @@
           <h4 class="modal-title" id="myModalLabel">Reserve Now</h4>
         </div>
         <div class="modal-body" style="height: auto;">
-         <div class="right_col">
-          <div>
-            <div class="clearfix"></div>
+          <div class="right_col">
+            <div>
+              <div class="clearfix"></div>
               <div class="x_content">
                 <!-- Smart Wizard -->
                 <br>
@@ -197,69 +212,95 @@
                     <li>
                       <a href="#step-1">
                         <span class="step_no">1</span>
-                        <span class="step_descr">Step 1<br />
-                                          <small>Type of Service Reservation</small></span></a>
+                        <span class="step_descr">Step 1
+                          <br />
+                          <small>Type of Service Reservation</small>
+                        </span>
+                      </a>
                     </li>
                     <li>
                       <a href="#step-2">
                         <span class="step_no">2</span>
-                        <span class="step_descr">Step 2<br />
-                                          <small>Contact information &amp; Reservation Details</small></span></a>
+                        <span class="step_descr">Step 2
+                          <br />
+                          <small>Contact information &amp; Reservation Details</small>
+                        </span>
+                      </a>
                     </li>
                     <li>
                       <a href="#step-3">
                         <span class="step_no">3</span>
-                        <span class="step_descr">Step 3<br />
-                                          <small>Confirm Reservation</small></span></a>
+                        <span class="step_descr">Step 3
+                          <br />
+                          <small>Confirm Reservation</small>
+                        </span>
+                      </a>
                     </li>
                   </ul>
 
                   <!-- Start of Step 1 -->
                   <div id="step-1" style="visibility: visible;">
-                  <hr>
-                  <center><h2>Type of Service Reservation</h2>
-                  <p>Select type of service to reserve.</p><br><br>
-                    <form class="form-horizontal form-label-left">
-                      <div class="form-group">
-                        <div>
-                          <input type="radio" id="servtype1" name="selector">
-                          <label class="radlab" for="servtype1">Home Service</label>
-                          <input type="radio" id="servtype2" name="selector">
-                          <label class="radlab" for="servtype2">Regular Service</label>
-                        </div>
-                      </div>
-                      <div>
-                      <hr>
-                      <div>
-                        <p class="notifdiv"><b>HOME SERVICE.</b><br />The therapist will be the one to come to the customer's preferred place to do the service.</p>
-                        <p class="notifdiv"><b>REGULAR SERVICE.</b><br />The customer will be the one to come to our spa to avail the service.</p>
-                      </div>
-                    </div>
                     <hr>
-                      <div style="padding-right: 20px">
-                        <button type="button" href="#step-2" id="next1" class="buttonNext btn pull-right" style="width: 80px">Next <span class="fa fa-arrow-right"></span></button><br>
-                      </div>
-                    </form>
+                    <center>
+                      <h2>Type of Service Reservation</h2>
+                      <p>Select type of service to reserve.</p>
+                      <br>
+                      <br>
+                      <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                          <div>
+                            <input type="radio" id="servtype1" name="selector">
+                            <label class="radlab" for="servtype1">Home Service</label>
+                            <input type="radio" id="servtype2" name="selector">
+                            <label class="radlab" for="servtype2">Regular Service</label>
+                          </div>
+                        </div>
+                        <div>
+                          <hr>
+                          <div>
+                            <p class="notifdiv">
+                              <b>HOME SERVICE.</b>
+                              <br />The therapist will be the one to come to the customer's preferred place to do the service.</p>
+                            <p class="notifdiv">
+                              <b>REGULAR SERVICE.</b>
+                              <br />The customer will be the one to come to our spa to avail the service.</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div style="padding-right: 20px">
+                          <button type="button" href="#step-2" id="next1" class="buttonNext btn pull-right" style="width: 80px">Next
+                            <span class="fa fa-arrow-right"></span>
+                          </button>
+                          <br>
+                        </div>
+                      </form>
                   </div>
                   <!-- End of Step 1 -->
 
                   <!-- Start of Step 2 -->
                   <div id="step-2">
-                  <br><hr>
-                  <center><h2>Contact Information &amp; Reservation Details</h2>
-                  <p>Fill in your personal and reservation details.</p><br>
-                  <div class="servicediv" id="servicediv">Home Service</div><br><br>
-                </center>
+                    <br>
+                    <hr>
+                    <center>
+                      <h2>Contact Information &amp; Reservation Details</h2>
+                      <p>Fill in your personal and reservation details.</p>
+                      <br>
+                      <div class="servicediv" id="servicediv">Home Service</div>
+                      <br>
+                      <br>
+                    </center>
                     <form class="form-horizontal form-label-left">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                           <input type="text" id="first-name" required class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                           <input type="text" id="last-name" name="last-name" required class="form-control col-md-7 col-xs-12">
@@ -274,127 +315,146 @@
                           </div>
                           <div class="radio">
                             <input id="gender2" name="gender" type="radio">
-                            <label  for="gender2" class="radio-label">Female</label>
+                            <label for="gender2" class="radio-label">Female</label>
                           </div>
                         </div>
                       </div>
                       <div class="form-group" id="divaddress">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                           <input type="text" id="address" name="address" required class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group" id="divcontnum">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contnum">Contact Number <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contnum">Contact Number
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                           <input type="number" id="contnum" name="contnum" required class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div><br><br>
+                      </div>
+                      <br>
+                      <br>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Treatment
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="07-04-2018" class="form-control" required>
-                            <script>
-                            $(function(){
-                                $('#date').combodate();    
-                            });
-                            </script>
+                          <input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" class="form-control"
+                            required>
                         </div>
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Preferred Time <span class="required">*</span>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Preferred Time
+                          <span class="required">*</span>
                         </label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                         <input type="text" id="time" data-format="h:mm" data-template="h : mm" name="time" value="12:00" class="form-control" required="required">
-                         <p style="float: right;">PM</p>
+                          <input type="text" id="time" data-format="h:mm" data-template="h : mm" name="time" value="12:00" class="form-control" required="required">
+                          <p style="float: right;"></p>
                           <script>
-                          $(function(){
+                            $(function () {
                               $('#time').combodate({
-                                  firstItem: 'none', //show 'hour' and 'minute' string at first item of dropdown
-                                  minuteStep: 5
-                              });  
-                          });
+                                firstItem: 'none', //show 'hour' and 'minute' string at first item of dropdown
+                                minuteStep: 5
+                              });
+                            });
                           </script>
                         </div>
                       </div>
                       <div>
+                        <hr>
+                        <div>
+                          <p class="notifdiv">
+                            <b>OPENING AND CLOSING HOURS.</b>
+                            <br />12:00 P.M. - 12:00 A.M. We're open from Monday to Sunday.</p>
+                        </div>
+                      </div>
                       <hr>
-                      <div>
-                        <p class="notifdiv"><b>OPENING AND CLOSING HOURS.</b><br />12:00 P.M. - 12:00 A.M. We're open from Monday to Sunday.</p>
-                    </div>
-                  </div>
-                    <hr>
                       <div class="form-group" style="padding-right: 20px">
-                        <button type="button" id="next2" class="buttonNext btn pull-right" style="width: 80px;">Next <span class="fa fa-arrow-right"></span></button>
-                        <button type="button" href="#step-1" id="prev1" class="buttonPrevious btn pull-right" style="width: 100px; margin-right: 5px"><span class="fa fa-arrow-left"></span> Previous</button>
+                        <button type="button" id="next2" class="buttonNext btn pull-right" style="width: 80px;">Next
+                          <span class="fa fa-arrow-right"></span>
+                        </button>
+                        <button type="button" href="#step-1" id="prev1" class="buttonPrevious btn pull-right" style="width: 100px; margin-right: 5px">
+                          <span class="fa fa-arrow-left"></span> Previous</button>
                       </div>
                     </form>
                   </div>
                   <!-- End of Step 2 -->
 
-                   <!-- Start of Step 3 -->
+                  <!-- Start of Step 3 -->
                   <div id="step-3">
-                  <hr>
-                  <center><h2>Confirm Reservation</h2>
-                  <p>Review your details and important notes before clicking 'Reserve Now'.</p><br><br>
-                    <form class="form-horizontal form-label-left">
-                      <div class="form-group">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                          <div class="pull-right" style="padding-right: 20px;">
-                            <h5 style="float: left;">Date:&nbsp;&nbsp;&nbsp;</h5>
-                            <h5 id="datetoday" style="float: right;"></h5>
-                            <script>
-                              n =  new Date();
-                              y = n.getFullYear();
-                              m = n.getMonth() + 1;
-                              d = n.getDate();
-                              document.getElementById("datetoday").innerHTML = m + "/" + d + "/" + y;
-                            </script>
+                    <hr>
+                    <center>
+                      <h2>Confirm Reservation</h2>
+                      <p>Review your details and important notes before clicking 'Reserve Now'.</p>
+                      <br>
+                      <br>
+                      <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                          <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="pull-right" style="padding-right: 20px;">
+                              <h5 style="float: left;">Date:&nbsp;&nbsp;&nbsp;</h5>
+                              <h5 id="datetoday" style="float: right;"></h5>
+                              <script>
+                                n = new Date();
+                                y = n.getFullYear();
+                                m = n.getMonth() + 1;
+                                d = n.getDate();
+                                document.getElementById("datetoday").innerHTML = m + "/" + d + "/" + y;
+                              </script>
+                            </div>
                           </div>
-                        </div>
 
-                        <div style="padding-left: 20px">
+                          <div style="padding-left: 20px">
                             <p id="custName" class="custName">Graciella C. Tatel</p>
                             <p id="custAddress" class="custAddress">RC 11 Area G, CSJDM, Bulacan</p>
-                        </div><br><hr width="200px" class="pull-left"><br><br><br>
-
-                        <div class="row" style="padding-left: 20px">
-                          <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 20px">
-                            <p style="text-align: left; text-transform: uppercase;">Type of Service: </p>
-                            <p id="servtypeReserve" class="custservtype"><b></b></p><br><br>
                           </div>
-                        </div>
-                        <div style="padding-left: 20px">
+                          <br>
+                          <hr width="200px" class="pull-left">
+                          <br>
+                          <br>
+                          <br>
+
+                          <div class="row" style="padding-left: 20px">
+                            <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 20px">
+                              <p style="text-align: left; text-transform: uppercase;">Type of Service: </p>
+                              <p id="servtypeReserve" class="custservtype">
+                                <b></b>
+                              </p>
+                              <br>
+                              <br>
+                            </div>
+                          </div>
+                          <div style="padding-left: 20px">
                             <p style="text-align: left; text-transform: uppercase;"> Service(s) to Reserve:</p>
-                             <table width="100%">
-                                <thead>
-                                  <tr>
-                                    <th class="th-modal" width="20%"> Quantity </th>
-                                    <th class="th-modal" width="40%"> Service </th>
-                                    <th class="th-modal" width="20%"> Amount </th>
-                                    <th class="th-modal" width="30%"> Total Amount </th>
-                                  </tr>
-                                </thead>
-                                <tbody class="orderContainer">
-                                  <tr>
-                                    <td class="td-quantity"> 2 </td>
-                                    <td> MS-Swedish Massage </td>
-                                    <td> 399.00 </td>
-                                    <td> 798.00 </td>
-                                  </tr>
-                                  <tr>
-                                    <td> 1 </td>
-                                    <td> BS-Anti Aging Body Scrub </td>
-                                    <td> 900.00 </td>
-                                    <td> 900.00 </td>
-                                  </tr>
-                                  <tr>
-                                    <td> 2 </td>
-                                    <td> OS-Ear Candling </td>
-                                    <td> 200.00 </td>
-                                    <td> 400.00 </td>
-                                  </tr>
+                            <table width="100%">
+                              <thead>
+                                <tr>
+                                  <th class="th-modal" width="20%"> Quantity </th>
+                                  <th class="th-modal" width="40%"> Service </th>
+                                  <th class="th-modal" width="20%"> Amount </th>
+                                  <th class="th-modal" width="30%"> Total Amount </th>
+                                </tr>
+                              </thead>
+                              <tbody class="orderContainer">
+                                <tr>
+                                  <td class="td-quantity"> 2 </td>
+                                  <td> MS-Swedish Massage </td>
+                                  <td> 399.00 </td>
+                                  <td> 798.00 </td>
+                                </tr>
+                                <tr>
+                                  <td> 1 </td>
+                                  <td> BS-Anti Aging Body Scrub </td>
+                                  <td> 900.00 </td>
+                                  <td> 900.00 </td>
+                                </tr>
+                                <tr>
+                                  <td> 2 </td>
+                                  <td> OS-Ear Candling </td>
+                                  <td> 200.00 </td>
+                                  <td> 400.00 </td>
+                                </tr>
                               </tbody>
                             </table>
                             <hr>
@@ -402,37 +462,44 @@
                               <strong>Total:</strong>
                               <span style="font-size: 15px; margin-right: 10px;" class="badge total">Php 2,098.00</span>
                             </p>
-                        </div><br>
-                        <div class="row">
-                          <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 30px">
-                            <p style="text-align: left; text-transform: uppercase;">Date and Time of Treatment: </p>
-                            <p id="datetimeReserve" class="custAddress">Tuesday, April 7, 2018  1:00 PM</p>
                           </div>
+                          <br>
+                          <div class="row">
+                            <div class="col-md-6 col-lg-6 col-xs-12" style="padding-left: 30px">
+                              <p style="text-align: left; text-transform: uppercase;">Date and Time of Treatment: </p>
+                              <p id="datetimeReserve" class="custAddress">Tuesday, April 7, 2018 1:00 PM</p>
+                            </div>
                           </div>
-                        <br><br>
-                        <div style="background-color: #9E2F46; margin: 0px; padding: 5px;">
-                          <h3 style="text-align: center; color: white">Important Notice:</h3>
+                          <br>
+                          <br>
+                          <div style="background-color: #9E2F46; margin: 0px; padding: 5px;">
+                            <h3 style="text-align: center; color: white">Important Notice:</h3>
+                          </div>
+                          <div>
+                            <p class="notifdiv">Payment shall be made upon completion of service.</p>
+                          </div>
+                          <div class="checkbox" style="padding-left: 500px; text-align: left;">
+                            <label>
+                              <input type="checkbox" id="agree" value="">I hereby acknowledge that
+                              <strong>I have read and understood</strong> the agreement as provided by the Eforea Nail and Body Spa.</label>
+                          </div>
+                          <hr>
                         </div>
-                        <div>
-                          <p class="notifdiv">Payment shall be made upon completion of service.</p>
+                        <div class="form-group" style="padding-right: 20px">
+                          <a href="#" id="finish" class="buttonFinish btn" style="width: 150px; float: right; margin-right: 5px">
+                            <span class="fa fa-heart"></span> Reserve Now!</a>
+                          <a href="#step-2" id="prev2" class="buttonPrevious btn pull-right" style="width: 100px; float: left; margin-right: 5px">
+                            <span class="fa fa-arrow-left"></span> Previous</a>
                         </div>
-                        <div class="checkbox" style="padding-left: 500px; text-align: left;">
-                          <label><input type="checkbox" id="agree" value="">I hereby acknowledge that <strong>I have read and understood</strong> the agreement as provided by the Eforea Nail and Body Spa.</label>
-                        </div><hr>
-                      </div>
-                      <div class="form-group" style="padding-right: 20px">
-                        <a href="#" id="finish" class="buttonFinish btn" style="width: 150px; float: right; margin-right: 5px"><span class="fa fa-heart"></span> Reserve Now!</a>
-                        <a href="#step-2" id="prev2" class="buttonPrevious btn pull-right" style="width: 100px; float: left; margin-right: 5px"><span class="fa fa-arrow-left"></span> Previous</a>
-                      </div>
-                    </form>
+                      </form>
                   </div>
                   <!-- End of Step 3 -->
                 </div>
                 <!-- End SmartWizard Content -->
               </div>
+            </div>
           </div>
-        </div>
-        <br />
+          <br />
         </div>
       </div>
     </div>
@@ -460,7 +527,8 @@
               <tr>
                 <th class="thtd-addCart">Price: </th>
                 <td class="thtd-addCart">
-                  <span id="priceHolder"></span><span>.00</span>
+                  <span id="priceHolder"></span>
+                  <span>.00</span>
                 </td>
               </tr>
               <tr>
@@ -497,18 +565,20 @@
             <hr>
             <h4>Description:</h4>
             <p class="info-desc"></p>
-            <img src="assets/images/icon-lotus.png" style="width: 15%;"
-            alt="Eforea Nail and Body Spa"><br><br>
+            <img src="assets/images/icon-lotus.png" style="width: 15%;" alt="Eforea Nail and Body Spa">
+            <br>
+            <br>
             <h5>
               <strong>Price:</strong> PHP
-              <span class="info-price"></span><span>.00</span>/
+              <span class="info-price"></span>
+              <span>.00</span>/
               <span class="info-time"></span>minutes
             </h5>
           </center>
         </div>
-        </div>
       </div>
     </div>
+  </div>
 
   <!-- User Data Modal -->
   <div class="modal fade" id="getUserData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -558,7 +628,7 @@
     </div>
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="assets/vendor/jquery/jquery.js"></script>
   <script>window.jQuery || document.write('<script src="assets/bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
