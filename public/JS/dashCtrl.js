@@ -125,45 +125,45 @@ $(function () {
                     html += "<tr><td onclick='showStaffDetail(\"" + count + "\")'>" + x.name + "</td></tr>";
                     count++;
                     staffName['' + x.id] = x.name;
-                    html1 += "<option value='" + x.id + "'>" + x.name + "</option>";                                                    
+                    html1 += "<option value='" + x.id + "'>" + x.name + "</option>";
                 });
                 $('#tList').html(html);
-                $('.therapist').html(html1);                                    
+                $('.therapist').html(html1);
 
-                operation['availStaff'] = function(){
+                operation['availStaff'] = function () {
                     var available = [];
-                    var addToAvail = function(cb){
+                    var addToAvail = function (cb) {
                         var x = staff.length;
-                        staff.forEach(a=>{
+                        staff.forEach(a => {
                             available.push(a.id);
                             x--;
-                            if(x==0) cb();
+                            if (x == 0) cb();
                         });
                     }
-                    var delUnavail = function(cb){
+                    var delUnavail = function (cb) {
                         var count = sessions.length;
-                        sessions.forEach(x=>{
+                        sessions.forEach(x => {
                             var z = $.inArray(parseInt(x.data.tID), available);
-                            if(z !== -1){
+                            if (z !== -1) {
                                 available.splice(z, 1);
                             }
                             count--;
-                            if(count == 0) cb();
+                            if (count == 0) cb();
                         });
                     }
-                    addToAvail(function(){
-                        delUnavail(function(){
+                    addToAvail(function () {
+                        delUnavail(function () {
                             var html = "";
-                            staff.forEach(x=>{
-                                if($.inArray(parseInt(x.id), available) != -1){
-                                    html += "<option value='" + x.id + "'>" + x.name + "</option>";                                                                                        
+                            staff.forEach(x => {
+                                if ($.inArray(parseInt(x.id), available) != -1) {
+                                    html += "<option value='" + x.id + "'>" + x.name + "</option>";
                                 }
                             });
-                            $('.therapist').html(html);                                                                
+                            $('.therapist').html(html);
                         });
                     });
                 }
-                showStaffDetail(0);                
+                showStaffDetail(0);
             }
         });
     }
@@ -291,6 +291,7 @@ $(function () {
 
     _getData(_displayToDD);
     _getStaffData();
+    loadDashboard();
 });
 //This is called by every row in the Service List.
 function showDetail(param) {
@@ -615,6 +616,7 @@ function resetsession() { //resets fields when NEW SESSION is clicked
     document.getElementById("contnum").value = "";
     document.getElementById("selectedServ").value = "";
     document.getElementById("totAmtNs").value = "";
+    document.getElementById("serviceSS").value = 0; //TUPS: Reset it to first item    
 }
 
 function servtypelistleave() { //Actions on HOME and REGULAR SERVICE (NEW SESSION)
@@ -733,12 +735,12 @@ function editTherapist() {
                 address: add,
                 gender: "Female"
             };
-            console.log(data);
-            operation.sendStaffData(2, data, function(res){
-                if(res){
+            //console.log(data);
+            operation.sendStaffData(2, data, function (res) {
+                if (res) {
                     confirmFunction(9);
                     operation.getStaffData();
-                }else{
+                } else {
                     confirmFunction(-1);
                 }
             });
@@ -839,6 +841,7 @@ function resetsched() {
     $('#custservSched').val("");
     $('#custtotamtSched').val("");
     $('#custgenderSched').val("Male");
+    $('#custtherapSched').val("");
     $('#btnConfReserv2').hide();
     $('#btnCancReserv2').hide();
     $('#btnConfReserv').show();
@@ -854,58 +857,113 @@ function confirmReserv2() {
     var name = document.getElementById("custnameSched").value;
     var add = document.getElementById("custaddressSched").value;
     var cont = document.getElementById("custcontnumSched").value;
+    var sety = document.getElementById("custservtype").value;
     var serv = document.getElementById("custservSched").value;
     var amt = document.getElementById("custtotamtSched").value;
+    var ther = document.getElementById("custtherapSched").value;
 
-    if (name == "" || name.length == 0 || name == null
-        || add == "" || add.length == 0 || add == null
-        || cont == "" || cont.length == 0 || cont == null
-        || serv == "" || serv.length == 0 || serv == null
-        || amt == "" || amt.length == 0 || amt == null) {
-        swal("Oops!", "Please fill out all required fields.", "error");
+    if (sety == "Home Service") {
+        if (name == "" || name.length == 0 || name == null
+            || add == "" || add.length == 0 || add == null
+            || cont == "" || cont.length == 0 || cont == null
+            || serv == "" || serv.length == 0 || serv == null
+            || amt == "" || amt.length == 0 || amt == null
+            || ther == "" || ther.length == 0 || ther == null
+            || sety == "" || sety.length == 0 || sety == null) {
+            swal("Oops!", "Please fill out all required fields.", "error");
+        }
+        else {
+            document.getElementById('modques').innerHTML = "Are you sure you want to confirm this session?";
+            $('#confirmModal').modal('show');
+
+            $('#btnone').off();
+            $('#btnone').click(function () {
+                var count = 0;
+                reserEvent.forEach(x => {
+                    if (x._id == selectedService) {
+                        var data = {
+                            name: $('.reserName').val(),
+                            address: $('.reserAdd').val(),
+                            contact: $('.reserCont').val(),
+                            sID: $('.reserServ').val(),
+                            tID: $('#custtherapSched').val(),
+                            amount: $('.reserTot').val()
+                            //TUPS: Palagay dito yung sa therapist and type of service
+                        };
+                        transaction.addSession(data, function (res) {
+                            if (res == 0) {
+                                reserEvent.splice(count, 1);
+                                $.post('admin/delSched', { id: x._id }, function (res) {
+                                    if (res.error == 0) {
+                                        confirmFunction(10);
+                                        loadReservation();
+                                    } else {
+                                        confirmFunction(-1);
+                                    }
+                                }).fail(function () {
+                                    confirmFunction(-1);
+                                });
+                            } else {
+                                confirmFunction(-1);
+                            }
+                        });
+                    }
+                    count++;
+                });
+            });
+        }
     }
     else {
-        document.getElementById('modques').innerHTML = "Are you sure you want to confirm this session?";
-        $('#confirmModal').modal('show');
+        if (name == "" || name.length == 0 || name == null
+            || serv == "" || serv.length == 0 || serv == null
+            || amt == "" || amt.length == 0 || amt == null
+            || ther == "" || ther.length == 0 || ther == null
+            || sety == "" || sety.length == 0 || sety == null) {
+            swal("Oops!", "Please fill out all required fields.", "error");
+        }
+        else {
+            document.getElementById('modques').innerHTML = "Are you sure you want to confirm this session?";
+            $('#confirmModal').modal('show');
 
-        $('#btnone').off();
-        $('#btnone').click(function () {
-            var count = 0;
-            reserEvent.forEach(x => {
-                if (x._id == selectedService) {
-                    var data = {
-                        name: $('.reserName').val(),
-                        address: $('.reserAdd').val(),
-                        contact: $('.reserCont').val(),
-                        sID: $('.reserServ').val(),
-                        tID: $('#custtherapSched').val(),
-                        amount: $('.reserTot').val(),
-                        stype: $('.reserST').val(),
-                        services: serviceSelc
-                    };
-                    transaction.addSession(data, function (res) {
-                        if (res == 0) {
-                            reserEvent.splice(count, 1);
-                            $.post('admin/delSched', { id: x._id }, function (res) {
-                                if (res.error == 0) {
-                                    if(reserEvent.length == 1){ reserEvent = [] }
-                                    confirmFunction(10);
-                                    loadReservation();
-                                    sessionUpdate();
-                                } else {
+            $('#btnone').off();
+            $('#btnone').click(function () {
+                var count = 0;
+                reserEvent.forEach(x => {
+                    if (x._id == selectedService) {
+                        var data = {
+                            name: $('.reserName').val(),
+                            address: $('.reserAdd').val(),
+                            contact: $('.reserCont').val(),
+                            sID: $('.reserServ').val(),
+                            tID: $('#custtherapSched').val(),
+                            amount: $('.reserTot').val(),
+                            stype: $('.reserST').val(),
+                            services: serviceSelc
+                        };
+                        transaction.addSession(data, function (res) {
+                            if (res == 0) {
+                                reserEvent.splice(count, 1);
+                                $.post('admin/delSched', { id: x._id }, function (res) {
+                                    if (res.error == 0) {
+                                        if (reserEvent.length == 1) { reserEvent = [] }
+                                        confirmFunction(10);
+                                        loadReservation();
+                                        sessionUpdate();
+                                    } else {
+                                        confirmFunction(-1);
+                                    }
+                                }).fail(function () {
                                     confirmFunction(-1);
-                                }
-                            }).fail(function () {
+                                });
+                            } else {
                                 confirmFunction(-1);
-                            });
-                        } else {
-                            confirmFunction(-1);
-                        }
-                    });
-                }
-                count++;
+                            }
+                        });
+                    }
+                    count++;
+                });
             });
-        });
+        }
     }
 }
 
@@ -983,6 +1041,7 @@ function cancReserve2() {
     document.getElementById("custservSched").disabled = true;
     document.getElementById("custtotamtSched").disabled = true;
     document.getElementById("custgenderSched").disabled = true;
+    document.getElementById("custtherapSched").disabled = true;
 }
 var xhalsdj = "";
 function loadReservation() {
@@ -1036,7 +1095,7 @@ function wrappedItem(arr, cb) {
     var count = arr.length;
     arr.forEach(x => {
         total += parseInt(x.price);
-        names += x.name + ",";
+        names += x.name + "; \n";
         xhalsdj += x.id + "/";
         count--;
         if (count == 0) out();

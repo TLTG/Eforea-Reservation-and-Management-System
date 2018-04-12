@@ -31,5 +31,6 @@ router.post('/recSession', transac.recordSession);
 router.post('/delSched', transac.removeSched);
 
 router.get('/dashInfo', transac.getDashDetail);
+router.get('/pastTransac', transac.getPastTrans);
 
 module.exports = router;

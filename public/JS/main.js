@@ -264,7 +264,7 @@ function setInitCart(){
     var cookies = decodeURIComponent(document.cookie).split(';');
     cookies.forEach(element => {
         var item = element.split('=');
-        if(item[0] === ' cart'){
+        if(item[0] === 'cart'){
             order = JSON.parse(item[1]);
             updateCart();
             var tot = 0;
@@ -304,7 +304,7 @@ function addToCart() {
                 quant: _quantity
             });
             document.cookie = "cart=" + JSON.stringify(order) + ";";
-            swal("Success!", "Session has been created!", "success");
+            swal("Success!", "Service has been added to your cart!", "success");
             $('#itemnum').val("1");
         }else {
             swal("Oops!", "Same entry is already reserved.", "error");
@@ -411,6 +411,7 @@ function submitReservation() {
             order = [];
             document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";                        
             window.location = "/";
+            setTimeout (callHome, 5000);
         } else if(response.status == 2){
             swal("Oops!", "Reservation Conflict! " + response.details, "error"); 
         }else{
@@ -418,6 +419,12 @@ function submitReservation() {
         }
     });
 }
+
+function callHome ()
+{
+    window.location = "/";
+}
+
 //This hides categories except on the parameter.
 function hideMenuExcept(param) {
     var apply = function (){

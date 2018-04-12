@@ -13,7 +13,7 @@ exports.recordSession = function(req, res, next){
         if(err){
             res.send({error: 1, detail: "Internal Server Error."});
         }else{
-            db.addTransaction([customerID, clients[id].data.services, clients[id].data.tID, req.body.total, 0], function(err, status){
+            db.addTransaction([customerID, clients[id].data.services, clients[id].data.tID, req.body.total, clients[id].data.stype], function(err, status){
                 if(err){
                     //next(new Error(err));
                     return res.send({error: 1});
@@ -64,5 +64,15 @@ exports.setClient = function(data){
 exports.getDashDetail = function(req, res, next){
     db.dashBoardDetail(null,function(data){
         res.send(data);
+    });
+}
+
+exports.getPastTrans = function(req, res, next){
+    db.getPastTransaction(null, function(err, results){
+        if(err){ 
+            res.send({error: 1});
+            return next(new Error(err));
+        }
+        res.send({error: 0, data: results});
     });
 }
