@@ -64,8 +64,8 @@ function sessionUpdate(){
                 html2 += html;
             }
         });
-        $('.sessionList').html(html1);
-        $('.homeSession').html(html2);
+        $('.sessionList').html(html1 === "" ? "<tr><th colspan='5'><p>None</p></th></tr>" : html1);
+        $('.homeSession').html(html2 === "" ? "<tr><th colspan='5'><p>None</p></th></tr>" : html2);
         $('#sessionNumber').html(sessions.length);
         operation.availStaff();
     });
@@ -73,7 +73,7 @@ function sessionUpdate(){
 
 function addToOrder(){
     var x = $('#serviceSS').val();
-    $('#selectedServ').val($('#selectedServ').val() + servName[x] + ",");
+    $('#selectedServ').val($('#selectedServ').val() + servName[x] + "; \n");
     serviceTot +=  parseInt(servPrice[x+'']);
     $('#totAmtNs').val(serviceTot);
     serviceSelc += x + "/";
@@ -98,7 +98,7 @@ function doneFreakingSession(){
 }
 
 function getSessionDetail(input){
-    var serv = input.data.sID.split(',');
+    var serv = input.data.sID.split('; \n');
     var price = 0;
     serv.forEach(x=>{
         var name = x;
@@ -125,8 +125,8 @@ function loadDashboard(){
     $.get('admin/dashInfo', function(res){
         $('.totTran').html(res.transaction);
         $('.totRes').html(res.reservation);
-        $('.totColT').html(res.tsale);
-        $('.totColW').html(res.wsale);
+        $('.totColT').html(res.tsale == null ? 0 : res.tsale);
+        $('.totColW').html(res.wsale == null ? 0 : res.wsale);
         var html = "", count = 1;
         res.topEmployee.forEach(x=>{
             html += "<div><p><span class='fa fa-user-md'></span> " + x.name + "</p>";
@@ -137,4 +137,52 @@ function loadDashboard(){
         });
         $('.topThera').html(html);
     });
+}
+
+function getServiceNames(data, done){
+    var arr = data.split('/');
+    var count = arr.length;
+    var names = "";
+    arr.forEach(x=>{
+        if(x!==''){
+            names += servName[x] + "; \n";
+        }
+        count--;
+        if(count == 0){
+            done(names);
+        }
+    });
+}
+
+function loadPastTransac(){
+    $.get('admin/pastTransac', function(res){
+        if(res.error === 0){
+            var reg = "";
+            var home = "";
+            res.data.forEach(x=>{
+                getServiceNames(x.serviceID, function(names){
+                    var html = "<tr>";
+                    html += "<td>"+ x.id +"</td>";
+                    html += "<td>"+ x.customer +"</td>";
+                    html += "<td>" + x.therapist + "</td>";
+                    html += "<td>"+ names +"</td>";
+                    html += "<td>" + x.date + "</td>";
+                    html += "</tr>";
+                    if(x.serviceType == 1){
+                        reg += html;
+                    }else{
+                        home += html;
+                    }
+                });
+            });
+            $('.pastTransactionHome').html(home);
+            $('.pastTransactionReg').html(reg);
+        }else{
+            confirmFunction(-1);
+        }
+    });
+}
+
+function sessionUpdatePast(){
+    loadPastTransac();
 }

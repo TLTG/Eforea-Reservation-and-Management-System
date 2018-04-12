@@ -36,7 +36,7 @@ exports.addCustomer = function(data, done){
 }
 
 exports.addTransaction = function(data, done){
-    var sql = "CALL addTrans(?,?,?,?,?)";
+    var sql = "CALL addTrans(?,?,?,?,?,?)";
     db.get().query(sql, data, function(err, result){
         if(err) return done(err);
         done(null, result[0]);
@@ -155,5 +155,13 @@ exports.dashBoardDetail = function(_data, done){
 
     query1().then(query2).then(query3).then(query4).then(query5).then(query6).then(function(){
         done(data);
+    });
+}
+
+exports.getPastTransaction = function(data, done){
+    var sql = "SELECT t.id, c.name as customer, e.name as therapist, t.serviceID, t.date, t.serviceType FROM transaction t, customer c, employee e WHERE c.id = t.customerID AND e.id = t.attendantID";
+    db.get().query(sql, function(err, results){
+        if(err) return done(err);
+        done(null, results);
     });
 }
