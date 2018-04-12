@@ -85,7 +85,7 @@
                       <a id="trans1">Today's Transactions </a>
                     </li>
                     <li>
-                      <a id="trans2">Past Transactions </a>
+                      <a id="trans2" onclick="loadPastTransac()">Past Transactions </a>
                     </li>
                   </ul>
                 </li>
@@ -201,7 +201,7 @@
               </center>
               <hr>
               <div class="pull-right">
-                <div class="input-group">
+                <div class="input-group" style="float: left;">
                   <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdate()" style="width: 150px; margin-right: 5px">
                     <span class="fa fa-refresh"></span>&nbsp;Refresh</button>
                 </div>
@@ -226,7 +226,7 @@
                       </tr>
                     </thead>
                     <tbody class="sessionList">
-                      <tr>
+                      <!-- <tr>
                         <td> 1 </td>
                         <td> Perrine Laganzo </td>
                         <td> Fred Weasley </td>
@@ -267,7 +267,7 @@
                             <span class="fa fa-times"></span>
                           </button>
                         </td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </center>
@@ -289,7 +289,7 @@
                       </tr>
                     </thead>
                     <tbody class="homeSession">
-                      <tr>
+                      <!-- <tr>
                         <td class="td-quantity"> 1 </td>
                         <td> Graciella C. Tatel </td>
                         <td> Harry Potter </td>
@@ -316,7 +316,7 @@
                             <span class="fa fa-times"></span>
                           </button>
                         </td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </center>
@@ -430,8 +430,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="col-md-12 col-sm-12 col-xs-6">
-                </div> -->
               </div>
             </div>
             <br>
@@ -547,6 +545,7 @@
       </div>
     </div>
     <br>
+
     <!-- page content SCHEDULE-->
     <div class="right_col3" role="main">
       <div class="">
@@ -958,6 +957,10 @@
           <br>
           <br>
           <div class="pull-right">
+            <div class="input-group" style="float: left;">
+              <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdate()" style="width: 150px; margin-right: 5px">
+                <span class="fa fa-refresh"></span>&nbsp;Refresh</button>
+            </div>
             <div class="input-group">
               <button class="btn btn1" id="btnNewSession" type="button" data-toggle="modal" data-target="#newSessionModal" onclick="resetsession()"
                 style="width: 150px; margin-right: 5px">
@@ -981,7 +984,7 @@
                 </tr>
               </thead>
               <tbody class="sessionList">
-                <tr>
+                <!-- <tr>
                   <td> 1 </td>
                   <td> Perrine Laganzo </td>
                   <td> Fred Weasley </td>
@@ -1022,7 +1025,7 @@
                       <span class="fa fa-times"></span>
                     </button>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </center>
@@ -1044,7 +1047,7 @@
                 </tr>
               </thead>
               <tbody class="homeSession">
-                <tr>
+                <!-- <tr>
                   <td class="td-quantity"> 1 </td>
                   <td> Graciella C. Tatel </td>
                   <td> Harry Potter </td>
@@ -1057,6 +1060,85 @@
                       <span class="fa fa-times"></span>
                     </button>
                   </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </center>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- page content PAST TRANSACTIONS-->
+    <div class="right_col7" role="main" style="display: none">
+      <div class="page-title">
+        <div class="row" style="border-bottom: solid 1px #034777; padding-bottom: 10px">
+          <div class="col-md-8 col-sm-8 col-xs-6">
+            <h3>Past Transactions (April)</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 transdiv1">
+          <br>
+          <br>
+          <div class="pull-right">
+            <div class="input-group" style="float: left;">
+              <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdatePast()" style="width: 150px; margin-right: 5px">
+                <span class="fa fa-refresh"></span>&nbsp;Refresh</button>
+            </div>
+          </div>
+          <center>
+            <h3 style="text-transform: uppercase;">April Sessions</h3>
+          </center>
+          <hr>
+          <h3>Regular Service</h3>
+          <center>
+            <table width="100%" class="table-hover table-striped tableregserv">
+              <thead>
+                <tr>
+                  <th class="th-modal" width="3%"> # </th>
+                  <th class="th-modal" width="20%"> Client Name </th>
+                  <th class="th-modal" width="20%"> Therapist </th>
+                  <th class="th-modal" width="30%"> Service(s) </th>
+                  <th class="th-modal" width="15%"> Date </th>
+                </tr>
+              </thead>
+              <tbody class="pastTransactionReg">
+                <tr>
+                  <td> 1 </td>
+                  <td> Perrine Laganzo </td>
+                  <td> Fred Weasley </td>
+                  <td> Shiatsu Massage </td>
+                  <td> 04-01-2018 </td>
+                </tr>
+              </tbody>
+            </table>
+          </center>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 transdiv1">
+          <h3>Home Service</h3>
+          <center>
+            <table width="100%" class="table-hover table-striped tableregserv">
+              <thead>
+                <tr>
+                  <th class="th-modal" width="3%"> # </th>
+                  <th class="th-modal" width="20%"> Client Name </th>
+                  <th class="th-modal" width="20%"> Therapist </th>
+                  <th class="th-modal" width="30%"> Service(s) </th>
+                  <th class="th-modal" width="15%"> Date </th>
+                </tr>
+              </thead>
+              <tbody class="pastTransactionHome">
+                <tr>
+                  <td class="td-quantity"> 1 </td>
+                  <td> Graciella C. Tatel </td>
+                  <td> Harry Potter </td>
+                  <td> Swedish Massage </td>
+                  <td> 04-01-2018 </td>
                 </tr>
               </tbody>
             </table>
