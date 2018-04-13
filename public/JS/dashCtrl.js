@@ -247,7 +247,8 @@ $(function () {
                     contact: cont,
                     sID: serv,
                     tID: $('#therapist').val(),
-                    stype: st
+                    stype: st,
+                    services: serviceSelc
                 };
                 transaction.addSession(data, function (res) {
                     if (res == 0) {
@@ -391,8 +392,8 @@ function resetcategory() { //reset ADD CATEGORY fields every time it is opened
 
 function resetservice() { //reset ADD SERVICE fields every time it is opened 
     document.getElementById('servNameAdd').value = "";
-    document.getElementById('servPriceMaleAdd').value = "100.00";
-    document.getElementById('servPriceFemaleAdd').value = "100.00";
+    document.getElementById('servPriceMaleAdd').value = "100";
+    document.getElementById('servPriceFemaleAdd').value = "100";
     document.getElementById('servDescEdit').value = "";
 }
 
@@ -509,17 +510,31 @@ function cancelSession(x) { //REMOVE CATEGORY FUNCTION (T)
 function doneSession(x) { //REMOVE CATEGORY FUNCTION (T)
     document.getElementById('modques').innerHTML = "Session finished?";
     $('#confirmModal').modal('show');
+    var popSession = function (a, cb) {
+        var count = sessions.length;
+        sessions.forEach(b => {
+            if (b.id == a) {
+                return cb(b);
+            }
+            count--;
+            if (count === 0) {
+                cb(null);
+            }
+        });
+    }
     $('#btnone').off();
     $('#btnone').click(function () {
-        $('#doneSessionModal').modal('show');
-        $('#invtoName').html(sessions[x].data.name);
-        $('#invtoAddress').html(sessions[x].data.address);
-        $('#invtoContnum').html(sessions[x].data.contact);
-        $('#invoiceNum').html(Math.floor(Math.random() * 1000000));
-        $('#invPaymentDue').html(Date.parse('tomorrow').toString('MM/dd/yyyy'));
-        selectedService = x;
-        $('#servicesTable').html('');
-        getSessionDetail(sessions[x]);
+        popSession(x, function (session) {
+            $('#doneSessionModal').modal('show');
+            $('#invtoName').html(session.data.name);
+            $('#invtoAddress').html(session.data.address);
+            $('#invtoContnum').html(session.data.contact);
+            $('#invoiceNum').html(Math.floor(Math.random() * 1000000));
+            $('#invPaymentDue').html(Date.parse('tomorrow').toString('MM/dd/yyyy'));
+            selectedService = x;
+            $('#servicesTable').html('');
+            getSessionDetail(session);
+        });
     });
 }
 

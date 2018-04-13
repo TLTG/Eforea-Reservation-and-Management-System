@@ -1,36 +1,55 @@
 var db = require('../model/transaction');
 
 var clients = [];
+var id_count = 0;
 
 exports.getCurrentSession = function(req, res, next){
     res.send(clients);
 }
 
 exports.recordSession = function(req, res, next){
-    var id = req.body.id;
     var customerID;
-    db.addCustomer([clients[id].data.name, clients[id].data.address, clients[id].data.contact], function(err, customerID){
-        if(err){
-            res.send({error: 1, detail: "Internal Server Error."});
-        }else{
-            db.addTransaction([customerID, clients[id].data.services, clients[id].data.tID, req.body.total, clients[id].data.stype], function(err, status){
-                if(err){
-                    //next(new Error(err));
-                    return res.send({error: 1});
-                }else{
-                    clients.splice(id, 1);
-                    res.send({error: 0});
-                    return;
-                }
-            });
-        }
+    var popClient = function(x, cb){
+        var count = clients.length;
+        var count1 = 0;
+        clients.forEach(a=>{
+            if(a.id == x){
+                return cb(a, count1);
+            }
+            count--;
+            count1++;
+            if(count === 0){
+                cb(null);
+                return;
+            }
+        });
+    }
+    popClient(req.body.id, function(client, id){
+        db.addCustomer([client.data.name, client.data.address, client.data.contact], function(err, customerID){
+            if(err){
+                res.send({error: 1, detail: "Internal Server Error."});
+            }else{
+                db.addTransaction([customerID, client.data.services, client.data.tID, req.body.total, client.data.stype], function(err, status){
+                    if(err){
+                        res.send({error: 1});
+                        return next(new Error(err));
+                    }else{
+                        clients.splice(id, 1);
+                        res.send({error: 0});
+                        return;
+                    }
+                });
+            }
+        });
     });
 }
 
 exports.addSession = function(req, res, next){
-    var data = {id: clients.length, data: req.body};
-    res.send({error: 0, data: clients.length});
+    var _id = Date.today().getMonth()+1 + "" + Date.today().getDate() + "" + id_count; 
+    var data = {id: clients.length, data: req.body, display: _id};
+    res.send({error: 0, data: clients.length, display: _id});
     clients.push(data);
+    id_count++;
 }
 
 exports.removeSession = function(req, res, next){
