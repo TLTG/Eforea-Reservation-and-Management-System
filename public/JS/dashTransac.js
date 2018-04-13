@@ -13,7 +13,7 @@ var transaction = {
     addSession: function(_data, cb){
         $.post('admin/addSession', _data, function(res){
             if(res.error == 0){
-                sessions.push({id:res.data, data: _data});
+                sessions.push({id:res.data,disID: res.display, data: _data});
                 cb(0);
             }else{
                 cb(1);
@@ -52,7 +52,7 @@ function sessionUpdate(){
             var html = "";
             var serv = servName[x.data.sID] == undefined ? x.data.sID : servName[x.data.sID];
             html += "<tr>";
-            html += "<td>"+ (parseInt(x.id) + 1) +"</td>";
+            html += "<td>"+ (x.data.stype == 1 ? ("RS-" + x.display) : ("HS-" + x.display)) +"</td>";
             html += "<td>"+ x.data.name +"</td>";
             html += "<td>"+ staffName[x.data.tID] + "</td>";
             html += "<td>" + serv + "</td>";
@@ -90,7 +90,7 @@ function doneFreakingSession(){
                 doneFreakingSession();
                 errorCount++;
             }else{
-                confirmFunction(-1);
+                confirmFunction(-1, res.detail);
                 errorCount = 0;
             }
         }
