@@ -116,10 +116,10 @@ function getSessionDetail(input) {
             service.services.forEach(y => {
                 if (y.name === x) {
                     price += parseInt(y.amount);
-                    var html = "<tr><!--<td>1</td>--><td>" + name + "</td><td>" + y.amount + "</td></tr>";
+                    var html = "<tr><!--<td>1</td>--><td>" + name + "</td><td>" + parseInt(y.amount).formatMoney(2,'.',',') + "</td></tr>";
                     $('#servicesTable').append(html);
-                    $('.fnlPrice').html(price);
-                    selectedStaff = price;
+                    $('.fnlPrice').html((price).formatMoney(2,'.',','));
+                    selectedStaff = (price).formatMoney(2,'.',',');
                 }
                 count++;
             });
@@ -131,8 +131,8 @@ function loadDashboard() {
     $.get('admin/dashInfo', function (res) {
         $('.totTran').html(res.transaction);
         $('.totRes').html(res.reservation);
-        $('.totColT').html(res.tsale == null ? "0.00" : res.tsale + ".00");
-        $('.totColW').html(res.wsale == null ? "0.00" : res.wsale + ".00");
+        $('.totColT').html(res.tsale == null ? "0.00" : res.tsale.formatMoney(2,'.',',') + ".00");
+        $('.totColW').html(res.wsale == null ? "0.00" : res.wsale.formatMoney(2,'.',',') + ".00");
         var html = "", count = 1;
         res.topEmployee.forEach(x => {
             html += "<div><p><span class='fa fa-user-md'></span> " + x.name + "</p>";
@@ -262,8 +262,8 @@ function generateReceipt(_data) {
                 service.services.forEach(y => {
                     if (y.name === x) {
                         price += parseInt(y.amount);
-                        dd.content[7].table.body.push([y.name,y.amount]);
-                        total = price;
+                        dd.content[7].table.body.push([y.name,parseInt(y.amount).formatMoney(2,'.',',')]);
+                        total = price.formatMoney(2,'.',',');
                         cb(total);
                     }
                     count++;
