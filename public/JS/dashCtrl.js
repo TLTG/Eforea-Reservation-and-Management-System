@@ -534,6 +534,7 @@ function doneSession(x) { //REMOVE CATEGORY FUNCTION (T)
             selectedService = x;
             $('#servicesTable').html('');
             getSessionDetail(session);
+            generateReceipt(session);
         });
     });
 }
@@ -964,6 +965,7 @@ function confirmReserv2() {
                                         confirmFunction(10);
                                         loadReservation();
                                         sessionUpdate();
+                                        operation.availStaff();
                                     } else {
                                         confirmFunction(-1);
                                     }
