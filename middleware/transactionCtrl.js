@@ -46,8 +46,8 @@ exports.recordSession = function(req, res, next){
 
 exports.addSession = function(req, res, next){
     var _id = Date.today().getMonth()+1 + "" + Date.today().getDate() + "" + id_count; 
-    var data = {id: clients.length, data: req.body, display: _id};
-    res.send({error: 0, data: clients.length, display: _id});
+    var data = {id: id_count, data: req.body, display: _id};
+    res.send({error: 0, data: id_count, display: _id});
     clients.push(data);
     id_count++;
 }
