@@ -72,13 +72,11 @@ function sessionUpdate(){
 }
 
 function addToOrder(){
-    if($('#serviceSS').val() !== null){
-        var x = $('#serviceSS').val();
-        $('#selectedServ').val($('#selectedServ').val() + servName[x] + "; \n");
-        serviceTot +=  parseInt(servPrice[x+'']);
-        $('#totAmtNs').val(serviceTot);
-        serviceSelc += x + "/";
-    }
+    var x = $('#serviceSS').val();
+    $('#selectedServ').val($('#selectedServ').val() + servName[x] + "; \n");
+    serviceTot +=  parseInt(servPrice[x+'']);
+    $('#totAmtNs').val(serviceTot);
+    serviceSelc += x + "/";
 }
 
 function doneFreakingSession(){
@@ -87,7 +85,6 @@ function doneFreakingSession(){
             sessions.splice(selectedService, 1);
             confirmFunction(7);
             sessionUpdate();
-            loadDashboard();
         }else{
             if(errorCount == 0){
                 doneFreakingSession();
@@ -128,8 +125,8 @@ function loadDashboard(){
     $.get('admin/dashInfo', function(res){
         $('.totTran').html(res.transaction);
         $('.totRes').html(res.reservation);
-        $('.totColT').html(res.tsale == null ? "0.00" : res.tsale + ".00");
-        $('.totColW').html(res.wsale == null ? "0.00" : res.wsale + ".00");
+        $('.totColT').html(res.tsale == null ? 0 : res.tsale);
+        $('.totColW').html(res.wsale == null ? 0 : res.wsale);
         var html = "", count = 1;
         res.topEmployee.forEach(x=>{
             html += "<div><p><span class='fa fa-user-md'></span> " + x.name + "</p>";
