@@ -410,9 +410,8 @@ function submitReservation() {
             swal("Success!", "Session has been created! " + response.details, "success");
             order = [];
             document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";                        
-            setTimeout (callHome, 5000);
             window.location = "/";
-            
+            setTimeout (callHome, 5000);
         } else if(response.status == 2){
             swal("Oops!", "Reservation Conflict! " + response.details, "error"); 
         }else{
