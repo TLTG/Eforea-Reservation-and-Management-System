@@ -232,8 +232,8 @@ $(function () {
         var amt = document.getElementById("totAmtNs").value;
         var _room = $('#assignRoom').val();
         var now = new Date();
-        var timeIn = Date.parse((now.getHours()) + ":" + (now.getMinutes() -1)).toString('hh:mm tt');
-        var timeOut = Date.parse((now.getHours()+1) + ":" + (now.getMinutes() -1)).toString('hh:mm tt');
+        var timeIn = Date.parse((now.getHours()) + ":" + (now.getMinutes() - 1)).toString('hh:mm tt');
+        var timeOut = Date.parse((now.getHours() + 1) + ":" + (now.getMinutes() - 1)).toString('hh:mm tt');
 
         if (document.getElementById("servtypelist").value == "1") {
             if (custNameNS == "" || custNameNS.length == 0 || custNameNS == null || serviceTot == "") {
@@ -911,6 +911,10 @@ function confirmReserv2() {
     var serv = document.getElementById("custservSched").value;
     var amt = document.getElementById("custtotamtSched").value;
     var ther = document.getElementById("custtherapSched").value;
+    var _room = $('#assignRoom2').val();
+    var now = new Date();
+    var timeIn = Date.parse((now.getHours()) + ":" + (now.getMinutes() - 1)).toString('hh:mm tt');
+    var timeOut = Date.parse((now.getHours() + 1) + ":" + (now.getMinutes() - 1)).toString('hh:mm tt');
 
     if (sety == "Home Service") {
         if (name == "" || name.length == 0 || name == null
@@ -988,7 +992,9 @@ function confirmReserv2() {
                             tID: $('#custtherapSched').val(),
                             amount: $('.reserTot').val(),
                             stype: $('.reserST').val(),
-                            services: serviceSelc
+                            services: serviceSelc,
+                            time: timeIn + "/" + timeOut,
+                            room: _room
                         };
                         transaction.addSession(data, function (res) {
                             if (res == 0) {
@@ -1153,15 +1159,15 @@ function wrappedItem(arr, cb) {
     });
 }
 
-function assignRoom(a, input){ //TUPS: Automatically placing of data from new session or reservation to these (ROOM) fields
-//after confirming reservation or adding new session
-    var setRoom = function(room){
+function assignRoom(a, input) { //TUPS: Automatically placing of data from new session or reservation to these (ROOM) fields
+    //after confirming reservation or adding new session
+    var setRoom = function (room) {
         $(".roomIU" + room).show();
         $(".roomA" + room).hide();
         $(".roombtnA" + room).show();
         $(".roombtnB" + room).hide();
 
-        $('.roomA'+room).attr('data', input.id);
+        $('.roomA' + room).attr('data', input.id);
         $("#timeStartRoom" + room).html(input.data.time.split('/')[0]);
         $("#timeEndRoom" + room).html(input.data.time.split('/')[1]);
         $("#custNameRoom" + room).html(input.data.name);
@@ -1183,30 +1189,30 @@ function assignRoom(a, input){ //TUPS: Automatically placing of data from new se
 }
 
 function cancelSessionRoom(a) {
-    var resetRoom = function(room, cb){
+    var resetRoom = function (room, cb) {
         swal("Success!", "Room is now available!", "success");
 
-            $("#timeStartRoom" + room).val("");
-            $("#timeEndRoom" + room).val("");
-            $("#custNameRoom" + room).val("");
-            $("#custTherRoom" + room).val("");
-            $("#custServRoom" + room).val("");
+        $("#timeStartRoom" + room).val("");
+        $("#timeEndRoom" + room).val("");
+        $("#custNameRoom" + room).val("");
+        $("#custTherRoom" + room).val("");
+        $("#custServRoom" + room).val("");
 
-            $(".roomIU" + room).hide();
-            $(".roomA" + room).show();
-            $(".roombtnA" + room).hide();
-            //TUPS: Cancel session room function
-            transaction.roomUpdate(null, $('.roomA'+room).attr('data'), function(){
-                cb();
-            });
+        $(".roomIU" + room).hide();
+        $(".roomA" + room).show();
+        $(".roombtnA" + room).hide();
+        //TUPS: Cancel session room function
+        transaction.roomUpdate(null, $('.roomA' + room).attr('data'), function () {
+            cb();
+        });
     }
     if (a == 1) {
         document.getElementById('modques').innerHTML = "Are you sure you want to remove this session from this room?";
         $('#confirmModal').modal('show');
         $('#btnone').off();
         $('#btnone').click(function () {
-            resetRoom(1, function(){
-               rooms.room1 = false;
+            resetRoom(1, function () {
+                rooms.room1 = false;
             });
         });
     }
@@ -1215,7 +1221,7 @@ function cancelSessionRoom(a) {
         $('#confirmModal').modal('show');
         $('#btnone').off();
         $('#btnone').click(function () {
-            resetRoom(2, function(){
+            resetRoom(2, function () {
                 rooms.room2 = false;
             });
         });
@@ -1225,7 +1231,7 @@ function cancelSessionRoom(a) {
         $('#confirmModal').modal('show');
         $('#btnone').off();
         $('#btnone').click(function () {
-            resetRoom(3, function(){
+            resetRoom(3, function () {
                 rooms.room3 = false;
             });
         });
@@ -1235,18 +1241,18 @@ function cancelSessionRoom(a) {
         $('#confirmModal').modal('show');
         $('#btnone').off();
         $('#btnone').click(function () {
-            resetRoom(4, function(){
+            resetRoom(4, function () {
                 rooms.room4 = false;
             });
         });
     }
 }
 
-function clearRooms(){
+function clearRooms() {
     rooms = { room1: false, room2: false, room3: false, room4: false };
-    for(var x=1; x<=4; x++){
-        $(".roomA" + x).show();    
-        $(".roomIU" + x).hide();  
-        $(".roombtnA" + x).hide();  
+    for (var x = 1; x <= 4; x++) {
+        $(".roomA" + x).show();
+        $(".roomIU" + x).hide();
+        $(".roombtnA" + x).hide();
     }
 }
