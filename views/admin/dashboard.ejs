@@ -46,7 +46,7 @@
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title">
+            <a href="/" class="site_title">
               <span> EForea |
                 <span style="font-size: 14px;">Nail & Body Spa</span>
               </span>
@@ -94,6 +94,11 @@
                     <i class="fa fa-calendar"></i> Reservations Schedule </a>
                 </li>
                 <li>
+                    <a id="rooms">
+                        <i class="fa fa-leaf"></i> Rooms
+                      </a>
+                    </li>
+                    <li>
                   <a id="services1" onclick="getloadindiv()">
                     <i class="fa fa-heart"></i> Services
                   </a>
@@ -141,7 +146,7 @@
       <!-- /top navigation -->
 
       <!-- page content HOME -->
-      <div class="right_col" role="main">
+      <div class="right_col" role="main" style="display: none">
         <!-- top tiles -->
         <div class="row tile_count">
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -164,7 +169,7 @@
             <br>
             <div class="count totRes">12</div>
           </div>
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top">
               <i class="fa fa-money"></i>&nbsp; Total Collections</span>
             <br>
@@ -175,7 +180,7 @@
             </span>
             <small> From today</small>
           </div>
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top">
               <i class="fa fa-money"></i>&nbsp; Total Collections</span>
             <br>
@@ -542,7 +547,6 @@
         </div>
       </div>
     </div>
-    <br>
 
     <!-- page content SCHEDULE-->
     <div class="right_col3" role="main">
@@ -607,6 +611,14 @@
                     <option>Dobby</option>
                     <option>Umbridge</option>
                   </select>
+                  <p>Room:</p>
+                  <select class="form-control therapist" id="custtherapSched" style="font-size: 13px">
+                    <option value="0">---</option>
+                    <option value="1">Room #1</option>
+                    <option value="2">Room #2</option>
+                    <option value="3">Room #3</option>
+                    <option value="4">Room #4</option>
+                  </select>
                 </div>
                 <div class="modal-footer">
                   <center>
@@ -628,6 +640,7 @@
       </div>
     </div>
     <!-- </div> -->
+
     <!-- /page content -->
     <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
     <div id="fc_edit"></div>
@@ -939,7 +952,6 @@
         </div>
       </div>
     </div>
-    <br>
 
     <!-- page content TODAY'S TRANSACTIONS-->
     <div class="right_col6" role="main" style="display: none">
@@ -1145,6 +1157,164 @@
       </div>
     </div>
     <!-- /page content -->
+
+        <!-- page content ROOMS -->
+        <div class="right_col8" role="main" style="display: none">
+            <div class="page-title">
+              <div class="row" style="border-bottom: solid 1px #034777; padding-bottom: 10px">
+                <div class="col-md-8 col-sm-8 col-xs-6">
+                  <h3>Rooms</h3>
+                </div>
+                <div class="pull-right" style="padding-top: 10px;">
+                  <div class="input-group" style="float: left;">
+                    <button class="btn btn1" id="btnRefresh" type="button" onclick="sessionUpdate()" style="width: 150px; margin-right: 5px">
+                      <span class="fa fa-refresh"></span>&nbsp;Refresh</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br><br>
+            <div style="margin: 50px;">
+              <center>
+                <h3 style="text-transform: uppercase;">Current Sessions</h3><br>
+                <div class="row">
+                  <div class="col-md-5 col-sm-5 col-xs-12 room">
+                    <div class="roomTitle">
+                      <p style="font-size: 16px;"><b>ROOM #1</b></p>
+                    </div>
+                    <div class="roomContent">
+                      <div class="roomA1">
+                        <hr style="width: 40%">
+                        <p class="pull-left">Status: <span id="roomStatus">AVAILABLE</span></p>
+                      </div>
+                      <div class="roomIU1">
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Status: <b><span id="roomStatus">IN USE</span></b></p>
+                        <p style="text-align: left;">Time Started: <b><span id="timeStartRoom1"></span></b></p>
+                        <p style="text-align: left;">Expected Time to End: <b><span id="timeEndRoom1"></span></b></p>
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Customer Name: <b><span id="custNameRoom1"></span></b></p>
+                        <p style="text-align: left;">Therapist: <b><span id="custTherRoom1"></span></b></p>
+                        <p style="text-align: left;">Availed Service(s): <b><span id="custServRoom1"></span></b></p>
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="roomButtons">
+                      <center>
+                        <div class="roombtnA1" style="display: none;">
+                          <div class="input-group">
+                            <button class="btn btn1" id="btnRefresh" type="button" onclick="cancelSessionRoom(1)" style="width: 150px; margin-right: 5px"><span class="fa fa-times"></span>&nbsp;Cancel</button>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-1">
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-12 room">
+                    <div class="roomTitle">
+                      <p style="font-size: 16px;"><b>ROOM #2</b></p>
+                    </div>
+                    <div class="roomContent">
+                      <div class="roomA2">
+                        <hr style="width: 40%">
+                        <p class="pull-left">Status: <span id="roomStatus">AVAILABLE</span></p>
+                      </div>
+                      <div class="roomIU2">
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Status: <b><span id="roomStatus">IN USE</span></b></p>
+                        <p style="text-align: left;">Time Started: <b><span id="timeStartRoom2"></span></b></p>
+                        <p style="text-align: left;">Expected Time to End: <b><span id="timeEndRoom2"></span></b></p>
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Customer Name: <b><span id="custNameRoom2"></span></b></p>
+                        <p style="text-align: left;">Therapist: <b><span id="custTherRoom2"></span></b></p>
+                        <p style="text-align: left;">Availed Service(s): <b><span id="custServRoom2"></span></b></p>
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="roomButtons">
+                      <center>
+                        <div class="roombtnA2" style="display: none;">
+                          <div class="input-group">
+                            <button class="btn btn1" id="btnRefresh" type="button" onclick="cancelSessionRoom(2)" style="width: 150px; margin-right: 5px"><span class="fa fa-times"></span>&nbsp;Cancel</button>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 col-sm-5 col-xs-12 room">
+                    <div class="roomTitle">
+                      <p style="font-size: 16px;"><b>ROOM #3</b></p>
+                    </div>
+                    <div class="roomContent">
+                      <div class="roomA3">
+                        <hr style="width: 40%">
+                        <p class="pull-left">Status: <span id="roomStatus">AVAILABLE</span></p>
+                      </div>
+                      <div class="roomIU3">
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Status: <b><span id="roomStatus">IN USE</span></b></p>
+                        <p style="text-align: left;">Time Started: <b><span id="timeStartRoom3"></span></b></p>
+                        <p style="text-align: left;">Expected Time to End: <b><span id="timeEndRoom3"></span></b></p>
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Customer Name: <b><span id="custNameRoom3"></span></b></p>
+                        <p style="text-align: left;">Therapist: <b><span id="custTherRoom3"></span></b></p>
+                        <p style="text-align: left;">Availed Service(s): <b><span id="custServRoom3"></span></b></p>
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="roomButtons">
+                      <center>
+                        <div class="roombtnA3" style="display: none;">
+                          <div class="input-group">
+                            <button class="btn btn1" id="btnRefresh" type="button" onclick="cancelSessionRoom(3)" style="width: 150px; margin-right: 5px"><span class="fa fa-times"></span>&nbsp;Cancel</button>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-1">
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-12 room">
+                    <div class="roomTitle">
+                      <p style="font-size: 16px;"><b>ROOM #4</b></p>
+                    </div>
+                    <div class="roomContent">
+                      <div class="roomA4">
+                        <hr style="width: 40%">
+                        <p class="pull-left">Status: <span id="roomStatus">AVAILABLE</span></p>
+                      </div>
+                      <div class="roomIU4">
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Status: <b><span id="roomStatus">IN USE</span></b></p>
+                        <p style="text-align: left;">Time Started: <b><span id="timeStartRoom4"></span></b></p>
+                        <p style="text-align: left;">Expected Time to End: <b><span id="timeEndRoom4"></span></b></p>
+                        <hr style="width: 40%">
+                        <p style="text-align: left;">Customer Name: <b><span id="custNameRoom4"></span></b></p>
+                        <p style="text-align: left;">Therapist: <b><span id="custTherRoom4"></span></b></p>
+                        <p style="text-align: left;">Availed Service(s): <b><span id="custServRoom4"></span></b></p>
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="roomButtons">
+                      <center>
+                        <div class="roombtnA4" style="display: none;">
+                          <div class="input-group">
+                            <button class="btn btn1" id="btnRefresh" type="button" onclick="cancelSessionRoom(4)" style="width: 150px; margin-right: 5px"><span class="fa fa-times"></span>&nbsp;Cancel</button>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </center>
+            </div>
+            
+          </div>
+          <!-- /page content -->
 
     <!-- footer content -->
     <footer>
@@ -1571,6 +1741,20 @@
                         </select>
                       </div>
                     </div>
+                    <div class="form-group row" id="divroom">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="assignRoom">Assign Room:
+                          <span class="required">*</span>
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                          <select class="form-control assignRoom" id="assignRoom" style="font-size: 13px">
+                            <option value="0">---</option>
+                            <option value="1">Room #1</option>
+                            <option value="2">Room #2</option>
+                            <option value="3">Room #3</option>
+                            <option value="4">Room #4</option>
+                          </select>
+                        </div>
+                      </div>
                   </form>
                 </div>
               </div>
@@ -1709,6 +1893,8 @@
                                 <br>
                                 <button class="btn btn-success pull-right" onclick="doneFreakingSession()">
                                   <i class="fa fa-credit-card"></i> Paid</button>
+                                  <button class="btn btn-primary pull-right" onclick="pdf.Receipt.open()" style="margin-right: 5px">
+                                      <i class="fa fa-print"></i> Print Invoice </button>
                                 <button type="button" class="buttonPrevious btn pull-right" data-dismiss="modal" style="width: 80px; margin-right: 5px">Cancel</button>
                               </div>
                             </div>
@@ -1717,7 +1903,6 @@
                         <!-- /.row -->
 
                         <!-- this row will not appear when printing -->
-
                       </div>
                     </div>
                   </div>

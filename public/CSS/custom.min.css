@@ -3367,6 +3367,11 @@ p.servDesc
 	height: 1500px;
 }
 
+.right_col8
+{
+	height: 1000px;
+}
+
 .radio-label
 {
 	padding-left: 0px;
@@ -3459,4 +3464,33 @@ p.theTrans
 .custaddressSched
 {
 	line-height: 10px;
+}
+
+.room
+{
+	height: 350px;
+	border: solid 3px #022F4F;
+	border-radius: 5px;
+	margin: 20px;
+	padding: 20px;
+}
+
+#roomStatus, #timeStartRoom, #timeEndRoom, #custNameRoom, #custTherRoom, #custServRoom
+{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.roomContent
+{
+	overflow-y: auto; 
+	height: 220px;
+}
+
+.roomTitle
+{
+	width: 100%;
+	padding: 10px;
+	background-color: #AAD2EE;
+	border-radius: 5px;
 }

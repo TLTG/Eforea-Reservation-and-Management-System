@@ -396,9 +396,20 @@ $(document).ready(function () {
 		document.getElementById("btnserv10").classList.add('activegrp1');
 	});
 
+	$('#rooms').click(function(){
+		$(".right_col").hide();
+		$(".right_col2").hide();
+		$(".right_col3").hide();
+		$(".right_col4").hide();
+		$(".right_col6").hide();
+		$(".right_col7").hide();
+		$(".right_col5").hide();
+		$(".right_col8").show();
+	});
+
 	function reset() {
 		$(".inbox-body").hide();
 		$(".temp-msg").show();
 	}
 });
-//Have you ever the news that your dead?
+//Have you ever heard the news that your dead?
