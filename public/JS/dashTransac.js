@@ -187,6 +187,29 @@ function getSessionDetail(input) {
 }
 
 function loadDashboard() {
+    var topService = function(services, cb){
+        var data = services.split('/');
+        var top = [];
+        var count = data.length;
+        data.forEach(x=>{
+            if(x==''){
+            }else{
+                var a = -1;
+                for(var b=0; b<top.length; b++){
+                    if(top[b][0] == x){
+                        a = b;
+                    }
+                }
+                if(a == -1){
+                    top.push([x, 1]);
+                }else{
+                    top[a][1]++;
+                }
+            }
+            count--;
+            if(count === 0) return cb(top);
+        });
+    }
     $.get('admin/dashInfo', function (res) {
         $('.totTran').html(res.transaction);
         $('.totRes').html(res.reservation);
@@ -194,13 +217,38 @@ function loadDashboard() {
         $('.totColW').html(res.wsale == null ? "0.00" : res.wsale.formatMoney(2, '.', ','));
         var html = "", count = 1;
         res.topEmployee.forEach(x => {
-            html += "<div><p><span class='fa fa-user-md'></span> " + x.name + "</p>";
-            html += "<span id='most" + count + "t#'> (" + x.count + "<small> transactions</small>)</span></p>";
-            html += "<div><div class='progress progress_sm' style='width: 80%;'></div>";
+            html += "<div><p><span class='fa fa-user-md'></span> " + x.name;
+            html += "<span id='most" + count + "#'> (" + x.count + "<small> transactions</small>)</span></p>";
+            html += "<div><div class='progress progress_sm' style='width: 80%;'>";
             html += "<div class='progress-bar bg-purple' role='progressbar' data-transitiongoal='" + x.count + "'></div></div>";
-            html += "</div>"
+            html += "</div></div>"
         });
         $('.topThera').html(html);
+        topService(res.services, function(_topService){
+            var topService = _topService;
+            var count = topService.length;
+            for(var x=0; x<topService.length; x++){
+                for(var y=x; y<topService.length; y++){
+                    if(topService[y][1] > topService[x][1]){
+                        var temp = topService[x];
+                        topService[x] = topService[y];
+                        topService[y] = temp;
+                    }
+                }
+                count--;
+                if(count === 0){
+                    var html = "";
+                    for(var a=0; a<3; a++){
+                        html += "<div>";
+                        html += "<p id='most"+ (a+1) +"'><span class='fa fa-heart'> "+ servName[''+(topService[a][0])] +"</span><span id='most"+ (a+1) +"#'> ("+ topService[a][1] +")</span></p>";
+                        html += "<div><div class='progress progress_sm' style='width: 80%;'><div class='progress-bar bg-blue' role='progressbar' data-transitiongoal='"+ topService[a][1] +"'></div></div></div>";
+                        html += "</div>";
+                    }
+                    $('.topService').html(html);
+                    $(".progress .progress-bar").progressbar()
+                } 
+            }
+        });
     });
 }
 

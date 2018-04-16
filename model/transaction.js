@@ -64,7 +64,7 @@ exports.dashBoardDetail = function(_data, done){
     var sql2 = "SELECT COUNT(*) as 'reservations' FROM web_reservation";
     var sql3 = "SELECT SUM(total_amount) as 'today_sale' FROM transaction WHERE date LIKE '%"+ Date.today().toString('yyyy-MM-dd') +"%' ";
     var sql4 = "SELECT SUM(total_amount) as 'week_sale' FROM transaction WHERE date BETWEEN '"+ Date.parse('last monday').toString('yyyy-MM-dd 00:00:00') +"' AND '"+ Date.today().toString('yyyy-MM-dd 23:59:59') +"'";  
-    var sql5 = "SELECT e.name, COUNT(t.id) as count FROM transaction t, employee e WHERE t.attendantID = e.id GROUP BY e.name ORDER BY count DESC LIMIT 3";
+    var sql5 = "SELECT e.name, COUNT(t.id) as count FROM transaction t, employee e WHERE t.attendantID = e.id AND e.status = 1 GROUP BY e.name ORDER BY count DESC LIMIT 3";
     var sql6 = "SELECT serviceID FROM transaction";
     
     var data = {}

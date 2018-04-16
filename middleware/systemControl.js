@@ -18,6 +18,8 @@ exports.readPrompt = function () {
             console.log("[SERVER] "+ Date.today().toString('yyyy-MM-dd'));
         } else if (cmd.trim() === 'loadSession') {
             loadSessions();
+        }else{
+            console.log("[SERVER] command not found.");
         }
     });
 }
