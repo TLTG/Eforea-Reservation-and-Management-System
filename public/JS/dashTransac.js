@@ -3,6 +3,7 @@ var serviceTot = 0;
 var serviceSelc = "";
 var errorCount = 0;
 var counter = 0;
+var rooms = {};
 var pdf;
 
 var transaction = {
@@ -43,10 +44,51 @@ var transaction = {
                 cb(1);
             }
         });
+    },
+    roomUpdate: function (action, data, cb) {
+        $.post('admin/updateClient', {id: data}, function(res){
+            if(res.error == 1){
+                confirmFunction(-1);
+            }else{
+                cb();
+            }
+        });
     }
 };
 
 function sessionUpdate() {
+    NProgress.start();
+    var loadRooms = function (cb) {
+        clearRooms();
+        var count = sessions.length;
+        sessions.forEach(x => {
+            switch (x.data.room) {
+                case '1': {
+                    assignRoom(1, x);
+                    rooms.room1 = true;
+                    break;
+                }
+                case '2': {
+                    assignRoom(2, x);
+                    rooms.room2 = true;
+                    break;
+                }
+                case '3': {
+                    assignRoom(3, x);
+                    rooms.room3 = true;
+                    break;
+                }
+                case '4': {
+                    assignRoom(4, x);
+                    rooms.room4 = true;
+                    break;
+                }
+                default: break;
+            }
+            count--;
+            if (count === 0) return cb();            
+        });
+    }
     transaction.loadSessions(function () {
         var html1 = "";
         var html2 = "";
@@ -70,6 +112,23 @@ function sessionUpdate() {
         $('.homeSession').html(html2 === "" ? "<tr><th colspan='5'><p>None</p></th></tr>" : html2);
         $('#sessionNumber').html(sessions.length);
         operation.availStaff();
+        loadRooms(function () {
+            var html = "<option value='0'>---</option>";
+            if (rooms.room1 === false) {
+                html += "<option value='1'>Room #1</option>";
+            }
+            if (rooms.room2 === false) {
+                html += "<option value='2'>Room #2</option>";
+            }
+            if (rooms.room3 === false) {
+                html += "<option value='3'>Room #3</option>";
+            }
+            if (rooms.room4 === false) {
+                html += "<option value='4'>Room #4</option>";
+            }
+            $('.assignRoom').html(html);
+        });
+        NProgress.done();
     });
 }
 
@@ -116,10 +175,10 @@ function getSessionDetail(input) {
             service.services.forEach(y => {
                 if (y.name === x) {
                     price += parseInt(y.amount);
-                    var html = "<tr><!--<td>1</td>--><td>" + name + "</td><td>" + parseInt(y.amount).formatMoney(2,'.',',') + "</td></tr>";
+                    var html = "<tr><!--<td>1</td>--><td>" + name + "</td><td>" + parseInt(y.amount).formatMoney(2, '.', ',') + "</td></tr>";
                     $('#servicesTable').append(html);
-                    $('.fnlPrice').html((price).formatMoney(2,'.',','));
-                    selectedStaff = (price).formatMoney(2,'.',',');
+                    $('.fnlPrice').html((price).formatMoney(2, '.', ','));
+                    selectedStaff = (price).formatMoney(2, '.', ',');
                 }
                 count++;
             });
@@ -131,8 +190,8 @@ function loadDashboard() {
     $.get('admin/dashInfo', function (res) {
         $('.totTran').html(res.transaction);
         $('.totRes').html(res.reservation);
-        $('.totColT').html(res.tsale == null ? "0.00" : res.tsale.formatMoney(2,'.',',') + ".00");
-        $('.totColW').html(res.wsale == null ? "0.00" : res.wsale.formatMoney(2,'.',',') + ".00");
+        $('.totColT').html(res.tsale == null ? "0.00" : res.tsale.formatMoney(2, '.', ','));
+        $('.totColW').html(res.wsale == null ? "0.00" : res.wsale.formatMoney(2, '.', ','));
         var html = "", count = 1;
         res.topEmployee.forEach(x => {
             html += "<div><p><span class='fa fa-user-md'></span> " + x.name + "</p>";
@@ -227,7 +286,7 @@ function generateReceipt(_data) {
                 }
             }, '\n\n',
             { text: 'Total Amount:', style: 'subHeader' },
-            { text: '' , style: 'subHeader' },
+            { text: '', style: 'subHeader' },
         ],
 
         styles: {
@@ -248,22 +307,22 @@ function generateReceipt(_data) {
         }
     };
 
-    var getTotalPrice = function(cb){
+    var getTotalPrice = function (cb) {
         var serv = _data.data.sID.split('; \n');
         var price = 0;
         var total = 0;
         serv.forEach(x => {
             var name = x;
-    
+
             if (x === '') {
-    
+
             } else {
                 var count = 0;
                 service.services.forEach(y => {
                     if (y.name === x) {
                         price += parseInt(y.amount);
-                        dd.content[7].table.body.push([y.name,parseInt(y.amount).formatMoney(2,'.',',')]);
-                        total = price.formatMoney(2,'.',',');
+                        dd.content[7].table.body.push([y.name, parseInt(y.amount).formatMoney(2, '.', ',')]);
+                        total = price.formatMoney(2, '.', ',');
                         cb(total);
                     }
                     count++;
@@ -272,9 +331,9 @@ function generateReceipt(_data) {
         });
     }
 
-    getTotalPrice(function(total){
+    getTotalPrice(function (total) {
         dd.content[10].text = total;
-        pdf = {Receipt: pdfMake.createPdf(dd), filename: 'receipt-' + rID + '.pdf'};
+        pdf = { Receipt: pdfMake.createPdf(dd), filename: 'receipt-' + rID + '.pdf' };
     });
     counter++;
 }

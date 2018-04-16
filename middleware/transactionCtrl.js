@@ -9,21 +9,6 @@ exports.getCurrentSession = function(req, res, next){
 
 exports.recordSession = function(req, res, next){
     var customerID;
-    var popClient = function(x, cb){
-        var count = clients.length;
-        var count1 = 0;
-        clients.forEach(a=>{
-            if(a.id == x){
-                return cb(a, count1);
-            }
-            count--;
-            count1++;
-            if(count === 0){
-                cb(null);
-                return;
-            }
-        });
-    }
     popClient(req.body.id, function(client, id){
         db.addCustomer([client.data.name, client.data.address, client.data.contact], function(err, customerID){
             if(err){
@@ -93,5 +78,29 @@ exports.getPastTrans = function(req, res, next){
             return next(new Error(err));
         }
         res.send({error: 0, data: results});
+    });
+}
+
+exports.updateClient = function(req, res, next){
+    var id = req.body.id;
+    popClient(id, function(client){
+        client.data.room = 0;
+        res.send({error: 0});
+    });
+}
+
+var popClient = function(x, cb){
+    var count = clients.length;
+    var count1 = 0;
+    clients.forEach(a=>{
+        if(a.id == x){
+            return cb(a, count1);
+        }
+        count--;
+        count1++;
+        if(count === 0){
+            cb(null);
+            return;
+        }
     });
 }

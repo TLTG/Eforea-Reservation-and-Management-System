@@ -10,8 +10,22 @@ var reserList = [];
 var reserEvent = [];
 var nR, gR, aR, cnR, stR, rsR, taR, tR;
 
+
 $(function () {
     //swal("Success!", "You are now logged in as an administrator.", "success");
+    $(".roomIU1").hide();
+    $(".roomIU2").hide();
+    $(".roomIU3").hide();
+    $(".roomIU4").hide();
+    $(".roomA1").show();
+    $(".roomA2").show();
+    $(".roomA3").show();
+    $(".roomA4").show();
+    $(".roombtnA1").hide();
+    $(".roombtnA2").hide();
+    $(".roombtnA3").hide();
+    $(".roombtnA4").hide();
+
     $('input.timepicker').timepicker({
         timeFormat: 'h:mm:ss p',
         minTime: '11:45:00', // 11:45:00 AM,
@@ -177,15 +191,15 @@ $(function () {
         getStaffData: _getStaffData
     };
 
-    Number.prototype.formatMoney = function(c, d, t){
-        var n = this, 
-        c = isNaN(c = Math.abs(c)) ? 2 : c, 
-        d = d == undefined ? "." : d, 
-        t = t == undefined ? "," : t, 
-        s = n < 0 ? "-" : "", 
-        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
-        j = (j = i.length) > 3 ? j % 3 : 0;
-       return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    Number.prototype.formatMoney = function (c, d, t) {
+        var n = this,
+            c = isNaN(c = Math.abs(c)) ? 2 : c,
+            d = d == undefined ? "." : d,
+            t = t == undefined ? "," : t,
+            s = n < 0 ? "-" : "",
+            i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+            j = (j = i.length) > 3 ? j % 3 : 0;
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
     };
 
     //This is called when Edit button is pressed            
@@ -216,6 +230,10 @@ $(function () {
         var cont = document.getElementById("contnum").value;
         var serv = $('.sessServ').val();
         var amt = document.getElementById("totAmtNs").value;
+        var _room = $('#assignRoom').val();
+        var now = new Date();
+        var timeIn = Date.parse((now.getHours()) + ":" + (now.getMinutes() -1)).toString('hh:mm tt');
+        var timeOut = Date.parse((now.getHours()+1) + ":" + (now.getMinutes() -1)).toString('hh:mm tt');
 
         if (document.getElementById("servtypelist").value == "1") {
             if (custNameNS == "" || custNameNS.length == 0 || custNameNS == null || serviceTot == "") {
@@ -229,7 +247,9 @@ $(function () {
                     sID: serv,
                     tID: $('#therapist').val(),
                     stype: st,
-                    services: serviceSelc
+                    services: serviceSelc,
+                    room: _room,
+                    time: timeIn + "/" + timeOut
                 };
                 transaction.addSession(data, function (res) {
                     if (res == 0) {
@@ -555,11 +575,13 @@ function servListChange() {
         //alert ('Regular');
         $('#divaddress').hide();
         $('#divcontnum').hide();
+        $('#divroom').show();
     }
     else {
         //alert ('Home');
         $('#divaddress').show();
         $('#divcontnum').show();
+        $('#divroom').hide();
     }
 }
 
@@ -635,6 +657,7 @@ function resetsession() { //resets fields when NEW SESSION is clicked
     serviceSelc = "";
     $('#divaddress').hide();
     $('#divcontnum').hide();
+    $('#divroom').show();
     document.getElementById("servtypelist").value = "1";
     document.getElementById("custNameNS").value = "";
     document.getElementById("gender1").checked = true;
@@ -1128,4 +1151,102 @@ function wrappedItem(arr, cb) {
         count--;
         if (count == 0) out();
     });
+}
+
+function assignRoom(a, input){ //TUPS: Automatically placing of data from new session or reservation to these (ROOM) fields
+//after confirming reservation or adding new session
+    var setRoom = function(room){
+        $(".roomIU" + room).show();
+        $(".roomA" + room).hide();
+        $(".roombtnA" + room).show();
+        $(".roombtnB" + room).hide();
+
+        $('.roomA'+room).attr('data', input.id);
+        $("#timeStartRoom" + room).html(input.data.time.split('/')[0]);
+        $("#timeEndRoom" + room).html(input.data.time.split('/')[1]);
+        $("#custNameRoom" + room).html(input.data.name);
+        $("#custTherRoom" + room).html(staffName[input.data.tID]);
+        $("#custServRoom" + room).html(input.data.sID);
+    }
+    if (a == 1) {
+        setRoom(1);
+    }
+    else if (a == 2) {
+        setRoom(2);
+    }
+    else if (a == 3) {
+        setRoom(3)
+    }
+    else if (a == 4) {
+        setRoom(4);
+    }
+}
+
+function cancelSessionRoom(a) {
+    var resetRoom = function(room, cb){
+        swal("Success!", "Room is now available!", "success");
+
+            $("#timeStartRoom" + room).val("");
+            $("#timeEndRoom" + room).val("");
+            $("#custNameRoom" + room).val("");
+            $("#custTherRoom" + room).val("");
+            $("#custServRoom" + room).val("");
+
+            $(".roomIU" + room).hide();
+            $(".roomA" + room).show();
+            $(".roombtnA" + room).hide();
+            //TUPS: Cancel session room function
+            transaction.roomUpdate(null, $('.roomA'+room).attr('data'), function(){
+                cb();
+            });
+    }
+    if (a == 1) {
+        document.getElementById('modques').innerHTML = "Are you sure you want to remove this session from this room?";
+        $('#confirmModal').modal('show');
+        $('#btnone').off();
+        $('#btnone').click(function () {
+            resetRoom(1, function(){
+               rooms.room1 = false;
+            });
+        });
+    }
+    else if (a == 2) {
+        document.getElementById('modques').innerHTML = "Are you sure you want to remove this session from this room?";
+        $('#confirmModal').modal('show');
+        $('#btnone').off();
+        $('#btnone').click(function () {
+            resetRoom(2, function(){
+                rooms.room2 = false;
+            });
+        });
+    }
+    else if (a == 3) {
+        document.getElementById('modques').innerHTML = "Are you sure you want to remove this session from this room?";
+        $('#confirmModal').modal('show');
+        $('#btnone').off();
+        $('#btnone').click(function () {
+            resetRoom(3, function(){
+                rooms.room3 = false;
+            });
+        });
+    }
+    else if (a == 4) {
+        document.getElementById('modques').innerHTML = "Are you sure you want to remove this session from this room?";
+        $('#confirmModal').modal('show');
+        $('#btnone').off();
+        $('#btnone').click(function () {
+            resetRoom(4, function(){
+                rooms.room4 = false;
+            });
+        });
+    }
+}
+
+function clearRooms(){
+    rooms = { room1: false, room2: false, room3: false, room4: false };
+    for(var x=1; x<=4; x++){
+        $(".roomA" + x).show();    
+        $(".roomIU" + x).hide();  
+        $(".roombtnA" + x).hide();  
+    }
 }
