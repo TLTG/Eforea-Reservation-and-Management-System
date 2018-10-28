@@ -15,7 +15,10 @@ $(document).ready(function () {
     $('#date').combodate({
         value: Date.today().toString('dd-MM-yyyy')
     });
-    //$('#date').val();
+    
+    getContent();
+    setInitCart();
+    updateCart();
 
     $('.carousel').carousel();
 
@@ -161,9 +164,7 @@ $(document).ready(function () {
         var cart = JSON.parse(document.cookie.cart);
         userData.cart = cart;
     } else {}
-    getContent();
-    setInitCart();
-    updateCart();
+    
 });
 
 function getContent() {
