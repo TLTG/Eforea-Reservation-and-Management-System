@@ -13,9 +13,9 @@ exports.MODE_TEST = 'mode_test';
 exports.connect = function (mode,done){
   dbstate.pool = mysql.createPool({
     connection: 20,
-    host: '127.0.0.1',
-    user: 'root',
-    password: '',
+    host: 'den1.mysql3.gear.host',
+    user: 'eforeadb',
+    password: 'maindb?',
     database: mode === exports.MODE_PRODUCTION ? production_db : test_db
   });
 
